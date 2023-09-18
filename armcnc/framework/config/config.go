@@ -7,9 +7,9 @@
 
 package Config
 
-var Get = &config{}
+var Get = &Data{}
 
-type config struct {
+type Data struct {
 	Name      string `json:"name"`
 	Version   string `json:"version"`
 	Workspace string `json:"workspace"`

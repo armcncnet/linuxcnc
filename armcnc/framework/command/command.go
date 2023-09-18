@@ -17,7 +17,7 @@ func Init() {
 
 	command := &cobra.Command{
 		Use:   "armcnc",
-		Short: "Welcome to " + Config.Get.Name,
+		Short: "Welcome to " + Config.Get.Name + "" + Config.Get.Version,
 		Long:  "Development Team: ARMCNC https://www.armcnc.net",
 	}
 
