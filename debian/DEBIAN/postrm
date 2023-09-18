@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# 移除之后执行业务
+
+echo Thank you for your support, see you next time, https://www.armcnc.net
