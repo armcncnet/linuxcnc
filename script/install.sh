@@ -2,6 +2,8 @@
 
 set -e
 
+uname -a
+
 lsb_release -a
 
 architecture=$(dpkg --print-architecture)
@@ -15,3 +17,6 @@ if [ ! -f "/etc/apt/sources.list.d/armcnc.list" ]; then
 fi
 
 sudo apt -y update && sudo apt -y upgrade
+sudo apt install linuxcnc-uspace linuxcnc-uspace-dev
+
+echo "Install ARMCNC successfully"
