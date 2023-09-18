@@ -17,7 +17,6 @@ if [ ! -d "/usr/local/go/bin/" ]; then
     sudo sh -c 'echo "export PATH=$PATH:/usr/local/go/bin" >> /etc/profile'
     # shellcheck disable=SC1090
     source /etc/profile && source ~/.bashrc
-    go version
 fi
 
 echo "Install development environment successfully"
