@@ -8,7 +8,7 @@ lsb_release -a
 
 architecture=$(dpkg --print-architecture)
 
-sudo apt install -y nodejs npm
+sudo apt install -y nodejs npm nsis
 
 sudo npm install -g yarn
 
