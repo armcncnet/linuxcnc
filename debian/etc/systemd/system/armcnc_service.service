@@ -1,0 +1,13 @@
+[Unit]
+Description=armcnc_service
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/armcnc/
+ExecStart=/usr/local/bin/armcnc service
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

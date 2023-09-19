@@ -1,12 +1,12 @@
 [Unit]
-Description=armcnc
+Description=armcnc_launch
 After=syslog.target network.target
 
 [Service]
 Type=simple
 User=root
-WorkingDirectory=/opt/armcnc/
-ExecStart=/usr/local/bin/armcnc service
+WorkingDirectory=/opt/armcnc/python/
+ExecStart=/usr/bin/python3 -B /opt/armcnc/python/launch.py
 Restart=on-failure
 
 [Install]
