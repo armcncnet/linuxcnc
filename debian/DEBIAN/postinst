@@ -24,6 +24,5 @@ fi
 
 sudo ldconfig
 sudo systemctl daemon-reload
-
 sudo systemctl enable armcnc.service
 sudo systemctl restart armcnc.service
