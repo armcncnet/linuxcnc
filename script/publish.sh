@@ -36,6 +36,10 @@ sudo -E /usr/local/go/bin/go build main.go
 sudo cp main debian/usr/local/bin/armcnc
 sudo rm -rf main
 
+cd ../
+
 sudo dpkg --build debian/ && dpkg-name debian.deb
+
+sudo rm -rf debian/usr/local/bin/armcnc
 
 echo "Publish successfully"
