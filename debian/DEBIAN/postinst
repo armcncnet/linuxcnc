@@ -2,6 +2,8 @@
 
 # 安装完成之后执行业务
 
+sudo pip3 install --upgrade armcnc
+
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('websocket') else exit(1)" >/dev/null 2>&1; then
     sudo pip3 install websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 else
