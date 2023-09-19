@@ -33,7 +33,7 @@ func Start() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			log.Println("[service]：" + color.Gray.Text("Core service is starting..."))
 			start := &http.Server{
-				Addr:           fmt.Sprintf(":%d", 10081),
+				Addr:           fmt.Sprintf(":%d", 10010),
 				Handler:        Service.Router(),
 				ReadTimeout:    60 * time.Second,
 				WriteTimeout:   60 * time.Second,

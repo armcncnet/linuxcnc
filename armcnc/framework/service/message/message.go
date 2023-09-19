@@ -8,7 +8,7 @@
 package MessageService
 
 import (
-	"armcnc/framework/utils"
+	"armcnc/framework/utils/socket"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"

@@ -8,7 +8,8 @@
 package Service
 
 import (
-	MessageService "armcnc/framework/service/message"
+	"armcnc/framework/service/config"
+	"armcnc/framework/service/message"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -23,6 +24,11 @@ func Router() http.Handler {
 	router.Use(gin.Recovery())
 
 	router.Use(cors.Default())
+
+	config := router.Group("ping")
+	{
+		config.Any("/index", ConfigService.Index)
+	}
 
 	message := router.Group("message")
 	{
