@@ -30,6 +30,7 @@ sudo sh -c 'echo "Installed-Size: 5000" >> debian/DEBIAN/control'
 sudo sh -c 'echo "Section: utils" >> debian/DEBIAN/control'
 sudo sh -c 'echo "Description: armcnc" >> debian/DEBIAN/control'
 
+cd ./armcnc
 export GO111MODULE=on && export GOPROXY=https://goproxy.io && sudo rm -rf main
 sudo -E /usr/local/go/bin/go build main.go
 sudo cp main debian/usr/local/bin/armcnc
