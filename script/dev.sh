@@ -8,7 +8,7 @@ lsb_release -a
 
 architecture=$(dpkg --print-architecture)
 
-sudo apt install -y nodejs npm nsis
+sudo apt install -y nodejs npm nsis libgtk-3-dev libwebkit2gtk-4.0-dev
 
 sudo npm install -g yarn
 
