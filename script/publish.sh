@@ -14,7 +14,7 @@ sudo apt install -y dpkg-dev gpg
 cd ../
 
 sudo chmod +x debian/DEBIAN/*
-find ./debian -type f -name ".gitkeep" -exec rm -f {} +
+# find ./debian -type f -name ".gitkeep" -exec rm -f {} +
 
 sudo rm -rf debian/DEBIAN/control
 sudo touch debian/DEBIAN/control && sudo chmod +x debian/DEBIAN/control
