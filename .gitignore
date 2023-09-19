@@ -2,3 +2,4 @@
 .DS*
 .git
 .vscode
+*.deb
