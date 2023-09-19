@@ -4,8 +4,6 @@
 
 sudo python3 -m pip install --upgrade --break-system-packages --root-user-action=ignore armcnc
 
-
-
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('websocket') else exit(1)" >/dev/null 2>&1; then
     sudo python3 -m pip install --break-system-packages --root-user-action=ignore websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 else
