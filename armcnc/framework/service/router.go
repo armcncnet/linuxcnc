@@ -32,7 +32,7 @@ func Router() http.Handler {
 
 	message := router.Group("message")
 	{
-		message.Any("/service", MessageService.Service)
+		message.GET("/service", MessageService.Service)
 	}
 
 	return router
