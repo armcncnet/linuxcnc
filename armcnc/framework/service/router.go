@@ -25,9 +25,9 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	config := router.Group("ping")
+	config := router.Group("config")
 	{
-		config.Any("/index", ConfigService.Index)
+		config.GET("/index", ConfigService.Index)
 	}
 
 	message := router.Group("message")
