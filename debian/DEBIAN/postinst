@@ -2,24 +2,24 @@
 
 # 安装完成之后执行业务
 
-sudo pip3 install --upgrade armcnc
+sudo python3 -m pip install --upgrade armcnc
 
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('websocket') else exit(1)" >/dev/null 2>&1; then
-    sudo pip3 install websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+    sudo python3 -m pip install websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 else
-    sudo pip3 install websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+    sudo python3 -m pip install websocket-client==0.48.0 -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('requests') else exit(1)" >/dev/null 2>&1; then
     echo "requests package is installed."
 else
-    sudo pip3 install requests -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+    sudo python3 -m pip install requests -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('serial') else exit(1)" >/dev/null 2>&1; then
     echo "pyserial package is installed."
 else
-    sudo pip3 install pyserial -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+    sudo python3 -m pip install pyserial -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
 sudo ldconfig
