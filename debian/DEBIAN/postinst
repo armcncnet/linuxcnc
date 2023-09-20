@@ -16,6 +16,12 @@ else
     sudo python3 -m pip install --break-system-packages --root-user-action=ignore requests -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('colorlog') else exit(1)" >/dev/null 2>&1; then
+    echo "colorlog package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore colorlog -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('serial') else exit(1)" >/dev/null 2>&1; then
     echo "pyserial package is installed."
 else
@@ -26,5 +32,5 @@ sudo ldconfig
 sudo systemctl daemon-reload
 sudo systemctl enable armcnc_service.service
 sudo systemctl restart armcnc_service.service
-sudo systemctl enable armcnc_python.service
-sudo systemctl restart armcnc_python.service
+sudo systemctl enable armcnc_launch.service
+sudo systemctl restart armcnc_launch.service
