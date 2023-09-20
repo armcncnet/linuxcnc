@@ -31,6 +31,7 @@ type Struct struct {
 
 type SocketMessageFormat struct {
 	Command string      `json:"command"`
+	Message string      `json:"message"`
 	Data    interface{} `json:"data"`
 }
 
