@@ -13,6 +13,9 @@ sudo apt install -y dpkg-dev gpg
 
 cd ../
 
+# shellcheck disable=SC2035
+sudo rm -rf *.deb
+
 sudo chmod +x debian/DEBIAN/*
 # find ./debian -type f -name ".gitkeep" -exec rm -f {} +
 
