@@ -41,8 +41,6 @@ func Init() {
 
 	Get.Authorization.Getaway = "https://getaway.geekros.com"
 
-	SetEnvironment()
-
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")
 	if !exists {
 		iniFile := ini.Empty()
@@ -60,7 +58,7 @@ func Init() {
 	}
 
 	if exists {
-		iniFile, err := ini.Load("config.ini")
+		iniFile, err := ini.Load(Get.Basic.Workspace + "/armcnc.ini")
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration information read failed."))
 			return
@@ -73,11 +71,6 @@ func Init() {
 			return
 		}
 
-		Get.Basic = intConfig.Basic
 		Get.Authorization = intConfig.Authorization
 	}
-}
-
-func SetEnvironment() {
-
 }
