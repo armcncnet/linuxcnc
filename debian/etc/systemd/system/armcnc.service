@@ -1,0 +1,13 @@
+[Unit]
+Description=armcnc
+After=syslog.target network.target
+
+[Service]
+Type=idle
+User=root
+EnvironmentFile=/opt/armcnc/environment
+ExecStart=/usr/bin/linuxcnc ${MACHINE_PATH}
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
