@@ -19,11 +19,11 @@ func Init() {
 
 	command := &cobra.Command{
 		Use:   "armcnc",
-		Short: "Welcome to " + Config.Get.Name + "" + Config.Get.Version,
+		Short: "Welcome to " + Config.Get.Basic.Name + "" + Config.Get.Basic.Version,
 		Long:  "Development Team: ARMCNC https://www.armcnc.net",
 	}
 
-	command.AddCommand(VersionCommand.Start(Config.Get.Name, Config.Get.Version))
+	command.AddCommand(VersionCommand.Start(Config.Get.Basic.Name, Config.Get.Basic.Version))
 
 	command.AddCommand(ServiceCommand.Start())
 
