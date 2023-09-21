@@ -72,5 +72,12 @@ func Init() {
 		}
 
 		Get.Authorization = intConfig.Authorization
+
+		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
+		err = iniFile.SaveTo(Get.Basic.Workspace + "/armcnc.ini")
+		if err != nil {
+			log.Println("[config]：" + color.Error.Sprintf("System configuration save failed"))
+			return
+		}
 	}
 }
