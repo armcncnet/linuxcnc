@@ -20,8 +20,8 @@ type responseIndex struct {
 
 func Index(c *gin.Context) {
 	returnData := responseIndex{}
-	returnData.Name = Config.Get.Name
-	returnData.Version = Config.Get.Version
+	returnData.Name = Config.Get.Basic.Name
+	returnData.Version = Config.Get.Basic.Version
 
 	Utils.Success(c, 0, "", returnData)
 	return
