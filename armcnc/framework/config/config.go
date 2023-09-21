@@ -12,6 +12,7 @@ import (
 	"github.com/gookit/color"
 	"gopkg.in/ini.v1"
 	"log"
+	"os/exec"
 )
 
 var Get = &Data{}
@@ -19,6 +20,7 @@ var Get = &Data{}
 type Data struct {
 	Basic         DataBasic         `ini:"basic"`
 	Authorization DataAuthorization `ini:"authorization"`
+	Machine       DataMachine       `ini:"machine"`
 }
 
 type DataBasic struct {
@@ -31,6 +33,10 @@ type DataAuthorization struct {
 	Getaway string `ini:"getaway"`
 	AppId   string `ini:"app_id"`
 	AppKey  string `ini:"app_key"`
+}
+
+type DataMachine struct {
+	Path string `ini:"path"`
 }
 
 func Init() {
@@ -64,14 +70,15 @@ func Init() {
 			return
 		}
 
-		var intConfig Data
-		err = iniFile.MapTo(&intConfig)
+		var iniConfig Data
+		err = iniFile.MapTo(&iniConfig)
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration information read failed."))
 			return
 		}
 
-		Get.Authorization = intConfig.Authorization
+		Get.Authorization = iniConfig.Authorization
+		Get.Machine = iniConfig.Machine
 
 		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
 		err = iniFile.SaveTo(Get.Basic.Workspace + "/armcnc.ini")
@@ -79,5 +86,23 @@ func Init() {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration save failed"))
 			return
 		}
+
+		SetEnvironment(Get.Machine.Path)
+	}
+}
+
+func SetEnvironment(path string) {
+	write := FileUtils.WriteFile("MACHINE_PATH="+path, Get.Basic.Workspace+"/.armcnc/environment")
+	if write == nil {
+		if path != "" {
+			cmd := exec.Command("systemctl", "restart", "programlaunch.service")
+			cmd.Output()
+		} else {
+			cmd := exec.Command("systemctl", "stop", "programlaunch.service")
+			cmd.Output()
+		}
+	} else {
+		cmd := exec.Command("systemctl", "stop", "programlaunch.service")
+		cmd.Output()
 	}
 }
