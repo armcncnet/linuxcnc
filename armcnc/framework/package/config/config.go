@@ -5,7 +5,7 @@
  ******************************************************************************
  */
 
-package Config
+package ConfigPackage
 
 import (
 	"armcnc/framework/utils/file"
@@ -27,6 +27,7 @@ type DataBasic struct {
 	Name      string `ini:"name"`
 	Version   string `ini:"version"`
 	Workspace string `ini:"workspace"`
+	Port      int    `ini:"port"`
 }
 
 type DataAuthorization struct {
@@ -44,6 +45,7 @@ func Init() {
 	Get.Basic.Name = "armcnc"
 	Get.Basic.Version = "1.0.0"
 	Get.Basic.Workspace = "/opt/armcnc"
+	Get.Basic.Port = 10081
 
 	Get.Authorization.Getaway = "https://getaway.geekros.com"
 

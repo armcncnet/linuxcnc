@@ -8,6 +8,7 @@
 package ServiceCommand
 
 import (
+	"armcnc/framework/package/config"
 	"armcnc/framework/service"
 	"fmt"
 	"github.com/gookit/color"
@@ -33,7 +34,7 @@ func Start() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			log.Println("[service]：" + color.Gray.Text("Core service is starting..."))
 			start := &http.Server{
-				Addr:           fmt.Sprintf(":%d", 10010),
+				Addr:           fmt.Sprintf(":%d", ConfigPackage.Get.Basic.Port),
 				Handler:        Service.Router(),
 				ReadTimeout:    60 * time.Second,
 				WriteTimeout:   60 * time.Second,

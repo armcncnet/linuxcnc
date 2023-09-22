@@ -9,13 +9,13 @@ package Framework
 
 import (
 	"armcnc/framework/command"
-	"armcnc/framework/config"
+	"armcnc/framework/package/config"
 )
 
 func Init() {
 
 	// 初始化全局配置
-	Config.Init()
+	ConfigPackage.Init()
 
 	// 初始化命令行工具
 	Command.Init()
