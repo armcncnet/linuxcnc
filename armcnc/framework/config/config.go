@@ -5,7 +5,7 @@
  ******************************************************************************
  */
 
-package ConfigPackage
+package Config
 
 import (
 	"armcnc/framework/utils/file"

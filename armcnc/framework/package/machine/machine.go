@@ -7,7 +7,9 @@
 
 package MachinePackage
 
-import "armcnc/framework/package/config"
+import (
+	"armcnc/framework/config"
+)
 
 type Machine struct {
 	Path string `json:"path"`
@@ -18,7 +20,7 @@ type Data struct {
 
 func Init() *Machine {
 	return &Machine{
-		Path: ConfigPackage.Get.Basic.Workspace + "/configs/",
+		Path: Config.Get.Basic.Workspace + "/configs/",
 	}
 }
 

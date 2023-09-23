@@ -10,7 +10,7 @@ package Command
 import (
 	"armcnc/framework/command/service"
 	"armcnc/framework/command/version"
-	"armcnc/framework/package/config"
+	"armcnc/framework/config"
 	"github.com/spf13/cobra"
 	"os"
 )
@@ -19,11 +19,11 @@ func Init() {
 
 	command := &cobra.Command{
 		Use:   "armcnc",
-		Short: "Welcome to " + ConfigPackage.Get.Basic.Name + "" + ConfigPackage.Get.Basic.Version,
+		Short: "Welcome to " + Config.Get.Basic.Name + "" + Config.Get.Basic.Version,
 		Long:  "Development Team: ARMCNC https://www.armcnc.net",
 	}
 
-	command.AddCommand(VersionCommand.Start(ConfigPackage.Get.Basic.Name, ConfigPackage.Get.Basic.Version))
+	command.AddCommand(VersionCommand.Start(Config.Get.Basic.Name, Config.Get.Basic.Version))
 
 	command.AddCommand(ServiceCommand.Start())
 
