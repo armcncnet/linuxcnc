@@ -97,14 +97,14 @@ func Start(path string) {
 	write := FileUtils.WriteFile("MACHINE_PATH="+path, Get.Basic.Workspace+"/.armcnc/environment")
 	if write == nil {
 		if path != "" {
-			cmd := exec.Command("systemctl", "restart", "armcnc.service")
+			cmd := exec.Command("systemctl", "restart", "armcnc_launch.service")
 			cmd.Output()
 		} else {
-			cmd := exec.Command("systemctl", "stop", "armcnc.service")
+			cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
 			cmd.Output()
 		}
 	} else {
-		cmd := exec.Command("systemctl", "stop", "armcnc.service")
+		cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
 		cmd.Output()
 	}
 }
