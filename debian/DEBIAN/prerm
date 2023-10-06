@@ -2,8 +2,10 @@
 
 # 移除之前执行业务
 
-sudo systemctl stop armcnc_service.service
-sudo systemctl disable armcnc_service.service
 sudo systemctl stop armcnc_launch.service
 sudo systemctl disable armcnc_launch.service
+sudo systemctl stop armcnc.service
+sudo systemctl disable armcnc.service
+sudo systemctl stop armcnc_service.service
+sudo systemctl disable armcnc_service.service
 sudo systemctl daemon-reload

@@ -6,7 +6,8 @@ After=syslog.target network.target
 Type=simple
 User=root
 WorkingDirectory=/opt/armcnc/launch/
-ExecStart=/usr/bin/python3 -B /opt/armcnc/launch/launch.py
+EnvironmentFile=/opt/armcnc/.armcnc/environment
+ExecStart=/usr/bin/python3 -B /opt/armcnc/configs/${MACHINE_PATH}/launch/launch.py
 Restart=on-failure
 
 [Install]

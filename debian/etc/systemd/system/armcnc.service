@@ -5,6 +5,7 @@ After=syslog.target network.target
 [Service]
 Type=idle
 User=armcnc
+WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/opt/armcnc/.armcnc/environment
 ExecStart=/usr/bin/linuxcnc ${MACHINE_PATH}
 Restart=on-failure
