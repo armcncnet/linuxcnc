@@ -9,8 +9,8 @@ package Config
 
 import (
 	"armcnc/framework/utils/file"
+	"armcnc/framework/utils/ini"
 	"github.com/gookit/color"
-	"gopkg.in/ini.v1"
 	"log"
 	"os/exec"
 )
@@ -51,14 +51,14 @@ func Init() {
 
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")
 	if !exists {
-		iniFile := ini.Empty()
-		err := ini.ReflectFrom(iniFile, Get)
+		iniFile := IniUtils.Empty()
+		err := IniUtils.ReflectFrom(iniFile, Get)
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration save failed"))
 			return
 		}
 
-		err = iniFile.SaveTo(Get.Basic.Workspace + "/armcnc.ini")
+		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration save failed"))
 			return
@@ -66,14 +66,14 @@ func Init() {
 	}
 
 	if exists {
-		iniFile, err := ini.Load(Get.Basic.Workspace + "/armcnc.ini")
+		iniFile, err := IniUtils.Load(Get.Basic.Workspace + "/armcnc.ini")
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration information read failed."))
 			return
 		}
 
 		var iniConfig Data
-		err = iniFile.MapTo(&iniConfig)
+		err = IniUtils.MapTo(iniFile, &iniConfig)
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration information read failed."))
 			return
@@ -83,7 +83,7 @@ func Init() {
 		Get.Machine = iniConfig.Machine
 
 		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
-		err = iniFile.SaveTo(Get.Basic.Workspace + "/armcnc.ini")
+		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration save failed"))
 			return

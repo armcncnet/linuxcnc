@@ -28,3 +28,9 @@ func (manager *Machine) Select() []Data {
 	data := make([]Data, 0)
 	return data
 }
+
+func (manager *Machine) Get(name string) Data {
+	data := Data{}
+
+	return data
+}
