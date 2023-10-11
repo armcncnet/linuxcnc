@@ -24,8 +24,8 @@
 
 
 
-#define GPIO_BASE               0x01c20800
-#define GPIO_R_BASE             0x01f02c00
+#define GPIO_BASE               0xA6003000
+#define GPIO_R_BASE             0xA6004000
 #define GPIO_BANK_SIZE          0x24
 
 #define GPIO_PORTS_MAX_CNT      8

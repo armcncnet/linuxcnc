@@ -44,8 +44,7 @@ RTAPI_MP_STRING(encoders, "number of encoder channels");
 #endif
 #endif
 
-static const char *gpio_name[GPIO_PORTS_MAX_CNT] =
-    {"PA","PB","PC","PD","PE","PF","PG","PL"};
+static const char *gpio_name[GPIO_PORTS_MAX_CNT] = {"PA","PB","PC","PD","PE","PF","PG","PL"};
 
 static hal_bit_t **gpio_hal_0[GPIO_PORTS_MAX_CNT];
 static hal_bit_t **gpio_hal_1[GPIO_PORTS_MAX_CNT];
