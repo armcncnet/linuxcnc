@@ -28,7 +28,7 @@ cnc_cmd = linuxcnc.command()
 
 
 def toolChangeM6(self, **words):
-    #基本信息
+    # 基本信息
     if not self.task:
         yield INTERP_OK
 
@@ -58,7 +58,7 @@ def toolChangeM6(self, **words):
 
         moveZtoSafePos(self, self.ensorData['searchfeed'])
 
-        #停止主轴
+        # 停止主轴
         stopSpindle(self)
 
         gcode = "G4 P2"
@@ -69,22 +69,22 @@ def toolChangeM6(self, **words):
             noProbeFlag = True
 
         cnc_stat.poll()
-        #安全位置
+        # 安全位置
         maxLimit = cnc_stat.axis[2]["max_position_limit"]-5
-        #手动换刀
+        # 手动换刀
         if self.toolchangetype == '1':
             
             
-            #移动到换刀位置
+            # 移动到换刀位置
             moveToToolChange(self)
             
-            #通知用户换刀
-            #数字输出信号1:输出换刀标记
+            # 通知用户换刀
+            # 数字输出信号1:输出换刀标记
             cncTools.set_change_sig(1)
             #cnc_cmd.set_digital_output(1, 1)
             #subprocess.Popen('halcmd setp hal_linktoolchange.changed_sig 1', stdout = subprocess.PIPE, shell = True)
 
-            #数字输入信号0:等待输入，
+            # 数字输入信号0:等待输入，
             gcode = "M66 P0 L3 Q10000"
             #print gcode + "wait change tool"
             executeGcode(self, gcode)
@@ -103,14 +103,14 @@ def toolChangeM6(self, **words):
                 disableChangeSig(self);
                 yield INTERP_ERROR
             
-        #自动换刀
+        # 自动换刀
         elif self.toolchangetype =='2':
-            print "toolchangetype2"
+            print("toolchangetype2")
             spindleToolNum = cnc_stat.tool_in_spindle;
-            print spindleToolNum;
+            print(spindleToolNum)
             #主轴中没刀
             if spindleToolNum == 0:
-                print "no tool in pocket"
+                print("no tool in pocket")
                 #数字输出信号1:输出换刀标记
                 cncTools.set_notool_sig(1)
                 cncTools.set_tool_sig(0)
@@ -137,15 +137,15 @@ def toolChangeM6(self, **words):
 
                 #获取刀具位置
                 posData = toolChange.getToolPosition(spindleToolNum)
-                print posData
+                print(posData)
                 gcode = "G53 G0 X{} Y{}".format(posData[0],posData[1])
                 self.execute(gcode)
                 gcode = "G53 G1 Z{} F200".format(float(posData[2])+1)
-                print gcode
+                print(gcode)
                 self.execute(gcode)
                 #打开拉爪
                 gcode = "G91 G1 W{} F500".format(-15)
-                print gcode
+                print(gcode)
                 self.execute(gcode)
                 gcode = "G4 P1"
                 self.execute(gcode)
@@ -166,11 +166,11 @@ def toolChangeM6(self, **words):
             gcode = "G53 G0 X{} Y{}".format(posData[0],posData[1])
             self.execute(gcode)
             gcode = "G53 G1 Z{} F200".format(float(posData[2]))
-            print gcode
+            print(gcode)
             self.execute(gcode)
             #收紧拉爪
             gcode = "G91 G1 W{} F500".format(15)
-            print gcode
+            print(gcode)
             self.execute(gcode)
             gcode = "G4 P1"
             self.execute(gcode)
@@ -184,8 +184,8 @@ def toolChangeM6(self, **words):
             #抬刀
             gcode = "G53 G0 Z{}".format(maxLimit)
             self.execute(gcode)
-            print gcode
-            
+            print(gcode)
+
 
         else :
             self.set_errormsg("tool_probe_m6 remap error:change type not found")
@@ -202,7 +202,7 @@ def toolChangeM6(self, **words):
             gcode = "G53 G0 X{} Y{} Z{}".format(self.ensorData['x'], self.ensorData['y'], self.ensorData['z'])
             self.execute(gcode)
             print("#移动到对刀位置");
-            print gcode
+            print(gcode)
 
             #self.params[1000] = self.params[5063]
             self.params[1000] = cnc_stat.probed_position[2]
@@ -213,13 +213,14 @@ def toolChangeM6(self, **words):
 
             gcode = "G38.3 Z{} F{}".format(self.ensorData['maxprobe'], self.ensorData['searchfeed'])
             self.execute(gcode)
-            print gcode
+            print(gcode)
             yield INTERP_EXECUTE_FINISH
 
             if self.params[5070] == 0:
                 self.execute("G90")
                 self.set_errormsg("换刀时发生错误")
                 yield INTERP_ERROR
+
 
             #print("last5063:{}".format(self.params[1000]))
 
@@ -319,7 +320,7 @@ def toolChangeM6(self, **words):
             self.execute(gcode)
 
         
-    except InterpreterException,e:
+    except InterpreterException as e:
         disableChangeSig(self); 
         msg = "换刀时发生错误end"
         self.set_errormsg(msg)
@@ -361,7 +362,7 @@ def getToolPos(self, toolNumber):
     return cnc_stat.tool_table[toolNumber]
 
 def moveToCurrentToolPocket(self):
-    print "moveToCurrentToolPocket:"
+    print("moveToCurrentToolPocket:")
     #self.current_tool = 5
     toolNumber = self.current_tool
     data = toolChange.getToolPosition(toolNumber)
@@ -375,9 +376,9 @@ def moveToCurrentToolPocket(self):
 
 
 def moveToSelectedToolPocket(self, toolNumber):
-    print "moveToSelectedToolPocket:"
-    print "selectedTool:"
-    print toolNumber
+    print("moveToSelectedToolPocket:")
+    print("selectedTool:")
+    print(toolNumber)
     data = toolChange.getToolPosition(toolNumber)
 
     gcode = "G53 G0 X{} Y{}".format(data[0],data[1])
