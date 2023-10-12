@@ -14,4 +14,4 @@ def armcnc_exit(cnc):
     pass
 
 if __name__ == '__main__':
-    cnc_sdk = sdk.Init()
+    sdk.Init()
