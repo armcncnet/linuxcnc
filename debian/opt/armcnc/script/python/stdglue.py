@@ -135,7 +135,7 @@ def prepare_epilog(self, **words):
                 self.set_errormsg("T%d: aborted (return code %.1f)" % (int(self.params["tool"]),self.return_value))
                 return INTERP_ERROR
     except Exception as e:
-        self.set_errormsg("T%d/prepare_epilog: %s" % (tool,e))
+        self.set_errormsg("T%d/prepare_epilog: %s" % e)
         return INTERP_ERROR       
 
 # REMAP=M6  modalgroup=6 prolog=change_prolog ngc=change epilog=change_epilog
@@ -152,9 +152,9 @@ def change_prolog(self, **words):
             if self.params[5601] < 0.0:
                 self.set_errormsg("Toolchanger hard fault %d" % (int(self.params[5601])))
                 return INTERP_ERROR
-            print "change_prolog: Toolchanger soft fault %d" % int(self.params[5601])
-            
-	if self.selected_pocket < 0:
+            print("change_prolog: Toolchanger soft fault %d" % int(self.params[5601]))
+
+        if self.selected_pocket < 0:
             self.set_errormsg("M6: no tool prepared")
             return INTERP_ERROR
 	if self.cutter_comp_side:
@@ -181,7 +181,7 @@ def change_epilog(self, **words):
             if self.params[5601] < 0.0:
                 self.set_errormsg("Toolchanger hard fault %d" % (int(self.params[5601])))
                 yield INTERP_ERROR
-            print "change_epilog: Toolchanger soft fault %d" % int(self.params[5601])
+            print("change_epilog: Toolchanger soft fault %d" % int(self.params[5601]))
 
         if self.blocks[self.remap_level].builtin_used:
             #print "---------- M6 builtin recursion, nothing to do"

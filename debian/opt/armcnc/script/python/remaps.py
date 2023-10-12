@@ -316,7 +316,7 @@ def toolChangeM6(self, **words):
         if float(self.params[1000]) >0 or float(self.params[1000])<0 :
             print(232323232323)
             gcode = "G43.1 Z{}".format(toolOffset)
-            print gcode
+            print(gcode)
             self.execute(gcode)
 
         
