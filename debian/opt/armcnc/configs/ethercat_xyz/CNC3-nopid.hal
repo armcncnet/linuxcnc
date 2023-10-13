@@ -9,7 +9,7 @@ loadrt classicladder_rt
 #loadrt spindle count=1  #halui include spindle.0
 #autoconverted  trivkins
 loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
-loadusr -W lcec_conf ethercat-conf.xml
+loadusr -W lcec_conf /opt/armcnc/configs/ethercat_xyz/ethercat-conf.xml
 loadusr classicladder --nogui CNC3LD.clp
 loadrt lcec
 loadrt cia402 count=4
