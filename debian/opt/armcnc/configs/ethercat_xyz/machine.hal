@@ -61,7 +61,7 @@ setp cia402.1.pos-scale 10000
 net y-statusword      lcec.0.1.cia-statusword  => cia402.1.statusword
 net y-opmode-display  lcec.0.1.opmode-display  => cia402.1.opmode-display
 net y-drv-act-pos     lcec.0.1.actual-position => cia402.1.drv-actual-position
-net y-drv-act-velo    lcec.0.1.actual-velocity => cia402.1.drv-actual-velocit
+net y-drv-act-velo    lcec.0.1.actual-velocity => cia402.1.drv-actual-velocity
 
 net y-controlword         cia402.1.controlword         => lcec.0.1.cia-controlword
 net y-modes-of-operation  cia402.1.opmode              => lcec.0.1.opmode
@@ -87,7 +87,7 @@ setp cia402.2.pos-scale 10000
 net z-statusword      lcec.0.2.cia-statusword  => cia402.2.statusword
 net z-opmode-display  lcec.0.2.opmode-display  => cia402.2.opmode-display
 net z-drv-act-pos     lcec.0.2.actual-position => cia402.2.drv-actual-position
-net z-drv-act-velo    lcec.0.2.actual-velocity => cia402.2.drv-actual-velocit
+net z-drv-act-velo    lcec.0.2.actual-velocity => cia402.2.drv-actual-velocity
 
 net z-controlword         cia402.2.controlword         => lcec.0.2.cia-controlword
 net z-modes-of-operation  cia402.2.opmode              => lcec.0.2.opmode
