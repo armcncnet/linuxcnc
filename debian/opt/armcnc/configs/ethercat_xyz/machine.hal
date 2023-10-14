@@ -92,6 +92,7 @@ net z-drv-act-velo    lcec.0.2.actual-velocity => cia402.2.drv-actual-velocity
 net z-controlword         cia402.2.controlword         => lcec.0.2.cia-controlword
 net z-modes-of-operation  cia402.2.opmode              => lcec.0.2.opmode
 net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.2.target-position
+net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-velocity
 
 #*********************
 #   E-STOP
