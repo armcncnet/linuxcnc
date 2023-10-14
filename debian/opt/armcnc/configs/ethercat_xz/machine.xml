@@ -18,13 +18,14 @@
                     <pdoEntry idx="6061" subIdx="00" bitLen="8" halPin="opmode-display" halType="s32"/>
                     <pdoEntry idx="6064" subIdx="00" bitLen="32" halPin="actual-position" halType="s32"/>
                     <pdoEntry idx="606C" subIdx="00" bitLen="32" halPin="actual-velocity" halType="s32"/>
+                    <pdoEntry idx="6077" subIdx="00" bitLen="32" halPin="actual-torque" halType="s32"/>
                 </pdo>
             </syncManager>
         </slave>
         <slave idx="1" type="generic" vid="00000a88" pid="0A880001" configPdos="true">
             <dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="0"/>
             <sdoConfig idx="2000" subIdx="0"><sdoDataRaw data ="DA 04"/></sdoConfig>  <!-- Max motor current (3.5) -->
-            <sdoConfig idx="2011" subIdx="0"><sdoDataRaw data ="01 00"/></sdoConfig>  <!-- Open loop -->
+            <sdoConfig idx="2011" subIdx="0"><sdoDataRaw data ="00 00"/></sdoConfig>  <!-- Open loop -->
             <syncManager idx="2" dir="out">
                 <pdo idx="1600">
                     <pdoEntry idx="6040" subIdx="00" bitLen="16" halPin="cia-controlword" halType="u32"/>
@@ -39,6 +40,7 @@
                     <pdoEntry idx="6061" subIdx="00" bitLen="8" halPin="opmode-display" halType="s32"/>
                     <pdoEntry idx="6064" subIdx="00" bitLen="32" halPin="actual-position" halType="s32"/>
                     <pdoEntry idx="606C" subIdx="00" bitLen="32" halPin="actual-velocity" halType="s32"/>
+                    <pdoEntry idx="6077" subIdx="00" bitLen="32" halPin="actual-torque" halType="s32"/>
                 </pdo>
             </syncManager>
         </slave>
