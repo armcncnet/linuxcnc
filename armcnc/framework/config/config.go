@@ -72,7 +72,7 @@ func Init() {
 		}
 
 		var iniConfig Data
-		err = IniUtils.MapTo(iniFile, iniConfig)
+		err = IniUtils.MapTo(iniFile, &iniConfig)
 		if err != nil {
 			log.Println("[config]：" + color.Error.Sprintf("System configuration information mapTo failed."))
 			return
