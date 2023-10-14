@@ -9,6 +9,7 @@ package ServiceCommand
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/package/launch"
 	"armcnc/framework/service"
 	"fmt"
 	"github.com/gookit/color"
@@ -44,6 +45,9 @@ func Start() *cobra.Command {
 			Get.Group.Go(func() error {
 				return start.ListenAndServe()
 			})
+
+			launch := LaunchPackage.Init()
+			launch.Start(Config.Get.Machine.Path)
 
 			log.Println("[service]：" + color.Info.Sprintf("Core service started successfully"))
 
