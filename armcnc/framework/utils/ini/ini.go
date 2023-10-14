@@ -19,8 +19,8 @@ func ReflectFrom(cfg *ini.File, v interface{}) error {
 	return err
 }
 
-func Load(source interface{}, others ...interface{}) (*ini.File, error) {
-	iniFile, err := ini.Load(source, others)
+func Load(source interface{}) (*ini.File, error) {
+	iniFile, err := ini.Load(source)
 	return iniFile, err
 }
 
