@@ -81,17 +81,17 @@ net z-pos-cmd    => cia402.2.pos-cmd
 net z-pos-fb     => cia402.2.pos-fb
 net z-enable     => cia402.2.enable
 
-setp cia402.1.csp-mode 1
-setp cia402.1.pos-scale 10000
+setp cia402.2.csp-mode 1
+setp cia402.2.pos-scale 10000
 
-net z-statusword      lcec.0.5.cia-statusword  => cia402.2.statusword
-net z-opmode-display  lcec.0.5.opmode-display  => cia402.2.opmode-display
-net z-drv-act-pos     lcec.0.5.actual-position => cia402.2.drv-actual-position
-net z-drv-act-velo    lcec.0.5.actual-velocity => cia402.2.drv-actual-velocit
+net z-statusword      lcec.0.6.cia-statusword  => cia402.2.statusword
+net z-opmode-display  lcec.0.6.opmode-display  => cia402.2.opmode-display
+net z-drv-act-pos     lcec.0.6.actual-position => cia402.2.drv-actual-position
+net z-drv-act-velo    lcec.0.6.actual-velocity => cia402.2.drv-actual-velocit
 
-net z-controlword         cia402.2.controlword         => lcec.0.5.cia-controlword
-net z-modes-of-operation  cia402.2.opmode              => lcec.0.5.opmode
-net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.5.target-position
+net z-controlword         cia402.2.controlword         => lcec.0.6.cia-controlword
+net z-modes-of-operation  cia402.2.opmode              => lcec.0.6.opmode
+net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.6.target-position
 
 #*********************
 #   E-STOP
