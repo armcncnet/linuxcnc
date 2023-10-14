@@ -53,13 +53,13 @@ func Init() {
 		iniFile := IniUtils.Empty()
 		err := IniUtils.ReflectFrom(iniFile, Get)
 		if err != nil {
-			log.Println("[config]:" + color.Error.Sprintf("System configuration save failed"))
+			log.Println("[config]: " + color.Error.Sprintf("System configuration save failed"))
 			return
 		}
 
 		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
 		if err != nil {
-			log.Println("[config]:" + color.Error.Sprintf("System configuration save failed"))
+			log.Println("[config]: " + color.Error.Sprintf("System configuration save failed"))
 			return
 		}
 	}
@@ -67,14 +67,14 @@ func Init() {
 	if exists {
 		iniFile, err := IniUtils.Load(Get.Basic.Workspace + "/armcnc.ini")
 		if err != nil {
-			log.Println("[config]:" + color.Error.Sprintf("System configuration information Load failed."))
+			log.Println("[config]: " + color.Error.Sprintf("System configuration information Load failed."))
 			return
 		}
 
 		var iniConfig Data
 		err = IniUtils.MapTo(iniFile, &iniConfig)
 		if err != nil {
-			log.Println("[config]:" + color.Error.Sprintf("System configuration information MapTo failed."))
+			log.Println("[config]: " + color.Error.Sprintf("System configuration information MapTo failed."))
 			return
 		}
 
@@ -84,7 +84,7 @@ func Init() {
 		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
 		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
 		if err != nil {
-			log.Println("[config]:" + color.Error.Sprintf("System configuration save failed"))
+			log.Println("[config]: " + color.Error.Sprintf("System configuration save failed"))
 			return
 		}
 	}

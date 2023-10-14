@@ -20,7 +20,7 @@ func Start(name string, version string) *cobra.Command {
 		Long:    "Get version number",
 		Example: "armcnc version",
 		Run: func(cmd *cobra.Command, args []string) {
-			log.Println("[version]:" + color.Green.Text(name+" "+version+" "))
+			log.Println("[version]: " + color.Green.Text(name+" "+version+" "))
 		},
 	}
 	return command
