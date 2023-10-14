@@ -33,7 +33,7 @@ func Start() *cobra.Command {
 		Long:    "Start core service",
 		Example: "armcnc service",
 		Run: func(cmd *cobra.Command, args []string) {
-			log.Println("[service]：" + color.Gray.Text("Core service is starting..."))
+			log.Println("[service]:" + color.Gray.Text("Core service is starting..."))
 			start := &http.Server{
 				Addr:           fmt.Sprintf(":%d", Config.Get.Basic.Port),
 				Handler:        Service.Router(),
@@ -49,7 +49,7 @@ func Start() *cobra.Command {
 			launch := LaunchPackage.Init()
 			launch.Start(Config.Get.Machine.Path)
 
-			log.Println("[service]：" + color.Info.Sprintf("Core service started successfully"))
+			log.Println("[service]:" + color.Info.Sprintf("Core service started successfully"))
 
 			if err := Get.Group.Wait(); err != nil {
 			}
