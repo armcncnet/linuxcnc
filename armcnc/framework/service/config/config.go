@@ -19,6 +19,7 @@ type responseIndex struct {
 }
 
 func Index(c *gin.Context) {
+
 	returnData := responseIndex{}
 	returnData.Name = Config.Get.Basic.Name
 	returnData.Version = Config.Get.Basic.Version
