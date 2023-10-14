@@ -67,7 +67,7 @@ func Init() {
 	if exists {
 		iniFile, err := IniUtils.Load(Get.Basic.Workspace + "/armcnc.ini")
 		if err != nil {
-			log.Println("[config]：" + color.Error.Sprintf("System configuration information load failed."))
+			log.Println("[config]：" + color.Error.Sprintf("System configuration information load failed.") + err.Error())
 			return
 		}
 
