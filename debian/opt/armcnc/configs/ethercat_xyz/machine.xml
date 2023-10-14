@@ -44,7 +44,7 @@
         </slave>
         <slave idx="2" type="generic" vid="00000a88" pid="0A880001" configPdos="true">
             <dcConf assignActivate="300" sync0Cycle="*1" sync0Shift="0"/>
-            <sdoConfig idx="2000" subIdx="0"><sdoDataRaw data ="DA 04"/></sdoConfig>
+            <sdoConfig idx="2000" subIdx="0"><sdoDataRaw data ="2C 00"/></sdoConfig>
             <sdoConfig idx="2011" subIdx="0"><sdoDataRaw data ="00 00"/></sdoConfig>
             <syncManager idx="2" dir="out">
                 <pdo idx="1600">
