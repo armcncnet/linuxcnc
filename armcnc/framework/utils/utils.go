@@ -44,14 +44,16 @@ func Error(c *gin.Context, code int, msg string, data interface{}) {
 	})
 }
 
-func GetWlanIP() string {
+func GetIP(name string) string {
 	ip := "0.0.0.0"
-	iface, err := net.InterfaceByName("wlan0")
+	iface, err := net.InterfaceByName("name")
 	if err == nil {
 		addr, err := iface.Addrs()
 		if err == nil {
-			for _, item := range addr {
-				ip = item.String()
+			for _, address := range addr {
+				if ipNet, ok := address.(*net.IPNet); ok && !ipNet.IP.IsLoopback() && ipNet.IP.To4() != nil {
+					ip = ipNet.IP.String()
+				}
 			}
 		}
 	}

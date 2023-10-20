@@ -16,7 +16,8 @@ import (
 type responseIndex struct {
 	Name    string `json:"name"`
 	Version string `json:"version"`
-	Ip      string `json:"ip"`
+	WlanIP  string `json:"wlan_ip"`
+	EthIP   string `json:"eth_ip"`
 }
 
 func Index(c *gin.Context) {
@@ -24,7 +25,8 @@ func Index(c *gin.Context) {
 	returnData := responseIndex{}
 	returnData.Name = Config.Get.Basic.Name
 	returnData.Version = Config.Get.Basic.Version
-	returnData.Ip = Utils.GetWlanIP()
+	returnData.WlanIP = Utils.GetIP("wlan0")
+	returnData.EthIP = Utils.GetIP("eth0")
 
 	Utils.Success(c, 0, "", returnData)
 	return
