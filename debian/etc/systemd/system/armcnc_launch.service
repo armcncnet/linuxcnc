@@ -4,8 +4,8 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
-User=root
-WorkingDirectory=/opt/armcnc/launch/
+User=armcnc
+WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/opt/armcnc/.armcnc/environment
 ExecStart=/usr/bin/python3 -B /opt/armcnc/configs/${MACHINE_PATH}/launch/launch.py
 Restart=on-failure
