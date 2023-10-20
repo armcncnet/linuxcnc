@@ -9,6 +9,7 @@ package MachineCommand
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/package/launch"
 	"armcnc/framework/package/machine"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
@@ -49,6 +50,8 @@ func Start() *cobra.Command {
 						return
 					}
 					log.Println("[machine]: " + color.Blue.Text("The current machine tool configuration version: "+check.Emc.Version))
+					launch := LaunchPackage.Init()
+					launch.Start(args[1])
 				} else {
 					log.Println("[machine]：" + color.Yellow.Text("Please select the relevant operation"))
 					return
