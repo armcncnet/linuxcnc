@@ -4,7 +4,7 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
-User=armcnc
+User=root
 WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/opt/armcnc/.armcnc/environment
 ExecStart=/usr/bin/python3 -B /opt/armcnc/configs/${MACHINE_PATH}/launch/launch.py /opt/armcnc/configs/${MACHINE_PATH}/machine.ini
