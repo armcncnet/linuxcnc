@@ -9,7 +9,7 @@ package MachineCommand
 
 import (
 	"armcnc/framework/config"
-	MachinePackage "armcnc/framework/package/machine"
+	"armcnc/framework/package/machine"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
 	"log"
