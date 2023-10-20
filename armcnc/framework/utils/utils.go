@@ -46,7 +46,7 @@ func Error(c *gin.Context, code int, msg string, data interface{}) {
 
 func GetIP(name string) string {
 	ip := "0.0.0.0"
-	iface, err := net.InterfaceByName("name")
+	iface, err := net.InterfaceByName(name)
 	if err == nil {
 		addr, err := iface.Addrs()
 		if err == nil {
