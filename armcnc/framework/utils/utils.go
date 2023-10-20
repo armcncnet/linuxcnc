@@ -11,7 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"net"
 	"net/http"
-	"strings"
 )
 
 type EmptyData struct {
@@ -52,9 +51,7 @@ func GetWlanIP() string {
 		addr, err := iface.Addrs()
 		if err == nil {
 			for _, item := range addr {
-				if strings.Contains(item.String(), "192.168") {
-					ip = item.String()
-				}
+				ip = item.String()
 			}
 		}
 	}
