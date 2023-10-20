@@ -7,7 +7,7 @@ Type=simple
 User=armcnc
 WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/opt/armcnc/.armcnc/environment
-ExecStart=/usr/bin/python3 -B /opt/armcnc/configs/${MACHINE_PATH}/launch/launch.py
+ExecStart=/usr/bin/python3 -B /opt/armcnc/configs/${MACHINE_PATH}/launch/launch.py /opt/armcnc/configs/${MACHINE_PATH}/machine.ini
 Restart=on-failure
 
 [Install]
