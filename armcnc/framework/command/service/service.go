@@ -46,8 +46,10 @@ func Start() *cobra.Command {
 				return start.ListenAndServe()
 			})
 
-			launch := LaunchPackage.Init()
-			launch.Start(Config.Get.Machine.Path)
+			if Config.Get.Machine.Path != "" {
+				launch := LaunchPackage.Init()
+				launch.Start(Config.Get.Machine.Path)
+			}
 
 			log.Println("[service]: " + color.Info.Sprintf("Core service started successfully"))
 

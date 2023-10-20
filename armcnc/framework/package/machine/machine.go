@@ -9,6 +9,8 @@ package MachinePackage
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/utils/file"
+	"armcnc/framework/utils/ini"
 )
 
 type Machine struct {
@@ -16,6 +18,13 @@ type Machine struct {
 }
 
 type Data struct {
+	Emc struct {
+		ControlType string `ini:"CONTROL_TYPE"`
+		Version     string `ini:"VERSION"`
+	} `ini:"EMC"`
+	Display struct {
+		Display string `ini:"DISPLAY"`
+	} `json:"DISPLAY"`
 }
 
 func Init() *Machine {
@@ -24,13 +33,19 @@ func Init() *Machine {
 	}
 }
 
-func (manager *Machine) Select() []Data {
+func (machine *Machine) Select() []Data {
 	data := make([]Data, 0)
 	return data
 }
 
-func (manager *Machine) Get(name string) Data {
+func (machine *Machine) Get(name string) Data {
 	data := Data{}
-
+	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
+	if exists {
+		iniFile, err := IniUtils.Load(machine.Path + name + "/machine.ini")
+		if err == nil {
+			err = IniUtils.MapTo(iniFile, &data)
+		}
+	}
 	return data
 }
