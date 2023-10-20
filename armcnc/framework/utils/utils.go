@@ -9,7 +9,9 @@ package Utils
 
 import (
 	"github.com/gin-gonic/gin"
+	"net"
 	"net/http"
+	"strings"
 )
 
 type EmptyData struct {
@@ -41,4 +43,20 @@ func Error(c *gin.Context, code int, msg string, data interface{}) {
 		"message": msg,
 		"data":    data,
 	})
+}
+
+func GetWlanIP() string {
+	ip := "0.0.0.0"
+	iface, err := net.InterfaceByName("wlan0")
+	if err == nil {
+		addr, err := iface.Addrs()
+		if err == nil {
+			for _, item := range addr {
+				if strings.Contains(item.String(), "192.168") {
+					ip = item.String()
+				}
+			}
+		}
+	}
+	return ip
 }
