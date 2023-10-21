@@ -4,6 +4,8 @@
 
 sudo systemctl stop armcnc_launch.service
 sudo systemctl disable armcnc_launch.service
+sudo systemctl stop armcnc_linuxcnc.service
+sudo systemctl disable armcnc_linuxcnc.service
 sudo systemctl stop armcnc_service.service
 sudo systemctl disable armcnc_service.service
 sudo systemctl daemon-reload
