@@ -30,19 +30,27 @@ func (launch *Launch) Start(machine string) {
 	write := FileUtils.WriteFile("MACHINE_PATH="+machine, Config.Get.Basic.Workspace+"/.armcnc/environment")
 	if write == nil {
 		if machine != "" {
-			cmd := exec.Command("systemctl", "restart", "armcnc_linuxcnc.service armcnc_launch.service")
+			cmd := exec.Command("systemctl", "restart", "armcnc_linuxcnc.service")
+			cmd.Output()
+			cmd = exec.Command("systemctl", "restart", "armcnc_launch.service")
 			cmd.Output()
 		} else {
-			cmd := exec.Command("systemctl", "stop", "armcnc_linuxcnc.service armcnc_launch.service")
+			cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
+			cmd.Output()
+			cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 			cmd.Output()
 		}
 	} else {
-		cmd := exec.Command("systemctl", "stop", "armcnc_linuxcnc.service armcnc_launch.service")
+		cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
+		cmd.Output()
+		cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 		cmd.Output()
 	}
 }
 
 func (launch *Launch) Stop() {
-	cmd := exec.Command("systemctl", "stop", "armcnc_linuxcnc.service armcnc_launch.service")
+	cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
+	cmd.Output()
+	cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 	cmd.Output()
 }
