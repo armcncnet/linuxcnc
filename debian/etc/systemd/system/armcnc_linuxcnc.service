@@ -7,6 +7,7 @@ Type=simple
 User=armcnc
 WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/opt/armcnc/.armcnc/environment
+Environment=DISPLAY=:0.0
 ExecStart=/usr/bin/linuxcnc /opt/armcnc/configs/${MACHINE_PATH}/machine.ini
 Restart=on-failure
 
