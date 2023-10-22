@@ -29,9 +29,14 @@ func Start() *cobra.Command {
 			}
 			if len(args) == 1 {
 				if args[0] == "get" {
+					if Config.Get.Machine.Path == "" {
+						log.Println("[machine]: " + color.Yellow.Text("The current machine tool configuration is empty"))
+						return
+					}
 					log.Println("[machine]: " + color.Blue.Text("The current machine tool configuration in use is: "+Config.Get.Machine.Path))
 					return
 				} else if args[0] == "clear" {
+					log.Println("[machine]：" + color.Gray.Text("Please wait..."))
 					Config.Get.Machine.Path = ""
 					save := Config.Save()
 					if !save {
