@@ -14,10 +14,11 @@ import (
 )
 
 type responseIndex struct {
-	Name    string `json:"name"`
-	Version string `json:"version"`
-	WlanIP  string `json:"wlan_ip"`
-	EthIP   string `json:"eth_ip"`
+	Name        string `json:"name"`
+	Version     string `json:"version"`
+	WlanIP      string `json:"wlan_ip"`
+	EthIP       string `json:"eth_ip"`
+	MachinePath string `json:"machine_path"`
 }
 
 func Index(c *gin.Context) {
@@ -27,6 +28,7 @@ func Index(c *gin.Context) {
 	returnData.Version = Config.Get.Basic.Version
 	returnData.WlanIP = Utils.GetIP("wlan0")
 	returnData.EthIP = Utils.GetIP("eth0")
+	returnData.MachinePath = Config.Get.Machine.Path
 
 	Utils.Success(c, 0, "", returnData)
 	return
