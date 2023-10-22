@@ -25,6 +25,10 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
+	router.Static("/files", "/opt/armcnc/files/")
+
+	router.Static("/uploads", "/opt/armcnc/uploads/")
+
 	config := router.Group("config")
 	{
 		config.GET("/index", ConfigService.Index)
