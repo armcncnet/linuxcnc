@@ -10,6 +10,7 @@ package ServiceCommand
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/package/launch"
+	"armcnc/framework/package/machine"
 	"armcnc/framework/service"
 	"fmt"
 	"github.com/gookit/color"
@@ -47,8 +48,12 @@ func Start() *cobra.Command {
 			})
 
 			if Config.Get.Machine.Path != "" {
-				launch := LaunchPackage.Init()
-				launch.Start(Config.Get.Machine.Path)
+				machine := MachinePackage.Init()
+				check := machine.Get(Config.Get.Machine.Path)
+				if check.Emc.Version != "" {
+					launch := LaunchPackage.Init()
+					launch.Start(Config.Get.Machine.Path)
+				}
 			}
 
 			log.Println("[service]: " + color.Info.Sprintf("Core service started successfully"))

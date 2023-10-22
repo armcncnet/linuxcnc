@@ -29,14 +29,14 @@ func Router() http.Handler {
 
 	router.Static("/uploads", "/opt/armcnc/uploads/")
 
-	config := router.Group("config")
-	{
-		config.GET("/index", ConfigService.Index)
-	}
-
 	message := router.Group("message")
 	{
 		message.GET("/service", MessageService.Service)
+	}
+
+	config := router.Group("config")
+	{
+		config.GET("/index", ConfigService.Index)
 	}
 
 	return router

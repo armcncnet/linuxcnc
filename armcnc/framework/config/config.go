@@ -91,3 +91,21 @@ func Init() {
 		}
 	}
 }
+
+func Save() bool {
+	status := true
+	iniFile := IniUtils.Empty()
+	err := IniUtils.ReflectFrom(iniFile, Get)
+	if err != nil {
+		status = false
+		return status
+	}
+
+	err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
+	if err != nil {
+		status = false
+		return status
+	}
+
+	return status
+}
