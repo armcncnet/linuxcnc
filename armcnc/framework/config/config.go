@@ -81,8 +81,6 @@ func Init() {
 		Get.Authorization = iniConfig.Authorization
 		Get.Machine = iniConfig.Machine
 
-		log.Println("[config]: " + color.Info.Sprintf(Get.Machine.Path))
-
 		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
 		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
 		if err != nil {

@@ -10,8 +10,6 @@ package LaunchPackage
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils/file"
-	"github.com/gookit/color"
-	"log"
 	"os/exec"
 )
 
@@ -29,7 +27,6 @@ func Init() *Launch {
 }
 
 func (launch *Launch) Start(machine string) {
-	log.Println("[launch]: " + color.Info.Sprintf(machine))
 	write := FileUtils.WriteFile("MACHINE_PATH="+machine, Config.Get.Basic.Workspace+"/.armcnc/environment")
 	if write == nil {
 		if machine != "" {
