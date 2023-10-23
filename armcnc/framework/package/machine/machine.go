@@ -11,6 +11,7 @@ import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils/file"
 	"armcnc/framework/utils/ini"
+	"time"
 )
 
 type Machine struct {
@@ -18,13 +19,15 @@ type Machine struct {
 }
 
 type Data struct {
-	EMC struct {
-		MACHINE      string `ini:"MACHINE"`
-		DESCRIBE     string `ini:"DESCRIBE"`
-		CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
-		DEBUG        string `ini:"DEBUG"`
-		VERSION      string `ini:"VERSION"`
-	} `ini:"EMC"`
+	Time time.Time
+}
+
+type EMC struct {
+	MACHINE      string `ini:"MACHINE"`
+	DESCRIBE     string `ini:"DESCRIBE"`
+	CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
+	DEBUG        string `ini:"DEBUG"`
+	VERSION      string `ini:"VERSION"`
 }
 
 func Init() *Machine {
@@ -38,8 +41,8 @@ func (machine *Machine) Select() []Data {
 	return data
 }
 
-func (machine *Machine) Get(name string) Data {
-	data := Data{}
+func (machine *Machine) Get(name string) EMC {
+	data := EMC{}
 	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + name + "/machine.ini")
