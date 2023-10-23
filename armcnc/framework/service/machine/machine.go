@@ -45,7 +45,6 @@ func GetIniContent(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
-
 	returnData.Content = machine.GetContent(path)
 
 	Utils.Success(c, 0, "", returnData)

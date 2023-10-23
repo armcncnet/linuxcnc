@@ -82,11 +82,11 @@ func (machine *Machine) Select() []Data {
 	return data
 }
 
-func (machine *Machine) Get(name string) INI {
+func (machine *Machine) Get(path string) INI {
 	data := INI{}
-	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {
-		iniFile, err := IniUtils.Load(machine.Path + name + "/machine.ini")
+		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.ini")
 		if err == nil {
 			err = IniUtils.MapTo(iniFile, &data)
 		}
@@ -94,11 +94,11 @@ func (machine *Machine) Get(name string) INI {
 	return data
 }
 
-func (machine *Machine) GetContent(name string) string {
+func (machine *Machine) GetContent(path string) string {
 	content := ""
-	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {
-		contentByte, err := FileUtils.ReadFile(machine.Path + name + "/machine.ini")
+		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/machine.ini")
 		if err == nil {
 			content = string(contentByte)
 		}
