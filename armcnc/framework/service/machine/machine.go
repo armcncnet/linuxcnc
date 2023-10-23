@@ -11,6 +11,8 @@ import (
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/goccy/go-json"
+	"io/ioutil"
 )
 
 type responseSelect struct {
@@ -48,5 +50,32 @@ func GetIniContent(c *gin.Context) {
 	returnData.Content = machine.GetContent(path)
 
 	Utils.Success(c, 0, "", returnData)
+	return
+}
+
+type requestUpdateIniContent struct {
+	Path    string `json:"path"`
+	Content string `json:"content"`
+}
+
+func UpdateIniContent(c *gin.Context) {
+
+	requestJson := requestUpdateIniContent{}
+
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	update := machine.UpdateContent(requestJson.Path, requestJson.Content)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }

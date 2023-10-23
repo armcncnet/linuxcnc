@@ -45,6 +45,8 @@ func Router() http.Handler {
 		machine.GET("/select", MachineService.Select)
 
 		machine.GET("/get/ini/content", MachineService.GetIniContent)
+
+		machine.POST("/update/ini/content", MachineService.UpdateIniContent)
 	}
 
 	return router

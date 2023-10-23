@@ -106,3 +106,15 @@ func (machine *Machine) GetContent(path string) string {
 
 	return content
 }
+
+func (machine *Machine) UpdateContent(path string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
+	if exists {
+		write := FileUtils.WriteFile(content, machine.Path+path+"/machine.ini")
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}
