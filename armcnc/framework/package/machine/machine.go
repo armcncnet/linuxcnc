@@ -54,7 +54,7 @@ func (machine *Machine) Select() []Data {
 		if err == nil {
 			if info.IsDir() {
 				item.Name = info.Name()
-				timeData, _ := times.Stat(file.Name())
+				timeData, _ := times.Stat(info.Name())
 				item.Time = timeData.BirthTime()
 				data = append(data, item)
 			}
