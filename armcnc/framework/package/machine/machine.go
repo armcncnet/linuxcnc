@@ -11,6 +11,8 @@ import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils/file"
 	"armcnc/framework/utils/ini"
+	"os"
+	"sort"
 	"time"
 )
 
@@ -19,7 +21,8 @@ type Machine struct {
 }
 
 type Data struct {
-	Time time.Time
+	Name string    `json:"name"`
+	Time time.Time `json:"time"`
 }
 
 type EMC struct {
@@ -38,6 +41,26 @@ func Init() *Machine {
 
 func (machine *Machine) Select() []Data {
 	data := make([]Data, 0)
+
+	files, err := os.ReadDir(machine.Path)
+	if err != nil {
+		return data
+	}
+
+	for _, file := range files {
+		item := Data{}
+		info, err := file.Info()
+		if err == nil {
+			item.Name = info.Name()
+			item.Time = info.ModTime()
+			data = append(data, item)
+		}
+	}
+
+	sort.Slice(data, func(i, j int) bool {
+		return data[i].Time.After(data[j].Time)
+	})
+
 	return data
 }
 

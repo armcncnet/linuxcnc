@@ -9,6 +9,7 @@ package Service
 
 import (
 	"armcnc/framework/service/config"
+	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -37,6 +38,11 @@ func Router() http.Handler {
 	config := router.Group("config")
 	{
 		config.GET("/index", ConfigService.Index)
+	}
+
+	machine := router.Group("machine")
+	{
+		machine.GET("/select", MachineService.Select)
 	}
 
 	return router
