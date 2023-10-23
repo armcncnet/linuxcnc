@@ -20,6 +20,7 @@ type responseSelect struct {
 func Select(c *gin.Context) {
 
 	returnData := responseSelect{}
+	returnData.Machine = make([]MachinePackage.Data, 0)
 
 	machine := MachinePackage.Init()
 

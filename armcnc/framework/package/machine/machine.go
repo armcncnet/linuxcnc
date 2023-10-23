@@ -24,6 +24,7 @@ type Machine struct {
 
 type Data struct {
 	Name        string    `json:"name"`
+	Path        string    `json:"path"`
 	Describe    string    `json:"describe"`
 	Version     string    `json:"version"`
 	ControlType int       `json:"control_type"`
@@ -57,7 +58,7 @@ func (machine *Machine) Select() []Data {
 	for _, file := range files {
 		item := Data{}
 		if file.IsDir() {
-			item.Name = file.Name()
+			item.Path = file.Name()
 			timeData, _ := times.Stat(machine.Path + file.Name())
 			item.Time = timeData.BirthTime()
 			if strings.Contains(file.Name(), "default_") {
@@ -65,6 +66,7 @@ func (machine *Machine) Select() []Data {
 			}
 			info := machine.Get(file.Name())
 			if info.EMC.VERSION != "" {
+				item.Name = info.EMC.MACHINE
 				item.Describe = info.EMC.DESCRIBE
 				item.Version = info.EMC.VERSION
 				item.ControlType = info.EMC.CONTROL_TYPE
