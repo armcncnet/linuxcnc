@@ -56,7 +56,7 @@ func (machine *Machine) Select() []Data {
 		if file.IsDir() {
 			item.Name = file.Name()
 			timeData, _ := times.Stat(machine.Path + file.Name())
-			item.Time = timeData.ModTime()
+			item.Time = timeData.BirthTime()
 			info := machine.Get(file.Name())
 			if info.VERSION != "" {
 				item.Describe = info.DESCRIBE
@@ -68,7 +68,7 @@ func (machine *Machine) Select() []Data {
 	}
 
 	sort.Slice(data, func(i, j int) bool {
-		return data[i].Time.Before(data[j].Time)
+		return data[i].Time.After(data[j].Time)
 	})
 
 	return data
