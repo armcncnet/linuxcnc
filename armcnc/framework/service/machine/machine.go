@@ -88,6 +88,7 @@ func UpdateIniContent(c *gin.Context) {
 	returnData.Machine.Describe = machineData.EMC.DESCRIBE
 	returnData.Machine.Version = machineData.EMC.VERSION
 	returnData.Machine.ControlType = machineData.EMC.CONTROL_TYPE
+	returnData.Machine.Coordinate = machineData.TRAJ.COORDINATES
 
 	Utils.Success(c, 0, "", returnData)
 	return

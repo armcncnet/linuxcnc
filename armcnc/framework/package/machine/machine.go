@@ -28,6 +28,7 @@ type Data struct {
 	Describe    string    `json:"describe"`
 	Version     string    `json:"version"`
 	ControlType int       `json:"control_type"`
+	Coordinate  string    `json:"coordinate"`
 	Time        time.Time `json:"-"`
 }
 
@@ -39,6 +40,9 @@ type INI struct {
 		DEBUG        string `ini:"DEBUG"`
 		VERSION      string `ini:"VERSION"`
 	} `ini:"EMC"`
+	TRAJ struct {
+		COORDINATES string `ini:"COORDINATES"`
+	} `ini:"TRAJ"`
 }
 
 func Init() *Machine {
@@ -70,6 +74,7 @@ func (machine *Machine) Select() []Data {
 				item.Describe = info.EMC.DESCRIBE
 				item.Version = info.EMC.VERSION
 				item.ControlType = info.EMC.CONTROL_TYPE
+				item.Coordinate = info.TRAJ.COORDINATES
 				data = append(data, item)
 			}
 		}
