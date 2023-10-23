@@ -59,7 +59,7 @@ func (machine *Machine) Select() []Data {
 			timeData, _ := times.Stat(machine.Path + file.Name())
 			item.Time = timeData.BirthTime()
 			if strings.Contains(file.Name(), "default_") {
-				item.Time = time.Time{}
+				item.Time = item.Time.Add(-10 * time.Minute)
 			}
 			info := machine.Get(file.Name())
 			if info.VERSION != "" {
