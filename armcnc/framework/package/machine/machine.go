@@ -27,7 +27,7 @@ type Data struct {
 	Describe    string    `json:"describe"`
 	Version     string    `json:"version"`
 	ControlType int       `json:"control_type"`
-	Time        time.Time `json:"time"`
+	Time        time.Time `json:"-"`
 }
 
 type INI struct {
