@@ -56,7 +56,7 @@ func (machine *Machine) Select() []Data {
 		if file.IsDir() {
 			item.Name = file.Name()
 			timeData, _ := times.Stat(machine.Path + file.Name())
-			item.Time = timeData.BirthTime()
+			item.Time = timeData.ModTime()
 			info := machine.Get(file.Name())
 			if info.VERSION != "" {
 				item.Describe = info.DESCRIBE
