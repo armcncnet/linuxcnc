@@ -58,7 +58,13 @@ type requestUpdateIniContent struct {
 	Content string `json:"content"`
 }
 
+type responseUpdateIniContent struct {
+	Machine MachinePackage.Data `json:"machine"`
+}
+
 func UpdateIniContent(c *gin.Context) {
+
+	returnData := responseUpdateIniContent{}
 
 	requestJson := requestUpdateIniContent{}
 
@@ -75,6 +81,13 @@ func UpdateIniContent(c *gin.Context) {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
+
+	machineData := machine.Get(requestJson.Path)
+	returnData.Machine.Path = requestJson.Path
+	returnData.Machine.Name = machineData.EMC.MACHINE
+	returnData.Machine.Describe = machineData.EMC.DESCRIBE
+	returnData.Machine.Version = machineData.EMC.VERSION
+	returnData.Machine.ControlType = machineData.EMC.CONTROL_TYPE
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
