@@ -51,9 +51,11 @@ func (machine *Machine) Select() []Data {
 		item := Data{}
 		info, err := file.Info()
 		if err == nil {
-			item.Name = info.Name()
-			item.Time = info.ModTime()
-			data = append(data, item)
+			if info.IsDir() {
+				item.Name = info.Name()
+				item.Time = info.ModTime()
+				data = append(data, item)
+			}
 		}
 	}
 
