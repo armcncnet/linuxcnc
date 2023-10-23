@@ -11,6 +11,7 @@ import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils/file"
 	"armcnc/framework/utils/ini"
+	"github.com/djherbis/times"
 	"os"
 	"sort"
 	"time"
@@ -53,7 +54,8 @@ func (machine *Machine) Select() []Data {
 		if err == nil {
 			if info.IsDir() {
 				item.Name = info.Name()
-				item.Time = info.ModTime()
+				timeData, _ := times.Stat(file.Name())
+				item.Time = timeData.BirthTime()
 				data = append(data, item)
 			}
 		}
