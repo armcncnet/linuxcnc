@@ -50,19 +50,16 @@ func (machine *Machine) Select() []Data {
 
 	for _, file := range files {
 		item := Data{}
-		info, err := file.Info()
-		if err == nil {
-			if info.IsDir() {
-				item.Name = info.Name()
-				timeData, _ := times.Stat(machine.Path + info.Name())
-				item.Time = timeData.BirthTime()
-				data = append(data, item)
-			}
+		if file.IsDir() {
+			item.Name = file.Name()
+			timeData, _ := times.Stat(machine.Path + file.Name())
+			item.Time = timeData.BirthTime()
+			data = append(data, item)
 		}
 	}
 
 	sort.Slice(data, func(i, j int) bool {
-		return data[i].Time.After(data[j].Time)
+		return data[i].Time.Before(data[j].Time)
 	})
 
 	return data
