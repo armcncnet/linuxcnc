@@ -89,6 +89,6 @@ func UpdateIniContent(c *gin.Context) {
 	returnData.Machine.Version = machineData.EMC.VERSION
 	returnData.Machine.ControlType = machineData.EMC.CONTROL_TYPE
 
-	Utils.Success(c, 0, "", Utils.EmptyData{})
+	Utils.Success(c, 0, "", returnData)
 	return
 }
