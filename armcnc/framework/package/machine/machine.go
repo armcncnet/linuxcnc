@@ -14,6 +14,7 @@ import (
 	"github.com/djherbis/times"
 	"os"
 	"sort"
+	"strings"
 	"time"
 )
 
@@ -57,6 +58,9 @@ func (machine *Machine) Select() []Data {
 			item.Name = file.Name()
 			timeData, _ := times.Stat(machine.Path + file.Name())
 			item.Time = timeData.BirthTime()
+			if strings.Contains(file.Name(), "default_") {
+				item.Time = time.Time{}
+			}
 			info := machine.Get(file.Name())
 			if info.VERSION != "" {
 				item.Describe = info.DESCRIBE
