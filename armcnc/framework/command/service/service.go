@@ -50,7 +50,7 @@ func Start() *cobra.Command {
 			if Config.Get.Machine.Path != "" {
 				machine := MachinePackage.Init()
 				check := machine.Get(Config.Get.Machine.Path)
-				if check.Emc.Version != "" {
+				if check.EMC.VERSION != "" {
 					launch := LaunchPackage.Init()
 					launch.Start(Config.Get.Machine.Path)
 				}
