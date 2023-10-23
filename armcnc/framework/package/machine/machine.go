@@ -68,8 +68,8 @@ func (machine *Machine) Select() []Data {
 				item.Describe = info.EMC.DESCRIBE
 				item.Version = info.EMC.VERSION
 				item.ControlType = info.EMC.CONTROL_TYPE
+				data = append(data, item)
 			}
-			data = append(data, item)
 		}
 	}
 
