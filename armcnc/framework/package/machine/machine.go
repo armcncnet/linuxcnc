@@ -22,13 +22,16 @@ type Machine struct {
 }
 
 type Data struct {
-	Name string    `json:"name"`
-	Time time.Time `json:"time"`
+	Name        string    `json:"name"`
+	Describe    string    `json:"describe"`
+	Version     string    `json:"version"`
+	ControlType int       `json:"control_type"`
+	Time        time.Time `json:"time"`
 }
 
 type EMC struct {
 	MACHINE      string `ini:"MACHINE"`
-	DESCRIBE     string `ini:"DESCRIBE"`
+	DESCRIBE     string `ini:""`
 	CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
 	DEBUG        string `ini:"DEBUG"`
 	VERSION      string `ini:"VERSION"`
@@ -54,6 +57,12 @@ func (machine *Machine) Select() []Data {
 			item.Name = file.Name()
 			timeData, _ := times.Stat(machine.Path + file.Name())
 			item.Time = timeData.BirthTime()
+			info := machine.Get(file.Name())
+			if info.VERSION != "" {
+				item.Describe = info.DESCRIBE
+				item.Version = info.VERSION
+				item.ControlType = info.CONTROL_TYPE
+			}
 			data = append(data, item)
 		}
 	}
