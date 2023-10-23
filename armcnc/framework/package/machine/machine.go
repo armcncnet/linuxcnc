@@ -18,13 +18,13 @@ type Machine struct {
 }
 
 type Data struct {
-	Emc struct {
-		ControlType string `ini:"CONTROL_TYPE"`
-		Version     string `ini:"VERSION"`
+	EMC struct {
+		MACHINE      string `ini:"MACHINE"`
+		DESCRIBE     string `ini:"DESCRIBE"`
+		CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
+		DEBUG        string `ini:"DEBUG"`
+		VERSION      string `ini:"VERSION"`
 	} `ini:"EMC"`
-	Display struct {
-		Display string `ini:"DISPLAY"`
-	} `json:"DISPLAY"`
 }
 
 func Init() *Machine {
