@@ -49,3 +49,9 @@ func WriteFile(data string, path string) error {
 	}
 	return err
 }
+
+func ReadFile(path string) ([]byte, error) {
+	filePath := path
+	content, err := os.ReadFile(filePath)
+	return content, err
+}

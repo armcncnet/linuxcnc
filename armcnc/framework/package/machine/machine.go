@@ -93,3 +93,16 @@ func (machine *Machine) Get(name string) INI {
 	}
 	return data
 }
+
+func (machine *Machine) GetContent(name string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
+	if exists {
+		contentByte, err := FileUtils.ReadFile(machine.Path + name + "/machine.ini")
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+
+	return content
+}

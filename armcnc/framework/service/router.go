@@ -43,6 +43,8 @@ func Router() http.Handler {
 	machine := router.Group("machine")
 	{
 		machine.GET("/select", MachineService.Select)
+
+		machine.GET("/get/ini/content", MachineService.GetIniContent)
 	}
 
 	return router

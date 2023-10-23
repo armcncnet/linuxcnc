@@ -29,3 +29,25 @@ func Select(c *gin.Context) {
 	Utils.Success(c, 0, "", returnData)
 	return
 }
+
+type responseGetIniContent struct {
+	Content string `json:"content"`
+}
+
+func GetIniContent(c *gin.Context) {
+
+	returnData := responseGetIniContent{}
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", returnData)
+		return
+	}
+
+	machine := MachinePackage.Init()
+
+	returnData.Content = machine.GetContent(path)
+
+	Utils.Success(c, 0, "", returnData)
+	return
+}
