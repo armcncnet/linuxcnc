@@ -30,12 +30,14 @@ type Data struct {
 	Time        time.Time `json:"time"`
 }
 
-type EMC struct {
-	MACHINE      string `ini:"MACHINE"`
-	DESCRIBE     string `ini:""`
-	CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
-	DEBUG        string `ini:"DEBUG"`
-	VERSION      string `ini:"VERSION"`
+type INI struct {
+	EMC struct {
+		MACHINE      string `ini:"MACHINE"`
+		DESCRIBE     string `ini:"DESCRIBE"`
+		CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
+		DEBUG        string `ini:"DEBUG"`
+		VERSION      string `ini:"VERSION"`
+	} `ini:"EMC"`
 }
 
 func Init() *Machine {
@@ -62,10 +64,10 @@ func (machine *Machine) Select() []Data {
 				item.Time = item.Time.Add(-10 * time.Minute)
 			}
 			info := machine.Get(file.Name())
-			if info.VERSION != "" {
-				item.Describe = info.DESCRIBE
-				item.Version = info.VERSION
-				item.ControlType = info.CONTROL_TYPE
+			if info.EMC.VERSION != "" {
+				item.Describe = info.EMC.DESCRIBE
+				item.Version = info.EMC.VERSION
+				item.ControlType = info.EMC.CONTROL_TYPE
 			}
 			data = append(data, item)
 		}
@@ -78,8 +80,8 @@ func (machine *Machine) Select() []Data {
 	return data
 }
 
-func (machine *Machine) Get(name string) EMC {
-	data := EMC{}
+func (machine *Machine) Get(name string) INI {
+	data := INI{}
 	exists, _ := FileUtils.PathExists(machine.Path + name + "/machine.ini")
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + name + "/machine.ini")
