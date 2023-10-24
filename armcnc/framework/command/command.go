@@ -24,6 +24,8 @@ func Init() {
 		Long:  "Development Team: ARMCNC https://www.armcnc.net",
 	}
 
+	command.CompletionOptions.HiddenDefaultCmd = true
+
 	command.AddCommand(VersionCommand.Start(Config.Get.Basic.Name, Config.Get.Basic.Version))
 
 	command.AddCommand(ServiceCommand.Start())
