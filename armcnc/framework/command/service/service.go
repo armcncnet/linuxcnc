@@ -33,6 +33,7 @@ func Start() *cobra.Command {
 		Short:   "Start core service",
 		Long:    "Start core service",
 		Example: "armcnc service",
+		Hidden:  true,
 		Run: func(cmd *cobra.Command, args []string) {
 			log.Println("[service]: " + color.Gray.Text("Core service is starting..."))
 			start := &http.Server{
