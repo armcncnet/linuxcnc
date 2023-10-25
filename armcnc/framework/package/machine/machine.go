@@ -23,13 +23,16 @@ type Machine struct {
 }
 
 type Data struct {
-	Name        string    `json:"name"`
-	Path        string    `json:"path"`
-	Describe    string    `json:"describe"`
-	Version     string    `json:"version"`
-	ControlType int       `json:"control_type"`
-	Coordinate  string    `json:"coordinate"`
-	Time        time.Time `json:"-"`
+	Name         string    `json:"name"`
+	Path         string    `json:"path"`
+	Describe     string    `json:"describe"`
+	Version      string    `json:"version"`
+	ControlType  int       `json:"control_type"`
+	Coordinate   string    `json:"coordinate"`
+	Increments   string    `json:"increments"`
+	LinearUnits  string    `json:"linear_units"`
+	AngularUnits string    `json:"angular_units"`
+	Time         time.Time `json:"-"`
 }
 
 type INI struct {
@@ -40,8 +43,13 @@ type INI struct {
 		DEBUG        string `ini:"DEBUG"`
 		VERSION      string `ini:"VERSION"`
 	} `ini:"EMC"`
+	DISPLAY struct {
+		INCREMENTS string `json:"INCREMENTS"`
+	} `json:"DISPLAY"`
 	TRAJ struct {
-		COORDINATES string `ini:"COORDINATES"`
+		COORDINATES   string `ini:"COORDINATES"`
+		LINEAR_UNITS  string `ini:"LINEAR_UNITS"`
+		ANGULAR_UNITS string `ini:"ANGULAR_UNITS"`
 	} `ini:"TRAJ"`
 }
 
@@ -75,6 +83,9 @@ func (machine *Machine) Select() []Data {
 				item.Version = info.EMC.VERSION
 				item.ControlType = info.EMC.CONTROL_TYPE
 				item.Coordinate = info.TRAJ.COORDINATES
+				item.Increments = info.DISPLAY.INCREMENTS
+				item.LinearUnits = info.TRAJ.LINEAR_UNITS
+				item.AngularUnits = info.TRAJ.ANGULAR_UNITS
 				data = append(data, item)
 			}
 		}
