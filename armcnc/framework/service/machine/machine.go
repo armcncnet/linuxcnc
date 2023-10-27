@@ -47,7 +47,7 @@ func GetIniContent(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
-	returnData.Content = machine.GetContent(path)
+	returnData.Content = machine.GetIniContent(path)
 
 	Utils.Success(c, 0, "", returnData)
 	return
@@ -76,19 +76,21 @@ func UpdateIniContent(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
-	update := machine.UpdateContent(requestJson.Path, requestJson.Content)
+	update := machine.UpdateIniContent(requestJson.Path, requestJson.Content)
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
 
-	machineData := machine.Get(requestJson.Path)
+	iniData := machine.GetIni(requestJson.Path)
 	returnData.Machine.Path = requestJson.Path
-	returnData.Machine.Name = machineData.EMC.MACHINE
-	returnData.Machine.Describe = machineData.EMC.DESCRIBE
-	returnData.Machine.Version = machineData.EMC.VERSION
-	returnData.Machine.ControlType = machineData.EMC.CONTROL_TYPE
-	returnData.Machine.Coordinate = machineData.TRAJ.COORDINATES
+	returnData.Machine.Version = iniData.Emc.Version
+	returnData.Machine.Coordinate = iniData.Traj.Coordinates
+
+	userData := machine.GetUser(requestJson.Path)
+	returnData.Machine.Name = userData.Base.Name
+	returnData.Machine.Describe = userData.Base.Describe
+	returnData.Machine.Control = userData.Base.Control
 
 	Utils.Success(c, 0, "", returnData)
 	return

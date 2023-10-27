@@ -58,8 +58,8 @@ func Start() *cobra.Command {
 						return
 					}
 					machine := MachinePackage.Init()
-					check := machine.Get(args[1])
-					if check.EMC.VERSION == "" {
+					check := machine.GetIni(args[1])
+					if check.Emc.Version == "" {
 						log.Println("[machine]：" + color.Red.Text("Machine tool configuration failed. Please check and try again"))
 						return
 					}
@@ -69,7 +69,7 @@ func Start() *cobra.Command {
 						log.Println("[machine]：" + color.Red.Text("Machine tool configuration failed. Please check and try again"))
 						return
 					}
-					log.Println("[machine]: " + color.Blue.Text("The current machine tool configuration version: "+Config.Get.Machine.Path+" "+check.EMC.VERSION))
+					log.Println("[machine]: " + color.Blue.Text("The current machine tool configuration version: "+Config.Get.Machine.Path+" "+check.Emc.Version))
 					launch := LaunchPackage.Init()
 					launch.Start(Config.Get.Machine.Path)
 				} else {

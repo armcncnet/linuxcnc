@@ -27,7 +27,7 @@ type Data struct {
 	Path         string    `json:"path"`
 	Describe     string    `json:"describe"`
 	Version      string    `json:"version"`
-	ControlType  int       `json:"control_type"`
+	Control      int       `json:"control"`
 	Coordinate   string    `json:"coordinate"`
 	Increments   string    `json:"increments"`
 	LinearUnits  string    `json:"linear_units"`
@@ -36,21 +36,27 @@ type Data struct {
 }
 
 type INI struct {
-	EMC struct {
-		MACHINE      string `ini:"MACHINE"`
-		DESCRIBE     string `ini:"DESCRIBE"`
-		CONTROL_TYPE int    `ini:"CONTROL_TYPE"`
-		DEBUG        string `ini:"DEBUG"`
-		VERSION      string `ini:"VERSION"`
+	Emc struct {
+		Machine string `ini:"MACHINE"`
+		Debug   string `ini:"DEBUG"`
+		Version string `ini:"VERSION"`
 	} `ini:"EMC"`
-	DISPLAY struct {
-		INCREMENTS string `json:"INCREMENTS"`
-	} `json:"DISPLAY"`
-	TRAJ struct {
-		COORDINATES   string `ini:"COORDINATES"`
-		LINEAR_UNITS  string `ini:"LINEAR_UNITS"`
-		ANGULAR_UNITS string `ini:"ANGULAR_UNITS"`
+	Display struct {
+		Increments string `ini:"INCREMENTS"`
+	} `ini:"DISPLAY"`
+	Traj struct {
+		Coordinates  string `ini:"COORDINATES"`
+		LinearUnits  string `ini:"LINEAR_UNITS"`
+		AngularUnits string `ini:"ANGULAR_UNITS"`
 	} `ini:"TRAJ"`
+}
+
+type USER struct {
+	Base struct {
+		Name     string `ini:"NAME"`
+		Describe string `ini:"DESCRIBE"`
+		Control  int    `ini:"CONTROL"`
+	} `ini:"BASE"`
 }
 
 func Init() *Machine {
@@ -76,18 +82,20 @@ func (machine *Machine) Select() []Data {
 			if strings.Contains(file.Name(), "default_") {
 				item.Time = item.Time.Add(-10 * time.Minute)
 			}
-			info := machine.Get(file.Name())
-			if info.EMC.VERSION != "" {
-				item.Name = info.EMC.MACHINE
-				item.Describe = info.EMC.DESCRIBE
-				item.Version = info.EMC.VERSION
-				item.ControlType = info.EMC.CONTROL_TYPE
-				item.Coordinate = info.TRAJ.COORDINATES
-				item.Increments = info.DISPLAY.INCREMENTS
-				item.LinearUnits = info.TRAJ.LINEAR_UNITS
-				item.AngularUnits = info.TRAJ.ANGULAR_UNITS
+			ini := machine.GetIni(file.Name())
+			if ini.Emc.Version != "" {
+				item.Name = ini.Emc.Machine
+				item.Version = ini.Emc.Version
+				item.Coordinate = ini.Traj.Coordinates
+				item.Increments = ini.Display.Increments
+				item.LinearUnits = ini.Traj.LinearUnits
+				item.AngularUnits = ini.Traj.AngularUnits
 				data = append(data, item)
 			}
+			user := machine.GetUser(file.Name())
+			item.Name = user.Base.Name
+			item.Describe = user.Base.Describe
+			item.Control = user.Base.Control
 		}
 	}
 
@@ -98,7 +106,19 @@ func (machine *Machine) Select() []Data {
 	return data
 }
 
-func (machine *Machine) Get(path string) INI {
+func (machine *Machine) GetUser(path string) USER {
+	data := USER{}
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.user")
+	if exists {
+		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
+		if err == nil {
+			err = IniUtils.MapTo(iniFile, &data)
+		}
+	}
+	return data
+}
+
+func (machine *Machine) GetIni(path string) INI {
 	data := INI{}
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {
@@ -110,7 +130,7 @@ func (machine *Machine) Get(path string) INI {
 	return data
 }
 
-func (machine *Machine) GetContent(path string) string {
+func (machine *Machine) GetIniContent(path string) string {
 	content := ""
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {
@@ -123,7 +143,7 @@ func (machine *Machine) GetContent(path string) string {
 	return content
 }
 
-func (machine *Machine) UpdateContent(path string, content string) bool {
+func (machine *Machine) UpdateIniContent(path string, content string) bool {
 	status := false
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {
