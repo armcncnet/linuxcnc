@@ -35,13 +35,7 @@ func Service(c *gin.Context) {
 		err = json.Unmarshal(data, &jsonFormat)
 		if err == nil {
 			if jsonFormat.Command != "" {
-				for user := range SocketUtils.SocketStruct.User {
-					err := user.WriteMessage(websocket.TextMessage, data)
-					if err != nil {
-						user.Close()
-						delete(SocketUtils.SocketStruct.User, user)
-					}
-				}
+				SocketUtils.SendMessage(jsonFormat.Command, jsonFormat.Message, jsonFormat.Data)
 			}
 		}
 	}

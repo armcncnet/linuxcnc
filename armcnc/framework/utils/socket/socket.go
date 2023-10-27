@@ -35,18 +35,19 @@ type SocketMessageFormat struct {
 	Data    interface{} `json:"data"`
 }
 
-func SendMessage(command string, data interface{}) {
+func SendMessage(command string, message string, data interface{}) {
 
 	sendData := SocketMessageFormat{}
 	sendData.Command = command
+	sendData.Message = message
 	sendData.Data = data
-	message, _ := json.Marshal(sendData)
+	messageJson, _ := json.Marshal(sendData)
 
 	SocketStruct.mutex.Lock()
 	defer SocketStruct.mutex.Unlock()
 
 	for user := range SocketStruct.User {
-		err := user.WriteMessage(websocket.TextMessage, message)
+		err := user.WriteMessage(websocket.TextMessage, messageJson)
 		if err != nil {
 			user.Close()
 			delete(SocketStruct.User, user)
