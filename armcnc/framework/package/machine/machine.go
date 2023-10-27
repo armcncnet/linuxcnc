@@ -89,12 +89,14 @@ func (machine *Machine) Select() []Data {
 				item.Increments = ini.Display.Increments
 				item.LinearUnits = ini.Traj.LinearUnits
 				item.AngularUnits = ini.Traj.AngularUnits
+
+				user := machine.GetUser(file.Name())
+				item.Name = user.Base.Name
+				item.Describe = user.Base.Describe
+				item.Control = user.Base.Control
+
 				data = append(data, item)
 			}
-			user := machine.GetUser(file.Name())
-			item.Name = user.Base.Name
-			item.Describe = user.Base.Describe
-			item.Control = user.Base.Control
 		}
 	}
 
