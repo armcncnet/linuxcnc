@@ -84,7 +84,6 @@ func (machine *Machine) Select() []Data {
 			}
 			ini := machine.GetIni(file.Name())
 			if ini.Emc.Version != "" {
-				item.Name = ini.Emc.Machine
 				item.Version = ini.Emc.Version
 				item.Coordinate = ini.Traj.Coordinates
 				item.Increments = ini.Display.Increments
@@ -110,9 +109,9 @@ func (machine *Machine) GetUser(path string) USER {
 	data := USER{}
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.user")
 	if exists {
-		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
+		userFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
 		if err == nil {
-			err = IniUtils.MapTo(iniFile, &data)
+			err = IniUtils.MapTo(userFile, &data)
 		}
 	}
 	return data
