@@ -68,7 +68,7 @@ func Start() *cobra.Command {
 			signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 			<-quit
 
-			launch.Stop()
+			launch.OnStop()
 			log.Println("[service]: " + color.Info.Sprintf("Core service exit"))
 
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
