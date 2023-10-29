@@ -21,6 +21,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"syscall"
 	"time"
 )
 
@@ -64,7 +65,7 @@ func Start() *cobra.Command {
 			log.Println("[service]: " + color.Info.Sprintf("Core service started successfully"))
 
 			quit := make(chan os.Signal)
-			signal.Notify(quit, os.Interrupt)
+			signal.Notify(quit, os.Interrupt, syscall.SIGTERM)
 			<-quit
 
 			launch.Stop()
