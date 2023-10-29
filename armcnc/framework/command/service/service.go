@@ -48,11 +48,12 @@ func Start() *cobra.Command {
 				return start.ListenAndServe()
 			})
 
+			launch := LaunchPackage.Init()
+
 			if Config.Get.Machine.Path != "" {
 				machine := MachinePackage.Init()
 				check := machine.GetIni(Config.Get.Machine.Path)
 				if check.Emc.Version != "" {
-					launch := LaunchPackage.Init()
 					launch.Start(Config.Get.Machine.Path)
 				}
 			}
@@ -61,6 +62,8 @@ func Start() *cobra.Command {
 
 			if err := Get.Group.Wait(); err != nil {
 			}
+
+			log.Println("[service]: " + color.Info.Sprintf("Core service exit"))
 		},
 	}
 	return command

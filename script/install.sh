@@ -16,6 +16,26 @@ if [ ! -f "/etc/apt/sources.list.d/armcnc.list" ]; then
     echo "deb [arch=${architecture}] https://mirrors.geekros.com/ focal main" | sudo tee /etc/apt/sources.list.d/armcnc.list
 fi
 
+cat <<'EOF' > /etc/set_mac_address.sh
+#!/bin/bash
+mac_file=/etc/network/mac_address
+
+if [ -s ${mac_file} ] && [ -f ${mac_file} ]; then
+    ifconfig eth0 down
+    ifconfig eth0 hw ether $(cat ${mac_file})
+    ifconfig eth0 up
+else
+    openssl rand -rand /dev/urandom:/sys/class/socinfo/soc_uid -hex 6 | sed -e 's/../&:/g;s/:$//' -e 's/^\(.\)[13579bdf]/\10/' > $mac_file
+    ifconfig eth0 down
+    ifconfig eth0 hw ether $(cat ${mac_file})
+    ifconfig eth0 up
+fi
+
+if [ -e /etc/ethercat.conf ]; then
+    systemctl restart ethercat.service
+fi
+EOF
+
 sudo apt -y update && sudo apt -y upgrade
 sudo apt install -y linuxcnc-uspace=2.9.0~pre1+git20230208.f1270d6ed7-1 linuxcnc-uspace-dev=2.9.0~pre1+git20230208.f1270d6ed7-1
 sudo apt install -y armcnc
