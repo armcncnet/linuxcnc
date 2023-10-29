@@ -15,9 +15,12 @@ import (
 	"fmt"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
+	"golang.org/x/net/context"
 	"golang.org/x/sync/errgroup"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"time"
 )
 
@@ -60,10 +63,21 @@ func Start() *cobra.Command {
 
 			log.Println("[service]: " + color.Info.Sprintf("Core service started successfully"))
 
-			if err := Get.Group.Wait(); err != nil {
+			quit := make(chan os.Signal)
+			signal.Notify(quit, os.Interrupt)
+			<-quit
+
+			launch.Stop()
+			log.Println("[service]: " + color.Info.Sprintf("Core service exit"))
+
+			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+			defer cancel()
+
+			if err := start.Shutdown(ctx); err != nil {
 			}
 
-			log.Println("[service]: " + color.Info.Sprintf("Core service exit"))
+			if err := Get.Group.Wait(); err != nil {
+			}
 		},
 	}
 	return command
