@@ -34,6 +34,9 @@ func Start() *cobra.Command {
 				log.Println("[login]：" + color.Red.Text("Incorrect email forma"))
 				return
 			}
+
+			log.Println("[login]：" + color.Gray.Text("Please wait..."))
+
 			request, response, _ := RequestUtils.Service("/account/login/mail/code", "GET", map[string]string{"mail": args[0]}, nil)
 			if request.StatusCode != 200 {
 				log.Println("[login]：" + color.Red.Text("Service request failed, please try again"))
