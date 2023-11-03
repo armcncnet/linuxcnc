@@ -24,7 +24,8 @@ type ResponseService struct {
 }
 
 type responseServiceData struct {
-	Token string `json:"token"`
+	Token      string `json:"token"`
+	LoginToken string `json:"login_token"`
 }
 
 func Service(path string, method string, parameters map[string]string, data map[string]string) (*http.Response, ResponseService, error) {
