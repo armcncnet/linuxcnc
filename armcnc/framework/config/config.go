@@ -81,6 +81,7 @@ func Init() {
 
 		Get.Authorization = iniConfig.Authorization
 		Get.Machine = iniConfig.Machine
+		Get.Authorization.Getaway = "https://gateway.geekros.com"
 
 		iniFile.Section("basic").Key("version").SetValue(Get.Basic.Version)
 		err = IniUtils.SaveTo(iniFile, Get.Basic.Workspace+"/armcnc.ini")
