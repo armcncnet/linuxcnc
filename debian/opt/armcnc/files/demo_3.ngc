@@ -1,17 +1,10 @@
-( This program is copyright of Rab Gordon, Gary Drew, and Paul Corner.)
-( It is released here under a GPL without warranty to do with as you may.)
-( With scales factors set at 1.0, the part is cut from a 100x100x50mm )
-( block with the zero point at the center top of the block )
-( and Cutter is assumed to be a 10mm ball nose )
-( and feedrate is 450 mm/min )
-
+({"name":demo, "describe":"三轴机床测试示例"})
 #<xscale> = 1.0
 #<yscale> = 1.0
 #<zscale> = 1.0
 #<fscale> = 10000.0
 #<toolno> = 1
 #<rpm>    = 1600
-
 N30 G21
 N40G90
 G64P.1

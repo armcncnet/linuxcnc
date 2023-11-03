@@ -1,3 +1,4 @@
+({"name":demo, "describe":"三轴机床测试示例"})
 g20 g64
 s3400 m3
 g0z1

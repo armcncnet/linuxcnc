@@ -1,3 +1,4 @@
+({"name":demo, "describe":"五轴机床测试示例"})
 N1 G17 G21 G94 G90 G64
 N2 M428
 N3 ;start toolpath
