@@ -31,6 +31,7 @@ type DataBasic struct {
 
 type DataAuthorization struct {
 	Getaway string `ini:"getaway"`
+	Token   string `ini:"token"`
 	AppId   string `ini:"app_id"`
 	AppKey  string `ini:"app_key"`
 }
