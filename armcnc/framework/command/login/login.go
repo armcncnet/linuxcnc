@@ -43,7 +43,7 @@ func Start() *cobra.Command {
 				return
 			}
 
-			log.Println("[login]：" + color.Green.Text("Please enter the email verification code:"))
+			log.Print("[login]：" + color.Green.Text("Please enter the email verification code:"))
 
 			scanner := bufio.NewScanner(os.Stdin)
 			if scanner.Scan() {
