@@ -27,6 +27,7 @@ type Data struct {
 	Path     string    `json:"path"`
 	Describe string    `json:"describe"`
 	Version  string    `json:"version"`
+	Line     []string  `json:"line"`
 	Time     time.Time `json:"-"`
 }
 
@@ -70,8 +71,28 @@ func (code *Code) Select() []Data {
 	return data
 }
 
+func (code *Code) ReadLine(path string) Data {
+	data := Data{}
+	data.Line = make([]string, 0)
+
+	file, err := os.Open(path)
+	if err != nil {
+		return data
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file)
+	for scanner.Scan() {
+		line := scanner.Text()
+		data.Line = append(data.Line, line)
+	}
+
+	return data
+}
+
 func (code *Code) ReadFirstLine(path string) Data {
 	data := Data{}
+
 	file, err := os.Open(path)
 	if err != nil {
 		return data

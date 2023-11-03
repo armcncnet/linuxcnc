@@ -53,6 +53,8 @@ func Router() http.Handler {
 	code := router.Group("code")
 	{
 		code.GET("/select", CodeService.Select)
+
+		code.GET("/read/line", CodeService.ReadLine)
 	}
 
 	return router
