@@ -8,6 +8,7 @@
 package Command
 
 import (
+	"armcnc/framework/command/login"
 	"armcnc/framework/command/machine"
 	"armcnc/framework/command/service"
 	"armcnc/framework/command/version"
@@ -31,6 +32,8 @@ func Init() {
 	command.AddCommand(ServiceCommand.Start())
 
 	command.AddCommand(MachineCommand.Start())
+
+	command.AddCommand(LoginCommand.Start())
 
 	if err := command.Execute(); err != nil {
 		os.Exit(1)
