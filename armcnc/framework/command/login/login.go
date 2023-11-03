@@ -43,7 +43,7 @@ func Start() *cobra.Command {
 				return
 			}
 			if response.Code != 0 {
-				log.Println("[login]：" + color.Red.Text("Service request failed, please try again"))
+				log.Println("[login]：" + color.White.Text("Service request failed, please try again"))
 				return
 			}
 
