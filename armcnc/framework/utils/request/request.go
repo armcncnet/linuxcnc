@@ -11,10 +11,8 @@ import (
 	"armcnc/framework/config"
 	"bytes"
 	"encoding/json"
-	"github.com/gookit/color"
 	"io"
 	"io/ioutil"
-	"log"
 	"mime/multipart"
 	"net/http"
 	"os"
@@ -39,8 +37,6 @@ func Service(path string, method string, parameters map[string]string, data map[
 		bodyData, _ = json.Marshal(data)
 	}
 
-	log.Println("[request]：" + color.Gray.Text(Config.Get.Authorization.Getaway+path))
-
 	request, err := http.NewRequest(method, Config.Get.Authorization.Getaway+path, bytes.NewReader(bodyData))
 	if err != nil {
 		return nil, responseData, err
@@ -60,8 +56,6 @@ func Service(path string, method string, parameters map[string]string, data map[
 	client := &http.Client{}
 
 	response, _ := client.Do(request)
-
-	log.Println("[request]：" + color.Gray.Text(response.Status))
 
 	body, _ := ioutil.ReadAll(response.Body)
 	err = json.Unmarshal(body, &responseData)
