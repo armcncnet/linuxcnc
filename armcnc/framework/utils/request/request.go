@@ -61,6 +61,8 @@ func Service(path string, method string, parameters map[string]string, data map[
 
 	response, _ := client.Do(request)
 
+	log.Println("[request]：" + color.Gray.Text(response.Status))
+
 	body, _ := ioutil.ReadAll(response.Body)
 	err = json.Unmarshal(body, &responseData)
 	return response, responseData, err
