@@ -40,10 +40,13 @@ func (launch *Launch) Start(machine string) {
 }
 
 func (launch *Launch) OnStart() {
-	cmd := exec.Command("systemctl", "start", "armcnc_linuxcnc.service")
-	cmd.Output()
-	cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
-	cmd.Output()
+	exists, _ := FileUtils.PathExists("/tmp/linuxcnc.lock")
+	if !exists {
+		cmd := exec.Command("systemctl", "start", "armcnc_linuxcnc.service")
+		cmd.Output()
+		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
+		cmd.Output()
+	}
 }
 
 func (launch *Launch) OnRestart() {
