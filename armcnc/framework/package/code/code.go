@@ -13,6 +13,7 @@ import (
 	"github.com/djherbis/times"
 	"github.com/goccy/go-json"
 	"os"
+	"sort"
 	"strings"
 	"time"
 )
@@ -62,6 +63,10 @@ func (code *Code) Select() []Data {
 		}
 	}
 
+	sort.Slice(data, func(i, j int) bool {
+		return data[i].Time.After(data[j].Time)
+	})
+
 	return data
 }
 
@@ -87,7 +92,6 @@ func (code *Code) ReadFirstLine(path string) Data {
 		if err != nil {
 			return data
 		}
-
 	}
 
 	return data

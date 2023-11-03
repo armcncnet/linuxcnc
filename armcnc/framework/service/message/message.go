@@ -8,6 +8,7 @@
 package MessageService
 
 import (
+	"armcnc/framework/package/launch"
 	"armcnc/framework/utils/socket"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
@@ -35,6 +36,12 @@ func Service(c *gin.Context) {
 		err = json.Unmarshal(data, &jsonFormat)
 		if err == nil {
 			if jsonFormat.Command != "" {
+				if jsonFormat.Command == "desktop:device:restart" {
+					go func() {
+						launch := LaunchPackage.Init()
+						launch.OnRestart()
+					}()
+				}
 				SocketUtils.SendMessage(jsonFormat.Command, jsonFormat.Message, jsonFormat.Data)
 			}
 		}
