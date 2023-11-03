@@ -11,6 +11,7 @@ import (
 	"armcnc/framework/utils"
 	"armcnc/framework/utils/request"
 	"bufio"
+	"fmt"
 	"github.com/gookit/color"
 	"github.com/spf13/cobra"
 	"log"
@@ -43,7 +44,7 @@ func Start() *cobra.Command {
 				return
 			}
 
-			log.Print("[login]：Please enter the email verification code:")
+			fmt.Print(color.Gray.Text("Please enter the email verification code:"))
 
 			scanner := bufio.NewScanner(os.Stdin)
 			if scanner.Scan() {
