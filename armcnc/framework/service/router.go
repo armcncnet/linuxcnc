@@ -8,6 +8,7 @@
 package Service
 
 import (
+	"armcnc/framework/service/code"
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
@@ -47,6 +48,11 @@ func Router() http.Handler {
 		machine.GET("/get/ini/content", MachineService.GetIniContent)
 
 		machine.POST("/update/ini/content", MachineService.UpdateIniContent)
+	}
+
+	code := router.Group("code")
+	{
+		code.GET("/select", CodeService.Select)
 	}
 
 	return router

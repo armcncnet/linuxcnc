@@ -25,7 +25,6 @@ func Select(c *gin.Context) {
 	returnData.Machine = make([]MachinePackage.Data, 0)
 
 	machine := MachinePackage.Init()
-
 	returnData.Machine = machine.Select()
 
 	Utils.Success(c, 0, "", returnData)
