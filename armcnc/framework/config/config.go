@@ -47,7 +47,7 @@ func Init() {
 	Get.Basic.Workspace = "/opt/armcnc"
 	Get.Basic.Port = 10081
 
-	Get.Authorization.Getaway = "https://getaway.geekros.com"
+	Get.Authorization.Getaway = "https://gateway.geekros.com"
 
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")
 	if !exists {
