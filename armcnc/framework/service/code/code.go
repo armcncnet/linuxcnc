@@ -38,14 +38,14 @@ func ReadLine(c *gin.Context) {
 	returnData := responseReadLine{}
 	returnData.Line = make([]string, 0)
 
-	path := c.DefaultQuery("path", "")
-	if path == "" {
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
 		Utils.Error(c, 10000, "", returnData)
 		return
 	}
 
 	code := CodePackage.Init()
-	read := code.ReadLine(path)
+	read := code.ReadLine(fileName)
 	returnData.Line = read.Line
 
 	Utils.Success(c, 0, "", returnData)

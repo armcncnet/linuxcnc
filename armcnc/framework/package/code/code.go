@@ -40,7 +40,7 @@ func Init() *Code {
 func (code *Code) Select() []Data {
 	data := make([]Data, 0)
 
-	files, err := os.ReadDir(code.Path)
+	files, err := os.ReadDir(code.Path + code.Path)
 	if err != nil {
 		return data
 	}
@@ -54,7 +54,7 @@ func (code *Code) Select() []Data {
 			if strings.Contains(file.Name(), "demo") {
 				item.Time = item.Time.Add(-10 * time.Minute)
 			}
-			firstLine := code.ReadFirstLine(code.Path + file.Name())
+			firstLine := code.ReadFirstLine(file.Name())
 			if firstLine.Version != "" {
 				item.Name = firstLine.Name
 				item.Describe = firstLine.Describe
@@ -71,11 +71,11 @@ func (code *Code) Select() []Data {
 	return data
 }
 
-func (code *Code) ReadLine(path string) Data {
+func (code *Code) ReadLine(fileName string) Data {
 	data := Data{}
 	data.Line = make([]string, 0)
 
-	file, err := os.Open(path)
+	file, err := os.Open(code.Path + fileName)
 	if err != nil {
 		return data
 	}
@@ -90,10 +90,10 @@ func (code *Code) ReadLine(path string) Data {
 	return data
 }
 
-func (code *Code) ReadFirstLine(path string) Data {
+func (code *Code) ReadFirstLine(fileName string) Data {
 	data := Data{}
 
-	file, err := os.Open(path)
+	file, err := os.Open(code.Path + fileName)
 	if err != nil {
 		return data
 	}
