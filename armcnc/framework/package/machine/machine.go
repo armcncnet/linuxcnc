@@ -99,11 +99,9 @@ func (machine *Machine) Select() []Data {
 			}
 		}
 	}
-
 	sort.Slice(data, func(i, j int) bool {
 		return data[i].Time.After(data[j].Time)
 	})
-
 	return data
 }
 
@@ -140,7 +138,6 @@ func (machine *Machine) GetIniContent(path string) string {
 			content = string(contentByte)
 		}
 	}
-
 	return content
 }
 

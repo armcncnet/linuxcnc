@@ -9,6 +9,7 @@ package CodePackage
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/utils/file"
 	"bufio"
 	"github.com/djherbis/times"
 	"github.com/goccy/go-json"
@@ -63,12 +64,22 @@ func (code *Code) Select() []Data {
 			}
 		}
 	}
-
 	sort.Slice(data, func(i, j int) bool {
 		return data[i].Time.After(data[j].Time)
 	})
-
 	return data
+}
+
+func (code *Code) ReadContent(fileName string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(code.Path + fileName)
+	if exists {
+		contentByte, err := FileUtils.ReadFile(code.Path + fileName)
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+	return content
 }
 
 func (code *Code) ReadLine(fileName string) Data {
@@ -86,7 +97,6 @@ func (code *Code) ReadLine(fileName string) Data {
 		line := scanner.Text()
 		data.Line = append(data.Line, line)
 	}
-
 	return data
 }
 
@@ -106,7 +116,6 @@ func (code *Code) ReadFirstLine(fileName string) Data {
 	}
 
 	line = strings.TrimSpace(line)
-
 	if len(line) > 0 && line[0] == '(' && line[len(line)-1] == ')' {
 		jsonStr := line[1 : len(line)-1]
 		err := json.Unmarshal([]byte(jsonStr), &data)
@@ -114,6 +123,5 @@ func (code *Code) ReadFirstLine(fileName string) Data {
 			return data
 		}
 	}
-
 	return data
 }

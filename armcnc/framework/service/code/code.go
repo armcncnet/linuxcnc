@@ -30,7 +30,8 @@ func Select(c *gin.Context) {
 }
 
 type responseReadLine struct {
-	Line []string `json:"lines"`
+	Content string   `json:"content"`
+	Line    []string `json:"lines"`
 }
 
 func ReadLine(c *gin.Context) {
@@ -45,6 +46,7 @@ func ReadLine(c *gin.Context) {
 	}
 
 	code := CodePackage.Init()
+	returnData.Content = code.ReadContent(fileName)
 	read := code.ReadLine(fileName)
 	returnData.Line = read.Line
 
