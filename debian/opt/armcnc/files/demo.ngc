@@ -1,4 +1,4 @@
-({"name": "demo5", "describe": "五轴机床测试示例", "version": "1.0.0"})
+({"name": "叶片", "describe": "五轴机床测试示例", "version": "1.0.0"})
 N1 G17 G21 G94 G90 G64
 N2 M428
 N3 ;start toolpath
