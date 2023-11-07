@@ -41,7 +41,7 @@ func Init() *Code {
 func (code *Code) Select() []Data {
 	data := make([]Data, 0)
 
-	files, err := os.ReadDir(code.Path + code.Path)
+	files, err := os.ReadDir(code.Path)
 	if err != nil {
 		return data
 	}
