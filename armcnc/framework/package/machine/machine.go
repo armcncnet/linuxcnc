@@ -14,6 +14,7 @@ import (
 	"github.com/djherbis/times"
 	"os"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -115,6 +116,24 @@ func (machine *Machine) GetUser(path string) USER {
 		}
 	}
 	return data
+}
+
+func (machine *Machine) UpdateUser(path string, data USER) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.user")
+	if exists {
+		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
+		if err == nil {
+			iniFile.Section("basic").Key("name").SetValue(data.Base.Name)
+			iniFile.Section("basic").Key("describe").SetValue(data.Base.Describe)
+			iniFile.Section("basic").Key("control").SetValue(strconv.Itoa(data.Base.Control))
+			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
+			if err == nil {
+				status = true
+			}
+		}
+	}
+	return status
 }
 
 func (machine *Machine) GetIni(path string) INI {

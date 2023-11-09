@@ -31,6 +31,38 @@ func Select(c *gin.Context) {
 	return
 }
 
+type requestUpdate struct {
+	Path     string `json:"path"`
+	Control  int    `json:"control"`
+	Name     string `json:"name"`
+	Describe string `json:"describe"`
+}
+
+func Update(c *gin.Context) {
+
+	requestJson := requestUpdate{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	updateData := MachinePackage.USER{}
+	updateData.Base.Name = requestJson.Name
+	updateData.Base.Describe = requestJson.Describe
+	updateData.Base.Control = requestJson.Control
+	update := machine.UpdateUser(requestJson.Path, updateData)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
 type responseGetIniContent struct {
 	Content string `json:"content"`
 }
@@ -66,7 +98,6 @@ func UpdateIniContent(c *gin.Context) {
 	returnData := responseUpdateIniContent{}
 
 	requestJson := requestUpdateIniContent{}
-
 	requestData, _ := ioutil.ReadAll(c.Request.Body)
 	err := json.Unmarshal(requestData, &requestJson)
 	if err != nil {
