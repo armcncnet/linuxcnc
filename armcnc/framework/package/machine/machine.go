@@ -124,9 +124,9 @@ func (machine *Machine) UpdateUser(path string, data USER) bool {
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
 		if err == nil {
-			iniFile.Section("basic").Key("name").SetValue(data.Base.Name)
-			iniFile.Section("basic").Key("describe").SetValue(data.Base.Describe)
-			iniFile.Section("basic").Key("control").SetValue(strconv.Itoa(data.Base.Control))
+			iniFile.Section("BASE").Key("NAME").SetValue(data.Base.Name)
+			iniFile.Section("BASE").Key("DESCRIBE").SetValue(data.Base.Describe)
+			iniFile.Section("BASE").Key("CONTROL").SetValue(strconv.Itoa(data.Base.Control))
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
 				status = true
