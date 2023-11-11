@@ -27,7 +27,7 @@ func Init() *Launch {
 }
 
 func (launch *Launch) Start(machine string) {
-	write := FileUtils.WriteFile("MACHINE_PATH="+machine, Config.Get.Basic.Workspace+"/.armcnc/environment")
+	write := FileUtils.WriteFile("MACHINE_PATH="+machine, "/tmp/environment")
 	if write == nil {
 		if machine != "" {
 			launch.OnRestart()
