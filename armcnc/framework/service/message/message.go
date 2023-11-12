@@ -45,7 +45,7 @@ func Service(c *gin.Context) {
 				}
 				if jsonFormat.Command == "desktop:device:shutdown" {
 					cmd := exec.Command("shutdown", "-h", "now")
-					cmd.Run()
+					cmd.Output()
 				}
 				SocketUtils.SendMessage(jsonFormat.Command, jsonFormat.Message, jsonFormat.Data)
 			}
