@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
+	"armcnc/framework/service/version"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -57,6 +58,11 @@ func Router() http.Handler {
 		code.GET("/select", CodeService.Select)
 
 		code.GET("/read/line", CodeService.ReadLine)
+	}
+
+	version := router.Group("version")
+	{
+		version.GET("/check", VersionService.Check)
 	}
 
 	return router

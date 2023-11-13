@@ -13,7 +13,6 @@ import (
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
-	"os/exec"
 )
 
 func Service(c *gin.Context) {
@@ -42,10 +41,6 @@ func Service(c *gin.Context) {
 						launch := LaunchPackage.Init()
 						launch.OnRestart()
 					}()
-				}
-				if jsonFormat.Command == "desktop:device:shutdown" {
-					cmd := exec.Command("shutdown", "-h", "now")
-					cmd.Output()
 				}
 				SocketUtils.SendMessage(jsonFormat.Command, jsonFormat.Message, jsonFormat.Data)
 			}
