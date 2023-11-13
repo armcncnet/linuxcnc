@@ -23,9 +23,9 @@ type Version struct {
 
 func Init() *Version {
 	return &Version{
-		ARMCNC:   "",
-		LINUXCNC: "",
-		SDK:      "",
+		ARMCNC:   "-",
+		LINUXCNC: "-",
+		SDK:      "-",
 	}
 }
 
