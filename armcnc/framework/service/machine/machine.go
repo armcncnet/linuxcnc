@@ -54,7 +54,6 @@ func Set(c *gin.Context) {
 			Utils.Error(c, 10000, "", Utils.EmptyData{})
 			return
 		}
-
 		launch := LaunchPackage.Init()
 		launch.Start(Config.Get.Machine.Path)
 	}
