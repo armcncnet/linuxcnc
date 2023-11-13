@@ -23,9 +23,9 @@ type Version struct {
 
 func Init() *Version {
 	return &Version{
-		ARMCNC:   "-",
-		LINUXCNC: "-",
-		SDK:      "-",
+		ARMCNC:   "",
+		LINUXCNC: "",
+		SDK:      "",
 	}
 }
 
@@ -43,7 +43,7 @@ func (version *Version) ArmCNC() string {
 }
 
 func (version *Version) Python() string {
-	data := ""
+	data := "-"
 	output, err := exec.Command("bash", "-c", "python3 -B -c \"import pkg_resources; print(pkg_resources.get_distribution('armcnc').version)\"").Output()
 	if err == nil {
 		data = strings.TrimSpace(string(output))
@@ -52,7 +52,7 @@ func (version *Version) Python() string {
 }
 
 func (version *Version) LinuxCNC() string {
-	data := ""
+	data := "-"
 	output, err := exec.Command("bash", "-c", "dpkg -l | grep linuxcnc").Output()
 	if err == nil {
 		scanner := bufio.NewScanner(strings.NewReader(string(output)))
