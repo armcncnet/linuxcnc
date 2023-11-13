@@ -25,9 +25,9 @@ func Check(c *gin.Context) {
 	version := VersionPackage.Init()
 	data := version.Get()
 
-	version.ARMCNC = data.ARMCNC
-	version.LINUXCNC = data.LINUXCNC
-	version.SDK = data.SDK
+	returnData.ARMCNC = data.ARMCNC
+	returnData.LINUXCNC = data.LINUXCNC
+	returnData.SDK = data.SDK
 
 	Utils.Success(c, 0, "", returnData)
 	return
