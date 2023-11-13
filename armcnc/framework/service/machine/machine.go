@@ -8,6 +8,8 @@
 package MachineService
 
 import (
+	"armcnc/framework/config"
+	"armcnc/framework/package/launch"
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
 	"github.com/gin-gonic/gin"
@@ -28,6 +30,36 @@ func Select(c *gin.Context) {
 	returnData.Machine = machine.Select()
 
 	Utils.Success(c, 0, "", returnData)
+	return
+}
+
+func Set(c *gin.Context) {
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	if path != Config.Get.Machine.Path {
+		machine := MachinePackage.Init()
+		check := machine.GetIni(path)
+		if check.Emc.Version == "" {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		Config.Get.Machine.Path = path
+		save := Config.Save()
+		if !save {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+
+		launch := LaunchPackage.Init()
+		launch.Start(Config.Get.Machine.Path)
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }
 
