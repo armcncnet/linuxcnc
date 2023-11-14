@@ -72,22 +72,22 @@ type INI struct {
 	Spindle0 struct {
 		MaxForwardVelocity string `ini:"MAX_FORWARD_VELOCITY"`
 		MinForwardVelocity string `ini:"MIN_FORWARD_VELOCITY"`
-	} `json:"SPINDLE_0"`
+	} `ini:"SPINDLE_0"`
 	Kins struct {
 		Joints     string `ini:"JOINTS"`
 		Kinematics string `ini:"KINEMATICS"`
-	} `json:"KINS"`
-	AxisX  AXIS  `json:"AXIS_X"`
-	Joint0 JOINT `json:"JOINT_0"`
-	AxisY  AXIS  `json:"AXIS_Y"`
-	Joint1 JOINT `json:"JOINT_1"`
-	AxisZ  AXIS  `json:"AXIS_Z"`
-	Joint2 JOINT `json:"JOINT_2"`
-	AxisA  AXIS  `json:"AXIS_A"`
-	Joint3 JOINT `json:"JOINT_3"`
-	AxisB  AXIS  `json:"AXIS_B"`
-	Joint4 JOINT `json:"JOINT_4"`
-	AxisC  AXIS  `json:"AXIS_C"`
+	} `ini:"KINS"`
+	AxisX  AXIS  `ini:"AXIS_X"`
+	Joint0 JOINT `ini:"JOINT_0"`
+	AxisY  AXIS  `ini:"AXIS_Y"`
+	Joint1 JOINT `ini:"JOINT_1"`
+	AxisZ  AXIS  `ini:"AXIS_Z"`
+	Joint2 JOINT `ini:"JOINT_2"`
+	AxisA  AXIS  `ini:"AXIS_A"`
+	Joint3 JOINT `ini:"JOINT_3"`
+	AxisB  AXIS  `ini:"AXIS_B"`
+	Joint4 JOINT `ini:"JOINT_4"`
+	AxisC  AXIS  `ini:"AXIS_C"`
 }
 
 type AXIS struct {
@@ -128,5 +128,5 @@ type USER struct {
 		AVelocity string `ini:"A_VELOCITY"`
 		BVelocity string `ini:"B_VELOCITY"`
 		CVelocity string `ini:"C_VELOCITY"`
-	} `json:"HANDWHEEL"`
+	} `ini:"HANDWHEEL"`
 }
