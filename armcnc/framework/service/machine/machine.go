@@ -86,16 +86,14 @@ func Set(c *gin.Context) {
 	return
 }
 
-type requestUpdate struct {
-	Path     string `json:"path"`
-	Control  int    `json:"control"`
-	Name     string `json:"name"`
-	Describe string `json:"describe"`
+type requestUpdateUser struct {
+	Path string              `json:"path"`
+	User MachinePackage.USER `json:"user"`
 }
 
-func Update(c *gin.Context) {
+func UpdateUser(c *gin.Context) {
 
-	requestJson := requestUpdate{}
+	requestJson := requestUpdateUser{}
 	requestData, _ := ioutil.ReadAll(c.Request.Body)
 	err := json.Unmarshal(requestData, &requestJson)
 	if err != nil {
@@ -104,11 +102,7 @@ func Update(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
-	updateData := MachinePackage.USER{}
-	updateData.Base.Name = requestJson.Name
-	updateData.Base.Describe = requestJson.Describe
-	updateData.Base.Control = requestJson.Control
-	update := machine.UpdateUser(requestJson.Path, updateData)
+	update := machine.UpdateUser(requestJson.Path, requestJson.User)
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return

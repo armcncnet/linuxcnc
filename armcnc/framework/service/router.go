@@ -50,7 +50,7 @@ func Router() http.Handler {
 
 		machine.GET("/set", MachineService.Set)
 
-		machine.POST("/update", MachineService.Update)
+		machine.POST("/update/user", MachineService.UpdateUser)
 	}
 
 	code := router.Group("code")

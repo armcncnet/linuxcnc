@@ -10,7 +10,7 @@ package MachinePackage
 type INI struct {
 	Emc struct {
 		Machine string `ini:"MACHINE"`
-		Debug   int    `ini:"DEBUG"`
+		Debug   string `ini:"DEBUG"`
 		Version string `ini:"VERSION"`
 	} `ini:"EMC"`
 	Display struct {
@@ -18,7 +18,7 @@ type INI struct {
 		CycleTime              string `ini:"CYCLE_TIME"`
 		PositionOffset         string `ini:"POSITION_OFFSET"`
 		PositionFeedback       string `ini:"POSITION_FEEDBACK"`
-		Arcdivision            int    `ini:"ARCDIVISION"`
+		Arcdivision            string `ini:"ARCDIVISION"`
 		MaxFeedOverride        string `ini:"MAX_FEED_OVERRIDE"`
 		MinSpindleOverride     string `ini:"MIN_SPINDLE_OVERRIDE"`
 		MaxSpindleOverride     string `ini:"MAX_SPINDLE_OVERRIDE"`
@@ -41,15 +41,15 @@ type INI struct {
 		Py               string `ini:"py"`
 	} `ini:"FILTER"`
 	Rs274ngc struct {
-		Features       int    `ini:"FEATURES"`
+		Features       string `ini:"FEATURES"`
 		SubroutinePath string `ini:"SUBROUTINE_PATH"`
 		ParameterFile  string `ini:"PARAMETER_FILE"`
 	} `ini:"RS274NGC"`
 	Emcmot struct {
 		Emcmot      string `ini:"EMCMOT"`
 		CommTimeout string `ini:"COMM_TIMEOUT"`
-		BasePeriod  int    `ini:"BASE_PERIOD"`
-		ServoPeriod int    `ini:"SERVO_PERIOD"`
+		BasePeriod  string `ini:"BASE_PERIOD"`
+		ServoPeriod string `ini:"SERVO_PERIOD"`
 	} `ini:"EMCMOT"`
 	Emcio struct {
 		Emcio     string `ini:"EMCIO"`
@@ -64,7 +64,7 @@ type INI struct {
 		HalFile string `ini:"HALFILE"`
 	} `ini:"HAL"`
 	Traj struct {
-		Spindles     int    `ini:"SPINDLES"`
+		Spindles     string `ini:"SPINDLES"`
 		Coordinates  string `ini:"COORDINATES"`
 		LinearUnits  string `ini:"LINEAR_UNITS"`
 		AngularUnits string `ini:"ANGULAR_UNITS"`
@@ -72,7 +72,7 @@ type INI struct {
 	} `ini:"TRAJ"`
 	Spindle0 SPINDLE `ini:"SPINDLE_0"`
 	Kins     struct {
-		Joints     int    `ini:"JOINTS"`
+		Joints     string `ini:"JOINTS"`
 		Kinematics string `ini:"KINEMATICS"`
 	} `ini:"KINS"`
 	AxisX  AXIS  `ini:"AXIS_X"`
@@ -89,8 +89,8 @@ type INI struct {
 }
 
 type SPINDLE struct {
-	MaxForwardVelocity int `ini:"MAX_FORWARD_VELOCITY"`
-	MinForwardVelocity int `ini:"MIN_FORWARD_VELOCITY"`
+	MaxForwardVelocity string `ini:"MAX_FORWARD_VELOCITY"`
+	MinForwardVelocity string `ini:"MIN_FORWARD_VELOCITY"`
 }
 
 type AXIS struct {
@@ -106,7 +106,7 @@ type JOINT struct {
 	MaxVelocity     string `ini:"MAX_VELOCITY"`
 	MaxAcceleration string `ini:"MAX_ACCELERATION"`
 	StepgenMaxaccel string `ini:"STEPGEN_MAXACCEL"`
-	Scale           int    `ini:"SCALE"`
+	Scale           string `ini:"SCALE"`
 	Ferror          string `ini:"FERROR"`
 	MinLimit        string `ini:"MIN_LIMIT"`
 	MaxLimit        string `ini:"MAX_LIMIT"`
