@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/package/launch"
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
@@ -100,6 +101,8 @@ func UpdateUser(c *gin.Context) {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
+
+	fmt.Println("---->", requestJson.User)
 
 	if requestJson.Path == "" {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
