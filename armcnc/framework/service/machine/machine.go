@@ -34,6 +34,7 @@ func Select(c *gin.Context) {
 }
 
 type responseGet struct {
+	Path string              `json:"path"`
 	User MachinePackage.USER `json:"user"`
 	Ini  MachinePackage.INI  `json:"ini"`
 }
@@ -48,6 +49,7 @@ func Get(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
+	returnData.Path = path
 	returnData.User = machine.GetUser(path)
 	returnData.Ini = machine.GetIni(path)
 
