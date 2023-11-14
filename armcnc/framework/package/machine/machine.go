@@ -135,12 +135,9 @@ func (machine *Machine) UpdateIni(path string, data INI) bool {
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.ini")
 		if err == nil {
-			err := IniUtils.ReflectFrom(iniFile, data)
+			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.ini")
 			if err == nil {
-				err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.ini")
-				if err == nil {
-					status = true
-				}
+				status = true
 			}
 		}
 	}
