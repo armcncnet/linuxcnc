@@ -102,6 +102,12 @@ func (machine *Machine) UpdateUser(path string, data USER) bool {
 			iniFile.Section("BASE").Key("NAME").SetValue(data.Base.Name)
 			iniFile.Section("BASE").Key("DESCRIBE").SetValue(data.Base.Describe)
 			iniFile.Section("BASE").Key("CONTROL").SetValue(strconv.Itoa(data.Base.Control))
+			iniFile.Section("HandWheel").Key("X_VELOCITY").SetValue(data.HandWheel.XVelocity)
+			iniFile.Section("HandWheel").Key("Y_VELOCITY").SetValue(data.HandWheel.YVelocity)
+			iniFile.Section("HandWheel").Key("Z_VELOCITY").SetValue(data.HandWheel.ZVelocity)
+			iniFile.Section("HandWheel").Key("A_VELOCITY").SetValue(data.HandWheel.AVelocity)
+			iniFile.Section("HandWheel").Key("B_VELOCITY").SetValue(data.HandWheel.BVelocity)
+			iniFile.Section("HandWheel").Key("C_VELOCITY").SetValue(data.HandWheel.CVelocity)
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
 				status = true
@@ -121,28 +127,4 @@ func (machine *Machine) GetIni(path string) INI {
 		}
 	}
 	return data
-}
-
-func (machine *Machine) GetIniContent(path string) string {
-	content := ""
-	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
-	if exists {
-		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/machine.ini")
-		if err == nil {
-			content = string(contentByte)
-		}
-	}
-	return content
-}
-
-func (machine *Machine) UpdateIniContent(path string, content string) bool {
-	status := false
-	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
-	if exists {
-		write := FileUtils.WriteFile(content, machine.Path+path+"/machine.ini")
-		if write == nil {
-			status = true
-		}
-	}
-	return status
 }
