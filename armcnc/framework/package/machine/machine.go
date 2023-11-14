@@ -36,30 +36,6 @@ type Data struct {
 	Time         time.Time `json:"-"`
 }
 
-type INI struct {
-	Emc struct {
-		Machine string `ini:"MACHINE"`
-		Debug   string `ini:"DEBUG"`
-		Version string `ini:"VERSION"`
-	} `ini:"EMC"`
-	Display struct {
-		Increments string `ini:"INCREMENTS"`
-	} `ini:"DISPLAY"`
-	Traj struct {
-		Coordinates  string `ini:"COORDINATES"`
-		LinearUnits  string `ini:"LINEAR_UNITS"`
-		AngularUnits string `ini:"ANGULAR_UNITS"`
-	} `ini:"TRAJ"`
-}
-
-type USER struct {
-	Base struct {
-		Name     string `ini:"NAME"`
-		Describe string `ini:"DESCRIBE"`
-		Control  int    `ini:"CONTROL"`
-	} `ini:"BASE"`
-}
-
 func Init() *Machine {
 	return &Machine{
 		Path: Config.Get.Basic.Workspace + "/configs/",

@@ -33,6 +33,28 @@ func Select(c *gin.Context) {
 	return
 }
 
+type responseGet struct {
+	Machine MachinePackage.USER `json:"machine"`
+	Ini     MachinePackage.INI  `json:"ini"`
+}
+
+func Get(c *gin.Context) {
+	returnData := responseGet{}
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	returnData.Machine = machine.GetUser(path)
+	returnData.Ini = machine.GetIni(path)
+
+	Utils.Success(c, 0, "", returnData)
+	return
+}
+
 func Set(c *gin.Context) {
 
 	path := c.DefaultQuery("path", "")

@@ -46,6 +46,8 @@ func Router() http.Handler {
 	{
 		machine.GET("/select", MachineService.Select)
 
+		machine.GET("/get", MachineService.Get)
+
 		machine.GET("/set", MachineService.Set)
 
 		machine.POST("/update", MachineService.Update)
