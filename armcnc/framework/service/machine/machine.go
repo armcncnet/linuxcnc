@@ -101,6 +101,11 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
+	if requestJson.Path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
 	machine := MachinePackage.Init()
 	update := machine.UpdateUser(requestJson.Path, requestJson.User)
 	if !update {
