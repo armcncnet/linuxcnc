@@ -125,11 +125,11 @@ type USER struct {
 		Control  int    `ini:"CONTROL"`
 	} `ini:"BASE"`
 	HandWheel struct {
-		XVelocity string `ini:"X_VELOCITY"`
-		YVelocity string `ini:"Y_VELOCITY"`
-		ZVelocity string `ini:"Z_VELOCITY"`
-		AVelocity string `ini:"A_VELOCITY"`
-		BVelocity string `ini:"B_VELOCITY"`
-		CVelocity string `ini:"C_VELOCITY"`
+		XVelocity float64 `ini:"X_VELOCITY"`
+		YVelocity float64 `ini:"Y_VELOCITY"`
+		ZVelocity float64 `ini:"Z_VELOCITY"`
+		AVelocity float64 `ini:"A_VELOCITY"`
+		BVelocity float64 `ini:"B_VELOCITY"`
+		CVelocity float64 `ini:"C_VELOCITY"`
 	} `ini:"HANDWHEEL"`
 }
