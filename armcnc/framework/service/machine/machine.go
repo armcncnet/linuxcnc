@@ -34,8 +34,8 @@ func Select(c *gin.Context) {
 }
 
 type responseGet struct {
-	Machine MachinePackage.USER `json:"machine"`
-	Ini     MachinePackage.INI  `json:"ini"`
+	User MachinePackage.USER `json:"user"`
+	Ini  MachinePackage.INI  `json:"ini"`
 }
 
 func Get(c *gin.Context) {
@@ -48,7 +48,7 @@ func Get(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
-	returnData.Machine = machine.GetUser(path)
+	returnData.User = machine.GetUser(path)
 	returnData.Ini = machine.GetIni(path)
 
 	Utils.Success(c, 0, "", returnData)
