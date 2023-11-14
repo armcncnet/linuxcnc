@@ -10,27 +10,27 @@ package MachinePackage
 type INI struct {
 	Emc struct {
 		Machine string `ini:"MACHINE"`
-		Debug   string `ini:"DEBUG"`
+		Debug   int    `ini:"DEBUG"`
 		Version string `ini:"VERSION"`
 	} `ini:"EMC"`
 	Display struct {
-		Display                string `ini:"DISPLAY"`
-		CycleTime              string `ini:"CYCLE_TIME"`
-		PositionOffset         string `ini:"POSITION_OFFSET"`
-		PositionFeedback       string `ini:"POSITION_FEEDBACK"`
-		Arcdivision            string `ini:"ARCDIVISION"`
-		MaxFeedOverride        string `ini:"MAX_FEED_OVERRIDE"`
-		MinSpindleOverride     string `ini:"MIN_SPINDLE_OVERRIDE"`
-		MaxSpindleOverride     string `ini:"MAX_SPINDLE_OVERRIDE"`
-		DefaultLinearVelocity  string `ini:"DEFAULT_LINEAR_VELOCITY"`
-		MinLinearVelocity      string `ini:"MIN_LINEAR_VELOCITY"`
-		MaxLinearVelocity      string `ini:"MAX_LINEAR_VELOCITY"`
-		DefaultAngularVelocity string `ini:"DEFAULT_ANGULAR_VELOCITY"`
-		MinAngularVelocity     string `ini:"MIN_ANGULAR_VELOCITY"`
-		MaxAngularVelocity     string `ini:"MAX_ANGULAR_VELOCITY"`
-		ProgramPrefix          string `ini:"PROGRAM_PREFIX"`
-		OpenFile               string `ini:"OPEN_FILE"`
-		Increments             string `ini:"INCREMENTS"`
+		Display                string  `ini:"DISPLAY"`
+		CycleTime              float64 `ini:"CYCLE_TIME"`
+		PositionOffset         string  `ini:"POSITION_OFFSET"`
+		PositionFeedback       string  `ini:"POSITION_FEEDBACK"`
+		Arcdivision            int     `ini:"ARCDIVISION"`
+		MaxFeedOverride        float64 `ini:"MAX_FEED_OVERRIDE"`
+		MinSpindleOverride     float64 `ini:"MIN_SPINDLE_OVERRIDE"`
+		MaxSpindleOverride     float64 `ini:"MAX_SPINDLE_OVERRIDE"`
+		DefaultLinearVelocity  float64 `ini:"DEFAULT_LINEAR_VELOCITY"`
+		MinLinearVelocity      float64 `ini:"MIN_LINEAR_VELOCITY"`
+		MaxLinearVelocity      float64 `ini:"MAX_LINEAR_VELOCITY"`
+		DefaultAngularVelocity float64 `ini:"DEFAULT_ANGULAR_VELOCITY"`
+		MinAngularVelocity     float64 `ini:"MIN_ANGULAR_VELOCITY"`
+		MaxAngularVelocity     float64 `ini:"MAX_ANGULAR_VELOCITY"`
+		ProgramPrefix          string  `ini:"PROGRAM_PREFIX"`
+		OpenFile               string  `ini:"OPEN_FILE"`
+		Increments             string  `ini:"INCREMENTS"`
 	} `ini:"DISPLAY"`
 	Python struct {
 		PathAppend string `ini:"PATH_APPEND"`
@@ -41,40 +41,38 @@ type INI struct {
 		Py               string `ini:"py"`
 	} `ini:"FILTER"`
 	Rs274ngc struct {
-		Features      string `ini:"FEATURES"`
-		ParameterFile string `ini:"PARAMETER_FILE"`
+		Features       int    `ini:"FEATURES"`
+		SubroutinePath string `ini:"SUBROUTINE_PATH"`
+		ParameterFile  string `ini:"PARAMETER_FILE"`
 	} `ini:"RS274NGC"`
 	Emcmot struct {
-		Emcmot      string `ini:"EMCMOT"`
-		CommTimeout string `ini:"COMM_TIMEOUT"`
-		BasePeriod  string `ini:"BASE_PERIOD"`
-		ServoPeriod string `ini:"SERVO_PERIOD"`
+		Emcmot      string  `ini:"EMCMOT"`
+		CommTimeout float64 `ini:"COMM_TIMEOUT"`
+		BasePeriod  int     `ini:"BASE_PERIOD"`
+		ServoPeriod int     `ini:"SERVO_PERIOD"`
 	} `ini:"EMCMOT"`
 	Emcio struct {
-		Emcio     string `ini:"EMCIO"`
-		CycleTime string `ini:"CYCLE_TIME"`
-		ToolTable string `ini:"TOOL_TABLE"`
+		Emcio     string  `ini:"EMCIO"`
+		CycleTime float64 `ini:"CYCLE_TIME"`
+		ToolTable string  `ini:"TOOL_TABLE"`
 	} `ini:"EMCIO"`
 	Task struct {
-		Task      string `ini:"TASK"`
-		CycleTime string `ini:"CYCLE_TIME"`
+		Task      string  `ini:"TASK"`
+		CycleTime float64 `ini:"CYCLE_TIME"`
 	} `ini:"TASK"`
 	Hal struct {
 		HalFile string `ini:"HALFILE"`
 	} `ini:"HAL"`
 	Traj struct {
-		Spindles     string `ini:"SPINDLES"`
+		Spindles     int    `ini:"SPINDLES"`
 		Coordinates  string `ini:"COORDINATES"`
 		LinearUnits  string `ini:"LINEAR_UNITS"`
 		AngularUnits string `ini:"ANGULAR_UNITS"`
 		PositionFile string `ini:"POSITION_FILE"`
 	} `ini:"TRAJ"`
-	Spindle0 struct {
-		MaxForwardVelocity string `ini:"MAX_FORWARD_VELOCITY"`
-		MinForwardVelocity string `ini:"MIN_FORWARD_VELOCITY"`
-	} `ini:"SPINDLE_0"`
-	Kins struct {
-		Joints     string `ini:"JOINTS"`
+	Spindle0 SPINDLE `ini:"SPINDLE_0"`
+	Kins     struct {
+		Joints     int    `ini:"JOINTS"`
 		Kinematics string `ini:"KINEMATICS"`
 	} `ini:"KINS"`
 	AxisX  AXIS  `ini:"AXIS_X"`
@@ -90,29 +88,34 @@ type INI struct {
 	AxisC  AXIS  `ini:"AXIS_C"`
 }
 
+type SPINDLE struct {
+	MaxForwardVelocity int `ini:"MAX_FORWARD_VELOCITY"`
+	MinForwardVelocity int `ini:"MIN_FORWARD_VELOCITY"`
+}
+
 type AXIS struct {
-	MaxVelocity     string `ini:"MAX_VELOCITY"`
-	MaxAcceleration string `ini:"MAX_ACCELERATION"`
-	MinLimit        string `ini:"MIN_LIMIT"`
-	MaxLimit        string `ini:"MAX_LIMIT"`
+	MaxVelocity     float64 `ini:"MAX_VELOCITY"`
+	MaxAcceleration float64 `ini:"MAX_ACCELERATION"`
+	MinLimit        float64 `ini:"MIN_LIMIT"`
+	MaxLimit        float64 `ini:"MAX_LIMIT"`
 }
 
 type JOINT struct {
-	Type            string `ini:"TYPE"`
-	Home            string `ini:"HOME"`
-	MaxVelocity     string `ini:"MAX_VELOCITY"`
-	MaxAcceleration string `ini:"MAX_ACCELERATION"`
-	StepgenMaxaccel string `ini:"STEPGEN_MAXACCEL"`
-	Scale           string `ini:"SCALE"`
-	Ferror          string `ini:"FERROR"`
-	MinLimit        string `ini:"MIN_LIMIT"`
-	MaxLimit        string `ini:"MAX_LIMIT"`
-	HomeOffset      string `ini:"HOME_OFFSET"`
-	HomeSearchVel   string `ini:"HOME_SEARCH_VEL"`
-	HomeLarchVel    string `ini:"HOME_LATCH_VEL"`
-	HomeUseIndex    string `ini:"HOME_USE_INDEX"`
-	HomeSequence    string `ini:"HOME_SEQUENCE"`
-	Backlash        string `ini:"BACKLASH"`
+	Type            string  `ini:"TYPE"`
+	Home            float64 `ini:"HOME"`
+	MaxVelocity     float64 `ini:"MAX_VELOCITY"`
+	MaxAcceleration float64 `ini:"MAX_ACCELERATION"`
+	StepgenMaxaccel float64 `ini:"STEPGEN_MAXACCEL"`
+	Scale           int     `ini:"SCALE"`
+	Ferror          float64 `ini:"FERROR"`
+	MinLimit        float64 `ini:"MIN_LIMIT"`
+	MaxLimit        float64 `ini:"MAX_LIMIT"`
+	HomeOffset      float64 `ini:"HOME_OFFSET"`
+	HomeSearchVel   float64 `ini:"HOME_SEARCH_VEL"`
+	HomeLarchVel    float64 `ini:"HOME_LATCH_VEL"`
+	HomeUseIndex    string  `ini:"HOME_USE_INDEX"`
+	HomeSequence    float64 `ini:"HOME_SEQUENCE"`
+	Backlash        float64 `ini:"BACKLASH"`
 }
 
 type USER struct {

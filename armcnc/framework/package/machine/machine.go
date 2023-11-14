@@ -71,7 +71,6 @@ func (machine *Machine) Select() []Data {
 				item.Name = user.Base.Name
 				item.Describe = user.Base.Describe
 				item.Control = user.Base.Control
-
 				data = append(data, item)
 			}
 		}
