@@ -12,7 +12,6 @@ import (
 	"armcnc/framework/package/launch"
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
@@ -88,8 +87,8 @@ func Set(c *gin.Context) {
 }
 
 type requestUpdateUser struct {
-	Path string              `json:"path"`
-	User MachinePackage.USER `json:"user"`
+	Path string                  `json:"path"`
+	User MachinePackage.JsonUSER `json:"user"`
 }
 
 func UpdateUser(c *gin.Context) {
@@ -101,8 +100,6 @@ func UpdateUser(c *gin.Context) {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
-
-	fmt.Println("---->", requestJson.User)
 
 	if requestJson.Path == "" {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})

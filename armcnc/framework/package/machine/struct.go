@@ -133,3 +133,19 @@ type USER struct {
 		CVelocity string `ini:"C_VELOCITY"`
 	} `ini:"HANDWHEEL"`
 }
+
+type JsonUSER struct {
+	Base struct {
+		Name     string `json:"Name"`
+		Describe string `json:"Describe"`
+		Control  int    `json:"Control"`
+	} `json:"Base"`
+	HandWheel struct {
+		XVelocity string `json:"XVelocity"`
+		YVelocity string `json:"YVelocity"`
+		ZVelocity string `json:"ZVelocity"`
+		AVelocity string `json:"AVelocity"`
+		BVelocity string `json:"BVelocity"`
+		CVelocity string `json:"CVelocity"`
+	} `json:"HandWheel"`
+}

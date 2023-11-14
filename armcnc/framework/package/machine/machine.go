@@ -14,6 +14,7 @@ import (
 	"github.com/djherbis/times"
 	"os"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -92,18 +93,24 @@ func (machine *Machine) GetUser(path string) USER {
 	return data
 }
 
-func (machine *Machine) UpdateUser(path string, data USER) bool {
+func (machine *Machine) UpdateUser(path string, data JsonUSER) bool {
 	status := false
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.user")
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.user")
 		if err == nil {
-			err := IniUtils.ReflectFrom(iniFile, data)
+			iniFile.Section("BASE").Key("NAME").SetValue(data.Base.Name)
+			iniFile.Section("BASE").Key("DESCRIBE").SetValue(data.Base.Describe)
+			iniFile.Section("BASE").Key("CONTROL").SetValue(strconv.Itoa(data.Base.Control))
+			iniFile.Section("HANDWHEEL").Key("X_VELOCITY").SetValue(data.HandWheel.XVelocity)
+			iniFile.Section("HANDWHEEL").Key("Y_VELOCITY").SetValue(data.HandWheel.YVelocity)
+			iniFile.Section("HANDWHEEL").Key("Z_VELOCITY").SetValue(data.HandWheel.ZVelocity)
+			iniFile.Section("HANDWHEEL").Key("A_VELOCITY").SetValue(data.HandWheel.AVelocity)
+			iniFile.Section("HANDWHEEL").Key("B_VELOCITY").SetValue(data.HandWheel.BVelocity)
+			iniFile.Section("HANDWHEEL").Key("C_VELOCITY").SetValue(data.HandWheel.CVelocity)
+			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
-				err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
-				if err == nil {
-					status = true
-				}
+				status = true
 			}
 		}
 	}
