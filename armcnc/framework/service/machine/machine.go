@@ -34,9 +34,10 @@ func Select(c *gin.Context) {
 }
 
 type responseGet struct {
-	Path string              `json:"path"`
-	User MachinePackage.USER `json:"user"`
-	Ini  MachinePackage.INI  `json:"ini"`
+	Path   string              `json:"path"`
+	User   MachinePackage.USER `json:"user"`
+	Ini    MachinePackage.INI  `json:"ini"`
+	Launch string              `json:"launch"`
 }
 
 func Get(c *gin.Context) {
@@ -52,37 +53,9 @@ func Get(c *gin.Context) {
 	returnData.Path = path
 	returnData.User = machine.GetUser(path)
 	returnData.Ini = machine.GetIni(path)
+	returnData.Launch = machine.GetLaunch(path)
 
 	Utils.Success(c, 0, "", returnData)
-	return
-}
-
-func Set(c *gin.Context) {
-
-	path := c.DefaultQuery("path", "")
-	if path == "" {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
-	}
-
-	if path != Config.Get.Machine.Path {
-		machine := MachinePackage.Init()
-		check := machine.GetIni(path)
-		if check.Emc.Version == "" {
-			Utils.Error(c, 10000, "", Utils.EmptyData{})
-			return
-		}
-		Config.Get.Machine.Path = path
-		save := Config.Save()
-		if !save {
-			Utils.Error(c, 10000, "", Utils.EmptyData{})
-			return
-		}
-		launch := LaunchPackage.Init()
-		launch.Start(Config.Get.Machine.Path)
-	}
-
-	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }
 
@@ -111,6 +84,66 @@ func UpdateUser(c *gin.Context) {
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
+type requestUpdateLaunch struct {
+	Path    string `json:"path"`
+	Content string `json:"content"`
+}
+
+func UpdateLaunch(c *gin.Context) {
+
+	requestJson := requestUpdateLaunch{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	if requestJson.Path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	update := machine.UpdateLaunch(requestJson.Path, requestJson.Content)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
+func SetCurrentMachine(c *gin.Context) {
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	if path != Config.Get.Machine.Path {
+		machine := MachinePackage.Init()
+		check := machine.GetIni(path)
+		if check.Emc.Version == "" {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		Config.Get.Machine.Path = path
+		save := Config.Save()
+		if !save {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		launch := LaunchPackage.Init()
+		launch.Start(Config.Get.Machine.Path)
 	}
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})

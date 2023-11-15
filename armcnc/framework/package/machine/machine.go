@@ -143,3 +143,27 @@ func (machine *Machine) UpdateIni(path string, data INI) bool {
 	}
 	return status
 }
+
+func (machine *Machine) GetLaunch(path string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/launch/launch.py")
+	if exists {
+		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/launch/launch.py")
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+	return content
+}
+
+func (machine *Machine) UpdateLaunch(path string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/launch/launch.py")
+	if exists {
+		write := FileUtils.WriteFile(content, machine.Path+path+"/launch/launch.py")
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}

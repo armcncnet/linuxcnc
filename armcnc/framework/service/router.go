@@ -48,9 +48,11 @@ func Router() http.Handler {
 
 		machine.GET("/get", MachineService.Get)
 
-		machine.GET("/set", MachineService.Set)
-
 		machine.POST("/update/user", MachineService.UpdateUser)
+
+		machine.POST("/update/launch", MachineService.UpdateLaunch)
+
+		machine.GET("/set/current/machine", MachineService.SetCurrentMachine)
 	}
 
 	code := router.Group("code")
