@@ -101,21 +101,24 @@ type AXIS struct {
 }
 
 type JOINT struct {
-	Type            string `ini:"TYPE"`
-	Home            string `ini:"HOME"`
-	MaxVelocity     string `ini:"MAX_VELOCITY"`
-	MaxAcceleration string `ini:"MAX_ACCELERATION"`
-	StepgenMaxaccel string `ini:"STEPGEN_MAXACCEL"`
-	Scale           string `ini:"SCALE"`
-	Ferror          string `ini:"FERROR"`
-	MinLimit        string `ini:"MIN_LIMIT"`
-	MaxLimit        string `ini:"MAX_LIMIT"`
-	HomeOffset      string `ini:"HOME_OFFSET"`
-	HomeSearchVel   string `ini:"HOME_SEARCH_VEL"`
-	HomeLarchVel    string `ini:"HOME_LATCH_VEL"`
-	HomeUseIndex    string `ini:"HOME_USE_INDEX"`
-	HomeSequence    string `ini:"HOME_SEQUENCE"`
-	Backlash        string `ini:"BACKLASH"`
+	Type             string `ini:"TYPE"`
+	Home             string `ini:"HOME"`
+	MaxVelocity      string `ini:"MAX_VELOCITY"`
+	MaxAcceleration  string `ini:"MAX_ACCELERATION"`
+	StepgenMaxaccel  string `ini:"STEPGEN_MAXACCEL"`
+	Scale            string `ini:"SCALE"`
+	Ferror           string `ini:"FERROR"`
+	MinLimit         string `ini:"MIN_LIMIT"`
+	MaxLimit         string `ini:"MAX_LIMIT"`
+	HomeOffset       string `ini:"HOME_OFFSET"`
+	HomeSearchVel    string `ini:"HOME_SEARCH_VEL"`
+	HomeLarchVel     string `ini:"HOME_LATCH_VEL"`
+	HomeFinalVel     string `ini:"HOME_FINAL_VEL"`
+	VolatileHome     string `ini:"VOLATILE_HOME"`
+	HomeIgnoreLimits string `ini:"HOME_IGNORE_LIMITS"`
+	HomeUseIndex     string `ini:"HOME_USE_INDEX"`
+	HomeSequence     string `ini:"HOME_SEQUENCE"`
+	Backlash         string `ini:"BACKLASH"`
 }
 
 type USER struct {
