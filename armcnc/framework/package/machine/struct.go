@@ -128,6 +128,7 @@ type USER struct {
 		Control  int    `ini:"CONTROL"`
 	} `ini:"BASE"`
 	HandWheel struct {
+		Status    string `ini:"STATUS"`
 		XVelocity string `ini:"X_VELOCITY"`
 		YVelocity string `ini:"Y_VELOCITY"`
 		ZVelocity string `ini:"Z_VELOCITY"`
@@ -144,6 +145,7 @@ type JsonUSER struct {
 		Control  int    `json:"Control"`
 	} `json:"Base"`
 	HandWheel struct {
+		Status    string `ini:"Status"`
 		XVelocity string `json:"XVelocity"`
 		YVelocity string `json:"YVelocity"`
 		ZVelocity string `json:"ZVelocity"`
