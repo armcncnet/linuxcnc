@@ -86,6 +86,7 @@ type INI struct {
 	AxisB  AXIS  `ini:"AXIS_B"`
 	Joint4 JOINT `ini:"JOINT_4"`
 	AxisC  AXIS  `ini:"AXIS_C"`
+	Joint5 JOINT `ini:"JOINT_5"`
 }
 
 type SPINDLE struct {
@@ -200,6 +201,7 @@ type IniJson struct {
 	AxisB  AxisJson  `json:"AxisB"`
 	Joint4 JointJson `json:"Joint4"`
 	AxisC  AxisJson  `json:"AxisC"`
+	Joint5 JointJson `json:"Joint5"`
 }
 
 type SpindleJson struct {
