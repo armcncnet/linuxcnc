@@ -37,6 +37,7 @@ type responseGet struct {
 	Path   string              `json:"path"`
 	User   MachinePackage.USER `json:"user"`
 	Ini    MachinePackage.INI  `json:"ini"`
+	Table  string              `json:"table"`
 	Launch string              `json:"launch"`
 }
 
@@ -53,6 +54,7 @@ func Get(c *gin.Context) {
 	returnData.Path = path
 	returnData.User = machine.GetUser(path)
 	returnData.Ini = machine.GetIni(path)
+	returnData.Table = machine.GetTable(path)
 	returnData.Launch = machine.GetLaunch(path)
 
 	Utils.Success(c, 0, "", returnData)

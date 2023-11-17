@@ -354,3 +354,27 @@ func (machine *Machine) UpdateLaunch(path string, content string) bool {
 	}
 	return status
 }
+
+func (machine *Machine) GetTable(path string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.tbl")
+	if exists {
+		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/machine.tbl")
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+	return content
+}
+
+func (machine *Machine) UpdateTable(path string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.tbl")
+	if exists {
+		write := FileUtils.WriteFile(content, machine.Path+path+"/machine.tbl")
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}
