@@ -139,7 +139,7 @@ func (machine *Machine) GetIni(path string) INI {
 	return data
 }
 
-func (machine *Machine) UpdateIni(path string, data INI) bool {
+func (machine *Machine) UpdateIni(path string, data IniJson) bool {
 	status := false
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.ini")
 	if exists {

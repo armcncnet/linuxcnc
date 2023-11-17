@@ -121,6 +121,120 @@ type JOINT struct {
 	Backlash         string `ini:"BACKLASH"`
 }
 
+type IniJson struct {
+	Emc struct {
+		Machine string `json:"Machine"`
+		Debug   string `json:"Debug"`
+		Version string `json:"Version"`
+	} `json:"Emc"`
+	Display struct {
+		Display                string `json:"Display"`
+		CycleTime              string `json:"CycleTime"`
+		PositionOffset         string `json:"PositionOffset"`
+		PositionFeedback       string `json:"PositionFeedback"`
+		Arcdivision            string `json:"Arcdivision"`
+		MaxFeedOverride        string `json:"MaxFeedOverride"`
+		MinSpindleOverride     string `json:"MinSpindleOverride"`
+		MaxSpindleOverride     string `json:"MaxSpindleOverride"`
+		DefaultLinearVelocity  string `json:"DefaultLinearVelocity"`
+		MinLinearVelocity      string `json:"MinLinearVelocity"`
+		MaxLinearVelocity      string `json:"MaxLinearVelocity"`
+		DefaultAngularVelocity string `json:"DefaultAngularVelocity"`
+		MinAngularVelocity     string `json:"MinAngularVelocity"`
+		MaxAngularVelocity     string `json:"MaxAngularVelocity"`
+		ProgramPrefix          string `json:"ProgramPrefix"`
+		OpenFile               string `json:"OpenFile"`
+		Increments             string `json:"Increments"`
+	} `json:"Display"`
+	Python struct {
+		PathAppend string `json:"PathAppend"`
+		Toplevel   string `json:"Toplevel"`
+	} `json:"Python"`
+	Filter struct {
+		ProgramExtension string `json:"ProgramExtension"`
+		Py               string `json:"Py"`
+	} `json:"Filter"`
+	Rs274ngc struct {
+		Features       string `json:"Features"`
+		SubroutinePath string `json:"SubroutinePath"`
+		ParameterFile  string `json:"ParameterFile"`
+	} `json:"Rs274ngc"`
+	Emcmot struct {
+		Emcmot      string `json:"Emcmot"`
+		CommTimeout string `json:"CommTimeout"`
+		BasePeriod  string `json:"BasePeriod"`
+		ServoPeriod string `json:"ServoPeriod"`
+	} `json:"Emcmot"`
+	Emcio struct {
+		Emcio     string `json:"Emcio"`
+		CycleTime string `json:"CycleTime"`
+		ToolTable string `json:"ToolTable"`
+	} `json:"Emcio"`
+	Task struct {
+		Task      string `json:"Task"`
+		CycleTime string `json:"CycleTime"`
+	} `json:"Task"`
+	Hal struct {
+		HalFile string `json:"HalFile"`
+	} `json:"Hal"`
+	Traj struct {
+		Spindles     string `json:"Spindles"`
+		Coordinates  string `json:"Coordinates"`
+		LinearUnits  string `json:"LinearUnits"`
+		AngularUnits string `json:"AngularUnits"`
+		PositionFile string `json:"PositionFile"`
+	} `json:"Traj"`
+	Spindle0 SpindleJson `json:"Spindle0"`
+	Kins     struct {
+		Joints     string `json:"Joints"`
+		Kinematics string `json:"Kinematics"`
+	} `json:"Kins"`
+	AxisX  AxisJson  `json:"AxisX"`
+	Joint0 JointJson `json:"Joint0"`
+	AxisY  AxisJson  `json:"AxisY"`
+	Joint1 JointJson `json:"Joint1"`
+	AxisZ  AxisJson  `json:"AxisZ"`
+	Joint2 JointJson `json:"Joint2"`
+	AxisA  AxisJson  `json:"AxisA"`
+	Joint3 JointJson `json:"Joint3"`
+	AxisB  AxisJson  `json:"AxisB"`
+	Joint4 JointJson `json:"Joint4"`
+	AxisC  AxisJson  `json:"AxisC"`
+}
+
+type SpindleJson struct {
+	MaxForwardVelocity string `json:"MaxForwardVelocity"`
+	MinForwardVelocity string `json:"MinForwardVelocity"`
+}
+
+type AxisJson struct {
+	MaxVelocity     string `json:"MaxVelocity"`
+	MaxAcceleration string `json:"MaxAcceleration"`
+	MinLimit        string `json:"MinLimit"`
+	MaxLimit        string `json:"MaxLimit"`
+}
+
+type JointJson struct {
+	Type             string `json:"Type"`
+	Home             string `json:"Home"`
+	MaxVelocity      string `json:"MaxVelocity"`
+	MaxAcceleration  string `json:"MaxAcceleration"`
+	StepgenMaxaccel  string `json:"StepgenMaxaccel"`
+	Scale            string `json:"Scale"`
+	Ferror           string `json:"Ferror"`
+	MinLimit         string `json:"MinLimit"`
+	MaxLimit         string `json:"MaxLimit"`
+	HomeOffset       string `json:"HomeOffset"`
+	HomeSearchVel    string `json:"HomeSearchVel"`
+	HomeLarchVel     string `json:"HomeLarchVel"`
+	HomeFinalVel     string `json:"HomeFinalVel"`
+	VolatileHome     string `json:"VolatileHome"`
+	HomeIgnoreLimits string `json:"HomeIgnoreLimits"`
+	HomeUseIndex     string `json:"HomeUseIndex"`
+	HomeSequence     string `json:"HomeSequence"`
+	Backlash         string `json:"Backlash"`
+}
+
 type USER struct {
 	Base struct {
 		Name     string `ini:"NAME"`
