@@ -108,6 +108,16 @@ func (machine *Machine) UpdateUser(path string, data JsonUSER) bool {
 			iniFile.Section("HANDWHEEL").Key("A_VELOCITY").SetValue(data.HandWheel.AVelocity)
 			iniFile.Section("HANDWHEEL").Key("B_VELOCITY").SetValue(data.HandWheel.BVelocity)
 			iniFile.Section("HANDWHEEL").Key("C_VELOCITY").SetValue(data.HandWheel.CVelocity)
+			iniFile.Section("TOOL").Key("METHOD").SetValue(data.Tool.Method)
+			iniFile.Section("TOOL").Key("X_POSITION").SetValue(data.Tool.XPosition)
+			iniFile.Section("TOOL").Key("Y_POSITION").SetValue(data.Tool.YPosition)
+			iniFile.Section("TOOL").Key("Z_POSITION").SetValue(data.Tool.ZPosition)
+			iniFile.Section("TOOL").Key("Z_HEIGHT").SetValue(data.Tool.ZHeight)
+			iniFile.Section("TOOL").Key("MAX_SEARCH_DISTANCE").SetValue(data.Tool.MaxSearchDistance)
+			iniFile.Section("TOOL").Key("LATCH_SEARCH_DISTANCE").SetValue(data.Tool.LatchSearchDistance)
+			iniFile.Section("TOOL").Key("SEARCH_VELOCITY").SetValue(data.Tool.SearchVelocity)
+			iniFile.Section("TOOL").Key("LATCH_SEARCH_VELOCITY").SetValue(data.Tool.LatchSearchVelocity)
+			iniFile.Section("TOOL").Key("POCKETS").SetValue(data.Tool.Pockets)
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
 				status = true

@@ -136,6 +136,18 @@ type USER struct {
 		BVelocity string `ini:"B_VELOCITY"`
 		CVelocity string `ini:"C_VELOCITY"`
 	} `ini:"HANDWHEEL"`
+	Tool struct {
+		Method              string `ini:"METHOD"`
+		XPosition           string `ini:"X_POSITION"`
+		YPosition           string `ini:"Y_POSITION"`
+		ZPosition           string `ini:"Z_POSITION"`
+		ZHeight             string `ini:"Z_HEIGHT"`
+		MaxSearchDistance   string `ini:"MAX_SEARCH_DISTANCE"`
+		LatchSearchDistance string `ini:"LATCH_SEARCH_DISTANCE"`
+		SearchVelocity      string `ini:"SEARCH_VELOCITY"`
+		LatchSearchVelocity string `ini:"LATCH_SEARCH_VELOCITY"`
+		Pockets             string `ini:"POCKETS"`
+	} `ini:"TOOL"`
 }
 
 type JsonUSER struct {
@@ -145,7 +157,7 @@ type JsonUSER struct {
 		Control  int    `json:"Control"`
 	} `json:"Base"`
 	HandWheel struct {
-		Status    string `ini:"Status"`
+		Status    string `json:"Status"`
 		XVelocity string `json:"XVelocity"`
 		YVelocity string `json:"YVelocity"`
 		ZVelocity string `json:"ZVelocity"`
@@ -153,4 +165,16 @@ type JsonUSER struct {
 		BVelocity string `json:"BVelocity"`
 		CVelocity string `json:"CVelocity"`
 	} `json:"HandWheel"`
+	Tool struct {
+		Method              string `json:"Method"`
+		XPosition           string `json:"XPosition"`
+		YPosition           string `json:"YPosition"`
+		ZPosition           string `json:"ZPosition"`
+		ZHeight             string `json:"ZHeight"`
+		MaxSearchDistance   string `json:"MaxSearchDistance"`
+		LatchSearchDistance string `json:"LatchSearchDistance"`
+		SearchVelocity      string `json:"SearchVelocity"`
+		LatchSearchVelocity string `json:"LatchSearchVelocity"`
+		Pockets             string `json:"Pockets"`
+	} `json:"Tool"`
 }
