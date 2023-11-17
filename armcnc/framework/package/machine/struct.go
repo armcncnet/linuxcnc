@@ -150,7 +150,7 @@ type USER struct {
 	} `ini:"TOOL"`
 }
 
-type JsonUSER struct {
+type UserJson struct {
 	Base struct {
 		Name     string `json:"Name"`
 		Describe string `json:"Describe"`

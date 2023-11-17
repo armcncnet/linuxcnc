@@ -93,7 +93,7 @@ func (machine *Machine) GetUser(path string) USER {
 	return data
 }
 
-func (machine *Machine) UpdateUser(path string, data JsonUSER) bool {
+func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 	status := false
 	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.user")
 	if exists {
@@ -145,6 +145,9 @@ func (machine *Machine) UpdateIni(path string, data INI) bool {
 	if exists {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.ini")
 		if err == nil {
+			iniFile.Section("EMC").Key("MACHINE").SetValue(data.Emc.Machine)
+			iniFile.Section("EMC").Key("DEBUG").SetValue(data.Emc.Debug)
+			iniFile.Section("EMC").Key("VERSION").SetValue(data.Emc.Version)
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.ini")
 			if err == nil {
 				status = true

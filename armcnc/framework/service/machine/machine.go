@@ -61,7 +61,7 @@ func Get(c *gin.Context) {
 
 type requestUpdateUser struct {
 	Path string                  `json:"path"`
-	User MachinePackage.JsonUSER `json:"user"`
+	User MachinePackage.UserJson `json:"user"`
 }
 
 func UpdateUser(c *gin.Context) {

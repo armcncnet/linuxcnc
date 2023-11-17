@@ -21,7 +21,7 @@ func Start() *cobra.Command {
 		Use:     "machine",
 		Short:   "Machine Tool Configuration Management",
 		Long:    "Machine Tool Configuration Management",
-		Example: "armcnc machine [set|get|clear] [machine_name]",
+		Example: "armcnc machine [set|get] [machine_name]",
 		Run: func(cmd *cobra.Command, args []string) {
 			if len(args) == 0 {
 				log.Println("[machine]：" + color.Yellow.Text("Please select the relevant operation"))
@@ -35,16 +35,6 @@ func Start() *cobra.Command {
 					}
 					log.Println("[machine]: " + color.Blue.Text("The current machine tool configuration in use is: "+Config.Get.Machine.Path))
 					return
-				} else if args[0] == "clear" {
-					log.Println("[machine]：" + color.Gray.Text("Please wait..."))
-					Config.Get.Machine.Path = ""
-					save := Config.Save()
-					if !save {
-						log.Println("[machine]：" + color.Red.Text("Cleaning the machine tool configuration failed, please try again"))
-						return
-					}
-					launch := LaunchPackage.Init()
-					launch.Start(Config.Get.Machine.Path)
 				} else {
 					log.Println("[machine]：" + color.Yellow.Text("Please select the relevant operation"))
 					return
