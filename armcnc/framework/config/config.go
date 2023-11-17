@@ -52,6 +52,7 @@ func Init() {
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")
 	if !exists {
 		iniFile := IniUtils.Empty()
+		Get.Machine.Path = "default_ethercat_sim"
 		err := IniUtils.ReflectFrom(iniFile, Get)
 		if err != nil {
 			log.Println("[config]: " + color.Error.Sprintf("System configuration save failed"))
