@@ -127,6 +127,68 @@ func UpdateLaunch(c *gin.Context) {
 	return
 }
 
+type requestUpdateHal struct {
+	Path    string `json:"path"`
+	Content string `json:"content"`
+}
+
+func UpdateHal(c *gin.Context) {
+
+	requestJson := requestUpdateHal{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	if requestJson.Path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	update := machine.UpdateHal(requestJson.Path, requestJson.Content)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
+type requestUpdateXml struct {
+	Path    string `json:"path"`
+	Content string `json:"content"`
+}
+
+func UpdateXml(c *gin.Context) {
+
+	requestJson := requestUpdateHal{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	if requestJson.Path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	update := machine.UpdateXml(requestJson.Path, requestJson.Content)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
 func SetCurrentMachine(c *gin.Context) {
 
 	path := c.DefaultQuery("path", "")

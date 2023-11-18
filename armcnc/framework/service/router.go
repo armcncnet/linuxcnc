@@ -52,6 +52,10 @@ func Router() http.Handler {
 
 		machine.POST("/update/launch", MachineService.UpdateLaunch)
 
+		machine.POST("/update/hal", MachineService.UpdateHal)
+
+		machine.POST("/update/xml", MachineService.UpdateXml)
+
 		machine.GET("/set/current/machine", MachineService.SetCurrentMachine)
 	}
 
