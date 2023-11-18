@@ -15,6 +15,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
+	"strings"
 )
 
 type responseSelect struct {
@@ -34,13 +35,14 @@ func Select(c *gin.Context) {
 }
 
 type responseGet struct {
-	Path   string              `json:"path"`
-	User   MachinePackage.USER `json:"user"`
-	Ini    MachinePackage.INI  `json:"ini"`
-	Table  string              `json:"table"`
-	Launch string              `json:"launch"`
-	Hal    string              `json:"hal"`
-	Xml    string              `json:"xml"`
+	IsDefault bool                `json:"is_default"`
+	Path      string              `json:"path"`
+	User      MachinePackage.USER `json:"user"`
+	Ini       MachinePackage.INI  `json:"ini"`
+	Table     string              `json:"table"`
+	Launch    string              `json:"launch"`
+	Hal       string              `json:"hal"`
+	Xml       string              `json:"xml"`
 }
 
 func Get(c *gin.Context) {
@@ -53,6 +55,10 @@ func Get(c *gin.Context) {
 	}
 
 	machine := MachinePackage.Init()
+	returnData.IsDefault = false
+	if strings.Contains(path, "default_") {
+		returnData.IsDefault = true
+	}
 	returnData.Path = path
 	returnData.User = machine.GetUser(path)
 	returnData.Ini = machine.GetIni(path)
@@ -165,7 +171,7 @@ type requestUpdateXml struct {
 
 func UpdateXml(c *gin.Context) {
 
-	requestJson := requestUpdateHal{}
+	requestJson := requestUpdateXml{}
 	requestData, _ := ioutil.ReadAll(c.Request.Body)
 	err := json.Unmarshal(requestData, &requestJson)
 	if err != nil {
