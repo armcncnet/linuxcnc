@@ -134,6 +134,42 @@ func (machine *Machine) GetIni(path string) INI {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.ini")
 		if err == nil {
 			err = IniUtils.MapTo(iniFile, &data)
+			if data.AxisA.MaxVelocity == "" {
+				data.AxisA.MaxVelocity = "0.000"
+			}
+			if data.AxisA.MaxAcceleration == "" {
+				data.AxisA.MaxAcceleration = "0.000"
+			}
+			if data.AxisA.MinLimit == "" {
+				data.AxisA.MinLimit = "0.000"
+			}
+			if data.AxisA.MaxLimit == "" {
+				data.AxisA.MaxLimit = "0.000"
+			}
+			if data.AxisB.MaxVelocity == "" {
+				data.AxisB.MaxVelocity = "0.000"
+			}
+			if data.AxisB.MaxAcceleration == "" {
+				data.AxisB.MaxAcceleration = "0.000"
+			}
+			if data.AxisB.MinLimit == "" {
+				data.AxisB.MinLimit = "0.000"
+			}
+			if data.AxisB.MaxLimit == "" {
+				data.AxisB.MaxLimit = "0.000"
+			}
+			if data.AxisC.MaxVelocity == "" {
+				data.AxisC.MaxVelocity = "0.000"
+			}
+			if data.AxisC.MaxAcceleration == "" {
+				data.AxisC.MaxAcceleration = "0.000"
+			}
+			if data.AxisC.MinLimit == "" {
+				data.AxisC.MinLimit = "0.000"
+			}
+			if data.AxisC.MaxLimit == "" {
+				data.AxisC.MaxLimit = "0.000"
+			}
 		}
 	}
 	return data
