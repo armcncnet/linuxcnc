@@ -71,6 +71,49 @@ func Get(c *gin.Context) {
 	return
 }
 
+type requestUpdate struct {
+	Path   string                  `json:"path"`
+	User   MachinePackage.UserJson `json:"user"`
+	Ini    MachinePackage.IniJson  `json:"ini"`
+	Table  string                  `json:"table"`
+	Launch string                  `json:"launch"`
+	Hal    string                  `json:"hal"`
+	Xml    string                  `json:"xml"`
+}
+
+func Update(c *gin.Context) {
+
+	requestJson := requestUpdate{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	updateIni := machine.UpdateIni(requestJson.Path, requestJson.Ini)
+	if !updateIni {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	updateUser := machine.UpdateUser(requestJson.Path, requestJson.User)
+	if !updateUser {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	updateTable := machine.UpdateTable(requestJson.Path, requestJson.Table)
+	if !updateTable {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
 type requestUpdateUser struct {
 	Path string                  `json:"path"`
 	User MachinePackage.UserJson `json:"user"`

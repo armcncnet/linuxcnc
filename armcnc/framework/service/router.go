@@ -48,6 +48,8 @@ func Router() http.Handler {
 
 		machine.GET("/get", MachineService.Get)
 
+		machine.POST("/update", MachineService.Update)
+
 		machine.POST("/update/user", MachineService.UpdateUser)
 
 		machine.POST("/update/launch", MachineService.UpdateLaunch)
