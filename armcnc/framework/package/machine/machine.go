@@ -378,3 +378,51 @@ func (machine *Machine) UpdateTable(path string, content string) bool {
 	}
 	return status
 }
+
+func (machine *Machine) GetHal(path string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.hal")
+	if exists {
+		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/machine.hal")
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+	return content
+}
+
+func (machine *Machine) UpdateHal(path string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.hal")
+	if exists {
+		write := FileUtils.WriteFile(content, machine.Path+path+"/machine.hal")
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}
+
+func (machine *Machine) GetXml(path string) string {
+	content := ""
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.xml")
+	if exists {
+		contentByte, err := FileUtils.ReadFile(machine.Path + path + "/machine.xml")
+		if err == nil {
+			content = string(contentByte)
+		}
+	}
+	return content
+}
+
+func (machine *Machine) UpdateXml(path string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path + "/machine.xml")
+	if exists {
+		write := FileUtils.WriteFile(content, machine.Path+path+"/machine.xml")
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}

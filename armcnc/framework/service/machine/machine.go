@@ -39,6 +39,8 @@ type responseGet struct {
 	Ini    MachinePackage.INI  `json:"ini"`
 	Table  string              `json:"table"`
 	Launch string              `json:"launch"`
+	Hal    string              `json:"hal"`
+	Xml    string              `json:"xml"`
 }
 
 func Get(c *gin.Context) {
@@ -56,6 +58,8 @@ func Get(c *gin.Context) {
 	returnData.Ini = machine.GetIni(path)
 	returnData.Table = machine.GetTable(path)
 	returnData.Launch = machine.GetLaunch(path)
+	returnData.Hal = machine.GetHal(path)
+	returnData.Xml = machine.GetXml(path)
 
 	Utils.Success(c, 0, "", returnData)
 	return
