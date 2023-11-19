@@ -73,7 +73,7 @@ func Unzip(src string, dest string) bool {
 
 	for _, file := range reader.File {
 		parts := strings.Split(file.Name, "/")
-		if len(parts) > 1 {
+		if len(parts) > 2 {
 			status = false
 			break
 		}
