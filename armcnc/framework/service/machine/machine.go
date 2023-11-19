@@ -238,6 +238,25 @@ func UpdateXml(c *gin.Context) {
 	return
 }
 
+func Delete(c *gin.Context) {
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	status := machine.Delete(path)
+	if !status {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
 func SetCurrentMachine(c *gin.Context) {
 
 	path := c.DefaultQuery("path", "")

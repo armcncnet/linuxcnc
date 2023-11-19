@@ -624,3 +624,15 @@ func (machine *Machine) UpdateXml(path string, content string) bool {
 	}
 	return status
 }
+
+func (machine *Machine) Delete(path string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(machine.Path + path)
+	if exists {
+		err := os.RemoveAll(machine.Path + path)
+		if err == nil {
+			status = true
+		}
+	}
+	return status
+}
