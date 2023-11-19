@@ -9,6 +9,7 @@ package FileUtils
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path"
@@ -63,7 +64,7 @@ func ReadFile(path string) ([]byte, error) {
 	return content, err
 }
 
-func Unzip(src string, dest string) bool {
+func Unzip(src string, dest string, length int) bool {
 	status := true
 	reader, err := zip.OpenReader(src)
 	if err != nil {
@@ -73,7 +74,8 @@ func Unzip(src string, dest string) bool {
 
 	for _, file := range reader.File {
 		parts := strings.Split(file.Name, "/")
-		if len(parts) > 2 {
+		fmt.Println("-->", len(parts))
+		if len(parts) > length {
 			status = false
 			break
 		}
