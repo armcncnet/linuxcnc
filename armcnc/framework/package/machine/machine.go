@@ -57,7 +57,7 @@ func (machine *Machine) Select() []Data {
 			timeData, _ := times.Stat(machine.Path + file.Name())
 			item.Time = timeData.BirthTime()
 			if strings.Contains(file.Name(), "default_") {
-				item.Time = item.Time.Add(-10 * time.Minute)
+				item.Time = item.Time.Add(-525600 * time.Minute)
 			}
 			ini := machine.GetIni(file.Name())
 			if ini.Emc.Version != "" {
