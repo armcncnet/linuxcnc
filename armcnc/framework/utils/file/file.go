@@ -9,13 +9,11 @@ package FileUtils
 
 import (
 	"archive/zip"
-	"fmt"
 	"io"
 	"os"
 	"path"
 	"path/filepath"
 	"strings"
-	"time"
 )
 
 func PathExists(path string) (bool, error) {
@@ -73,12 +71,12 @@ func Unzip(src string, dest string, length int) bool {
 	}
 	defer reader.Close()
 
+	check := true
+
 	for _, file := range reader.File {
 		parts := strings.Split(file.Name, "/")
 		if len(parts) > length {
-			status = false
-			fmt.Println("Setting status to false due to parts length")
-			time.Sleep(1 * time.Second)
+			check = false
 			break
 		}
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
@@ -87,34 +85,37 @@ func Unzip(src string, dest string, length int) bool {
 				os.MkdirAll(filePath, os.ModePerm)
 			} else {
 				if err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
-					status = false
+					check = false
 					break
 				}
 				inFile, err := file.Open()
 				if err != nil {
-					status = false
+					check = false
 					break
 				}
 				outFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
 				if err != nil {
 					inFile.Close()
-					status = false
+					check = false
 					break
 				}
 				if _, err = io.Copy(outFile, inFile); err != nil {
 					outFile.Close()
 					inFile.Close()
-					status = false
+					check = false
 					break
 				}
 				outFile.Close()
 				inFile.Close()
 			}
 		} else {
-			status = false
+			check = false
 			break
 		}
 	}
+
+	status = check
+
 	return status
 }
 
