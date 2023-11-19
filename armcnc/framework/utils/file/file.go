@@ -9,7 +9,6 @@ package FileUtils
 
 import (
 	"archive/zip"
-	"fmt"
 	"io"
 	"os"
 	"path"
@@ -73,16 +72,15 @@ func Unzip(src string, dest string) bool {
 	defer reader.Close()
 
 	for _, file := range reader.File {
-		fmt.Println("--->", file.Name)
+		parts := strings.Split(file.Name, "/")
+		if len(parts) > 1 {
+			status = false
+			break
+		}
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
 			filePath := path.Join(dest, file.Name)
 			if file.FileInfo().IsDir() {
-				if !strings.Contains(file.Name, "launch") {
-					status = false
-					break
-				} else {
-					os.MkdirAll(filePath, os.ModePerm)
-				}
+				os.MkdirAll(filePath, os.ModePerm)
 			} else {
 				if err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
 					status = false
