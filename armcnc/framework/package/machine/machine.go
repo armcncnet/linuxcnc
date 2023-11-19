@@ -682,7 +682,7 @@ func (machine *Machine) DefaultIni(data INI) INI {
 		data.AxisA.MaxLimit = "0.000"
 	}
 	if data.Joint3.Type == "" {
-		data.Joint3.Type = "LINEAR"
+		data.Joint3.Type = "ANGULAR"
 	}
 	if data.Joint3.Home == "" {
 		data.Joint3.Home = "0.000"
@@ -748,7 +748,7 @@ func (machine *Machine) DefaultIni(data INI) INI {
 		data.AxisB.MaxLimit = "0.000"
 	}
 	if data.Joint4.Type == "" {
-		data.Joint4.Type = "LINEAR"
+		data.Joint4.Type = "ANGULAR"
 	}
 	if data.Joint4.Home == "" {
 		data.Joint4.Home = "0.000"
@@ -814,7 +814,7 @@ func (machine *Machine) DefaultIni(data INI) INI {
 		data.AxisC.MaxLimit = "0.000"
 	}
 	if data.Joint5.Type == "" {
-		data.Joint5.Type = "LINEAR"
+		data.Joint5.Type = "ANGULAR"
 	}
 	if data.Joint5.Home == "" {
 		data.Joint5.Home = "0.000"
