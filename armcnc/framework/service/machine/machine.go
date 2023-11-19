@@ -92,7 +92,7 @@ func New(c *gin.Context) {
 	returnData.Path = ""
 	returnData.User = machine.DefaultUser(returnData.User)
 	returnData.Ini = machine.DefaultIni(returnData.Ini)
-	returnData.Table = ""
+	returnData.Table = "T1 P1 D2.000 X0.000 Y0.000 Z0.000;"
 	returnData.Launch = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
 	returnData.Hal = ""
 	returnData.Xml = ""
