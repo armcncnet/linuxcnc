@@ -333,6 +333,342 @@ func (machine *Machine) UpdateIni(path string, data IniJson) bool {
 }
 
 func (machine *Machine) DefaultIni(data INI) INI {
+	if data.Emc.Machine == "" {
+		data.Emc.Machine = "machine"
+	}
+	if data.Emc.Debug == "" {
+		data.Emc.Debug = "0"
+	}
+	if data.Emc.Version == "" {
+		data.Emc.Version = "1.1"
+	}
+	if data.Display.Display == "" {
+		data.Display.Display = "halui"
+	}
+	if data.Display.CycleTime == "" {
+		data.Display.CycleTime = "0.1000"
+	}
+	if data.Display.PositionOffset == "" {
+		data.Display.PositionOffset = "RELATIVE"
+	}
+	if data.Display.PositionFeedback == "" {
+		data.Display.PositionFeedback = "ACTUAL"
+	}
+	if data.Display.Arcdivision == "" {
+		data.Display.Arcdivision = "64"
+	}
+	if data.Display.MaxFeedOverride == "" {
+		data.Display.MaxFeedOverride = "1.5"
+	}
+	if data.Display.MinSpindleOverride == "" {
+		data.Display.MinSpindleOverride = "0.3"
+	}
+	if data.Display.MaxSpindleOverride == "" {
+		data.Display.MaxSpindleOverride = "1.5"
+	}
+	if data.Display.DefaultLinearVelocity == "" {
+		data.Display.DefaultLinearVelocity = "30.000"
+	}
+	if data.Display.MinLinearVelocity == "" {
+		data.Display.MinLinearVelocity = "0.000"
+	}
+	if data.Display.MaxLinearVelocity == "" {
+		data.Display.MaxLinearVelocity = "100.000"
+	}
+	if data.Display.DefaultAngularVelocity == "" {
+		data.Display.DefaultAngularVelocity = "13.333"
+	}
+	if data.Display.MinAngularVelocity == "" {
+		data.Display.MinAngularVelocity = "0.000"
+	}
+	if data.Display.MaxAngularVelocity == "" {
+		data.Display.MaxAngularVelocity = "16.667"
+	}
+	if data.Display.ProgramPrefix == "" {
+		data.Display.ProgramPrefix = "../../files"
+	}
+	if data.Display.OpenFile == "" {
+		data.Display.OpenFile = "../../files/armcnc.ngc"
+	}
+	if data.Display.Increments == "" {
+		data.Display.Increments = "10mm,5mm,1mm,.5mm,.1mm,.05mm,.01mm,.005mm"
+	}
+	if data.Python.PathAppend == "" {
+		data.Python.PathAppend = "../../scripts/python"
+	}
+	if data.Python.Toplevel == "" {
+		data.Python.Toplevel = "../../scripts/python/main.py"
+	}
+	if data.Filter.ProgramExtension == "" {
+		data.Filter.ProgramExtension = ".py Python Script"
+	}
+	if data.Filter.Py == "" {
+		data.Filter.Py = "python"
+	}
+	if data.Rs274ngc.Features == "" {
+		data.Rs274ngc.Features = "30"
+	}
+	if data.Rs274ngc.SubroutinePath == "" {
+		data.Rs274ngc.SubroutinePath = "../../scripts/ngc"
+	}
+	if data.Rs274ngc.ParameterFile == "" {
+		data.Rs274ngc.ParameterFile = "machine.var"
+	}
+	if data.Emcmot.Emcmot == "" {
+		data.Emcmot.Emcmot = "motmod"
+	}
+	if data.Emcmot.CommTimeout == "" {
+		data.Emcmot.CommTimeout = "1.000"
+	}
+	if data.Emcmot.BasePeriod == "" {
+		data.Emcmot.BasePeriod = "200000"
+	}
+	if data.Emcmot.ServoPeriod == "" {
+		data.Emcmot.ServoPeriod = "1000000"
+	}
+	if data.Emcio.Emcio == "" {
+		data.Emcio.Emcio = "io"
+	}
+	if data.Emcio.CycleTime == "" {
+		data.Emcio.CycleTime = "0.100"
+	}
+	if data.Emcio.ToolTable == "" {
+		data.Emcio.ToolTable = "machine.tbl"
+	}
+	if data.Task.Task == "" {
+		data.Task.Task = "milltask"
+	}
+	if data.Task.CycleTime == "" {
+		data.Task.CycleTime = "0.010"
+	}
+	if data.Hal.HalFile == "" {
+		data.Hal.HalFile = "machine.hal"
+	}
+	if data.Traj.Spindles == "" {
+		data.Traj.Spindles = "1"
+	}
+	if data.Traj.Coordinates == "" {
+		data.Traj.Coordinates = "XYZ"
+	}
+	if data.Traj.LinearUnits == "" {
+		data.Traj.LinearUnits = "mm"
+	}
+	if data.Traj.AngularUnits == "" {
+		data.Traj.AngularUnits = "deg"
+	}
+	if data.Traj.PositionFile == "" {
+		data.Traj.PositionFile = "machine.position"
+	}
+	if data.Spindle0.MinForwardVelocity == "" {
+		data.Spindle0.MinForwardVelocity = "0"
+	}
+	if data.Spindle0.MaxForwardVelocity == "" {
+		data.Spindle0.MaxForwardVelocity = "12000"
+	}
+	if data.Kins.Joints == "" {
+		data.Kins.Joints = "3"
+	}
+	if data.Kins.Kinematics == "" {
+		data.Kins.Kinematics = "trivkins coordinates=XYZ"
+	}
+	if data.AxisX.MaxVelocity == "" {
+		data.AxisX.MaxVelocity = "0.000"
+	}
+	if data.AxisX.MaxAcceleration == "" {
+		data.AxisX.MaxAcceleration = "0.000"
+	}
+	if data.AxisX.MinLimit == "" {
+		data.AxisX.MinLimit = "0.000"
+	}
+	if data.AxisX.MaxLimit == "" {
+		data.AxisX.MaxLimit = "0.000"
+	}
+	if data.Joint0.Type == "" {
+		data.Joint0.Type = "LINEAR"
+	}
+	if data.Joint0.Home == "" {
+		data.Joint0.Home = "0.000"
+	}
+	if data.Joint0.MaxVelocity == "" {
+		data.Joint0.MaxVelocity = "0.000"
+	}
+	if data.Joint0.MaxAcceleration == "" {
+		data.Joint0.MaxAcceleration = "0.000"
+	}
+	if data.Joint0.StepgenMaxaccel == "" {
+		data.Joint0.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint0.Scale == "" {
+		data.Joint0.Scale = "1600"
+	}
+	if data.Joint0.Ferror == "" {
+		data.Joint0.Ferror = "1.000"
+	}
+	if data.Joint0.MinLimit == "" {
+		data.Joint0.MinLimit = "0.000"
+	}
+	if data.Joint0.MaxLimit == "" {
+		data.Joint0.MaxLimit = "0.000"
+	}
+	if data.Joint0.HomeOffset == "" {
+		data.Joint0.HomeOffset = "0.000"
+	}
+	if data.Joint0.HomeSearchVel == "" {
+		data.Joint0.HomeSearchVel = "0.000"
+	}
+	if data.Joint0.HomeLarchVel == "" {
+		data.Joint0.HomeLarchVel = "0.000"
+	}
+	if data.Joint0.HomeFinalVel == "" {
+		data.Joint0.HomeFinalVel = "0.000"
+	}
+	if data.Joint0.VolatileHome == "" {
+		data.Joint0.VolatileHome = "1"
+	}
+	if data.Joint0.HomeIgnoreLimits == "" {
+		data.Joint0.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint0.HomeUseIndex == "" {
+		data.Joint0.HomeUseIndex = "NO"
+	}
+	if data.Joint0.HomeSequence == "" {
+		data.Joint0.HomeSequence = "0"
+	}
+	if data.Joint0.Backlash == "" {
+		data.Joint0.Backlash = "0.00"
+	}
+	if data.AxisY.MaxVelocity == "" {
+		data.AxisY.MaxVelocity = "0.000"
+	}
+	if data.AxisY.MaxAcceleration == "" {
+		data.AxisY.MaxAcceleration = "0.000"
+	}
+	if data.AxisY.MinLimit == "" {
+		data.AxisY.MinLimit = "0.000"
+	}
+	if data.AxisY.MaxLimit == "" {
+		data.AxisY.MaxLimit = "0.000"
+	}
+	if data.Joint1.Type == "" {
+		data.Joint1.Type = "LINEAR"
+	}
+	if data.Joint1.Home == "" {
+		data.Joint1.Home = "0.000"
+	}
+	if data.Joint1.MaxVelocity == "" {
+		data.Joint1.MaxVelocity = "0.000"
+	}
+	if data.Joint1.MaxAcceleration == "" {
+		data.Joint1.MaxAcceleration = "0.000"
+	}
+	if data.Joint1.StepgenMaxaccel == "" {
+		data.Joint1.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint1.Scale == "" {
+		data.Joint1.Scale = "1600"
+	}
+	if data.Joint1.Ferror == "" {
+		data.Joint1.Ferror = "1.000"
+	}
+	if data.Joint1.MinLimit == "" {
+		data.Joint1.MinLimit = "0.000"
+	}
+	if data.Joint1.MaxLimit == "" {
+		data.Joint1.MaxLimit = "0.000"
+	}
+	if data.Joint1.HomeOffset == "" {
+		data.Joint1.HomeOffset = "0.000"
+	}
+	if data.Joint1.HomeSearchVel == "" {
+		data.Joint1.HomeSearchVel = "0.000"
+	}
+	if data.Joint1.HomeLarchVel == "" {
+		data.Joint1.HomeLarchVel = "0.000"
+	}
+	if data.Joint1.HomeFinalVel == "" {
+		data.Joint1.HomeFinalVel = "0.000"
+	}
+	if data.Joint1.VolatileHome == "" {
+		data.Joint1.VolatileHome = "1"
+	}
+	if data.Joint1.HomeIgnoreLimits == "" {
+		data.Joint1.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint1.HomeUseIndex == "" {
+		data.Joint1.HomeUseIndex = "NO"
+	}
+	if data.Joint1.HomeSequence == "" {
+		data.Joint1.HomeSequence = "0"
+	}
+	if data.Joint1.Backlash == "" {
+		data.Joint1.Backlash = "0.00"
+	}
+	if data.AxisZ.MaxVelocity == "" {
+		data.AxisZ.MaxVelocity = "0.000"
+	}
+	if data.AxisZ.MaxAcceleration == "" {
+		data.AxisZ.MaxAcceleration = "0.000"
+	}
+	if data.AxisZ.MinLimit == "" {
+		data.AxisZ.MinLimit = "0.000"
+	}
+	if data.AxisZ.MaxLimit == "" {
+		data.AxisZ.MaxLimit = "0.000"
+	}
+	if data.Joint2.Type == "" {
+		data.Joint2.Type = "LINEAR"
+	}
+	if data.Joint2.Home == "" {
+		data.Joint2.Home = "0.000"
+	}
+	if data.Joint2.MaxVelocity == "" {
+		data.Joint2.MaxVelocity = "0.000"
+	}
+	if data.Joint2.MaxAcceleration == "" {
+		data.Joint2.MaxAcceleration = "0.000"
+	}
+	if data.Joint2.StepgenMaxaccel == "" {
+		data.Joint2.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint2.Scale == "" {
+		data.Joint2.Scale = "1600"
+	}
+	if data.Joint2.Ferror == "" {
+		data.Joint2.Ferror = "1.000"
+	}
+	if data.Joint2.MinLimit == "" {
+		data.Joint2.MinLimit = "0.000"
+	}
+	if data.Joint2.MaxLimit == "" {
+		data.Joint2.MaxLimit = "0.000"
+	}
+	if data.Joint2.HomeOffset == "" {
+		data.Joint2.HomeOffset = "0.000"
+	}
+	if data.Joint2.HomeSearchVel == "" {
+		data.Joint2.HomeSearchVel = "0.000"
+	}
+	if data.Joint2.HomeLarchVel == "" {
+		data.Joint2.HomeLarchVel = "0.000"
+	}
+	if data.Joint2.HomeFinalVel == "" {
+		data.Joint2.HomeFinalVel = "0.000"
+	}
+	if data.Joint2.VolatileHome == "" {
+		data.Joint2.VolatileHome = "1"
+	}
+	if data.Joint2.HomeIgnoreLimits == "" {
+		data.Joint2.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint2.HomeUseIndex == "" {
+		data.Joint2.HomeUseIndex = "NO"
+	}
+	if data.Joint2.HomeSequence == "" {
+		data.Joint2.HomeSequence = "0"
+	}
+	if data.Joint2.Backlash == "" {
+		data.Joint2.Backlash = "0.00"
+	}
 	if data.AxisA.MaxVelocity == "" {
 		data.AxisA.MaxVelocity = "0.000"
 	}
@@ -530,6 +866,61 @@ func (machine *Machine) DefaultIni(data INI) INI {
 	}
 	if data.Joint5.Backlash == "" {
 		data.Joint5.Backlash = "0.00"
+	}
+	return data
+}
+
+func (machine *Machine) DefaultUser(data USER) USER {
+	if data.HandWheel.Status == "" {
+		data.HandWheel.Status = "NO"
+	}
+	if data.HandWheel.XVelocity == "" {
+		data.HandWheel.XVelocity = "10.000"
+	}
+	if data.HandWheel.YVelocity == "" {
+		data.HandWheel.YVelocity = "10.000"
+	}
+	if data.HandWheel.ZVelocity == "" {
+		data.HandWheel.ZVelocity = "6.000"
+	}
+	if data.HandWheel.AVelocity == "" {
+		data.HandWheel.AVelocity = "10.000"
+	}
+	if data.HandWheel.BVelocity == "" {
+		data.HandWheel.BVelocity = "10.000"
+	}
+	if data.HandWheel.CVelocity == "" {
+		data.HandWheel.CVelocity = "10.000"
+	}
+	if data.Tool.Method == "" {
+		data.Tool.Method = "MANUAL"
+	}
+	if data.Tool.XPosition == "" {
+		data.Tool.XPosition = "0.000"
+	}
+	if data.Tool.YPosition == "" {
+		data.Tool.YPosition = "0.000"
+	}
+	if data.Tool.ZPosition == "" {
+		data.Tool.ZPosition = "0.000"
+	}
+	if data.Tool.ZHeight == "" {
+		data.Tool.ZHeight = "0.000"
+	}
+	if data.Tool.MaxSearchDistance == "" {
+		data.Tool.MaxSearchDistance = "0.000"
+	}
+	if data.Tool.LatchSearchDistance == "" {
+		data.Tool.LatchSearchDistance = "0.000"
+	}
+	if data.Tool.SearchVelocity == "" {
+		data.Tool.SearchVelocity = "0.000"
+	}
+	if data.Tool.LatchSearchVelocity == "" {
+		data.Tool.LatchSearchVelocity = "0.000"
+	}
+	if data.Tool.Pockets == "" {
+		data.Tool.Pockets = "[]"
 	}
 	return data
 }

@@ -72,6 +72,35 @@ func Get(c *gin.Context) {
 	return
 }
 
+type responseNew struct {
+	IsDefault bool                `json:"is_default"`
+	Path      string              `json:"path"`
+	User      MachinePackage.USER `json:"user"`
+	Ini       MachinePackage.INI  `json:"ini"`
+	Table     string              `json:"table"`
+	Launch    string              `json:"launch"`
+	Hal       string              `json:"hal"`
+	Xml       string              `json:"xml"`
+}
+
+func New(c *gin.Context) {
+
+	returnData := responseNew{}
+
+	machine := MachinePackage.Init()
+	returnData.IsDefault = false
+	returnData.Path = ""
+	returnData.User = machine.DefaultUser(returnData.User)
+	returnData.Ini = machine.DefaultIni(returnData.Ini)
+	returnData.Table = ""
+	returnData.Launch = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
+	returnData.Hal = ""
+	returnData.Xml = ""
+
+	Utils.Success(c, 0, "", returnData)
+	return
+}
+
 type requestUpdate struct {
 	Path   string                  `json:"path"`
 	User   MachinePackage.UserJson `json:"user"`
