@@ -8,11 +8,13 @@
 package MessageService
 
 import (
+	"armcnc/framework/config"
 	"armcnc/framework/package/launch"
 	"armcnc/framework/utils/socket"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
+	"os"
 )
 
 func Service(c *gin.Context) {
@@ -40,6 +42,11 @@ func Service(c *gin.Context) {
 					go func() {
 						launch := LaunchPackage.Init()
 						launch.OnRestart()
+					}()
+				}
+				if jsonFormat.Command == "desktop:delete:uploads:file" {
+					go func() {
+						os.Remove(Config.Get.Basic.Workspace + "/uploads/" + jsonFormat.Data.(string))
 					}()
 				}
 				SocketUtils.SendMessage(jsonFormat.Command, jsonFormat.Message, jsonFormat.Data)
