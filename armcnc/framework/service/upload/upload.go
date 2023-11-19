@@ -10,7 +10,9 @@ package UploadService
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils"
+	FileUtils "armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
+	"os"
 	"path/filepath"
 	"time"
 )
@@ -31,6 +33,16 @@ func UploadMachine(c *gin.Context) {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
+
+	zip := FileUtils.Unzip(filePath, Config.Get.Basic.Workspace+"/configs/"+timestamp+"/")
+	if !zip {
+		os.Remove(filePath)
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	time.Sleep(1 * time.Second)
+	os.Remove(filePath)
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
