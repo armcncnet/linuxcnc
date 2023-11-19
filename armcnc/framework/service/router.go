@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
+	"armcnc/framework/service/upload"
 	"armcnc/framework/service/version"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -59,6 +60,8 @@ func Router() http.Handler {
 		machine.POST("/update/xml", MachineService.UpdateXml)
 
 		machine.GET("/set/current/machine", MachineService.SetCurrentMachine)
+
+		machine.POST("/upload", UploadService.UploadMachine)
 	}
 
 	code := router.Group("code")
