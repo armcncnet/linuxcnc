@@ -26,9 +26,8 @@ func UploadMachine(c *gin.Context) {
 	timestamp := time.Now().Format("20060102150405")
 	ext := filepath.Ext(file.Filename)
 	newFileName := timestamp + ext
-	filepath := Config.Get.Basic.Workspace + "/uploads/" + newFileName
-
-	if err := c.SaveUploadedFile(file, filepath); err != nil {
+	filePath := Config.Get.Basic.Workspace + "/uploads/" + newFileName
+	if err := c.SaveUploadedFile(file, filePath); err != nil {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
