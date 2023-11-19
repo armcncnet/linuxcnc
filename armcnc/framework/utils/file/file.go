@@ -74,7 +74,7 @@ func Unzip(src string, dest string) bool {
 
 	for _, file := range reader.File {
 		fmt.Println("--->", file.Name)
-		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
+		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") || strings.Contains(file.Name, ".ngc") {
 			filePath := path.Join(dest, file.Name)
 			if file.FileInfo().IsDir() {
 				if !strings.Contains(file.Name, "launch") {
