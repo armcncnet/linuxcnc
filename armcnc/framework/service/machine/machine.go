@@ -262,7 +262,7 @@ func Download(c *gin.Context) {
 
 	fileName := "machine_" + path + ".zip"
 	filePath := Config.Get.Basic.Workspace + "/uploads/" + fileName
-	zip := FileUtils.Zip(machine.Path+path, filePath)
+	zip := FileUtils.Zip(machine.Path+path+"/", filePath)
 	if !zip {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
