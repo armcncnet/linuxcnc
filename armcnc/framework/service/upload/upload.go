@@ -10,7 +10,7 @@ package UploadService
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils"
-	FileUtils "armcnc/framework/utils/file"
+	"armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
 	"os"
 	"path/filepath"
