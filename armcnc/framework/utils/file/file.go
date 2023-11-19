@@ -75,7 +75,7 @@ func Unzip(src string, dest string, length int) bool {
 		parts := strings.Split(file.Name, "/")
 		if len(parts) > length {
 			status = false
-			return status
+			return false
 		}
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
 			filePath := path.Join(dest, file.Name)
