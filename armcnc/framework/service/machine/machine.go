@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/package/launch"
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
+	FileUtils "armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
@@ -235,6 +236,41 @@ func UpdateXml(c *gin.Context) {
 	}
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
+type responseDownload struct {
+	File string `json:"file"`
+}
+
+func Download(c *gin.Context) {
+
+	returnData := responseDownload{}
+
+	path := c.DefaultQuery("path", "")
+	if path == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	machine := MachinePackage.Init()
+	exists, _ := FileUtils.PathExists(machine.Path + path)
+	if !exists {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	fileName := "machine_" + path + ".zip"
+	filePath := Config.Get.Basic.Workspace + "/uploads/" + fileName
+	zip := FileUtils.Zip(machine.Path+path, filePath)
+	if !zip {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	returnData.File = fileName
+
+	Utils.Success(c, 0, "", returnData)
 	return
 }
 
