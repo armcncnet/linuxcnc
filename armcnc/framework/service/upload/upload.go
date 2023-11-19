@@ -10,7 +10,6 @@ package UploadService
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"path/filepath"
 	"time"
@@ -24,9 +23,7 @@ func UploadMachine(c *gin.Context) {
 		return
 	}
 
-	now := time.Now()
-	millis := now.UnixNano() / 1000000
-	timestamp := now.Format("20060102150405") + fmt.Sprintf("%03d", millis%1000)
+	timestamp := time.Now().Format("20060102150405")
 	ext := filepath.Ext(file.Filename)
 	newFileName := timestamp + ext
 	filepath := Config.Get.Basic.Workspace + "/uploads/" + newFileName
