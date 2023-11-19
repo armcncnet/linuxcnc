@@ -15,6 +15,7 @@ import (
 	"path"
 	"path/filepath"
 	"strings"
+	"time"
 )
 
 func PathExists(path string) (bool, error) {
@@ -74,9 +75,10 @@ func Unzip(src string, dest string, length int) bool {
 
 	for _, file := range reader.File {
 		parts := strings.Split(file.Name, "/")
-		fmt.Println("-->", len(parts))
 		if len(parts) > length {
 			status = false
+			fmt.Println("Setting status to false due to parts length")
+			time.Sleep(1 * time.Second)
 			break
 		}
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
