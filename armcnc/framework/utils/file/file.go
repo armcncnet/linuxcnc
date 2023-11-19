@@ -71,13 +71,11 @@ func Unzip(src string, dest string, length int) bool {
 	}
 	defer reader.Close()
 
-	check := true
-
 	for _, file := range reader.File {
 		parts := strings.Split(file.Name, "/")
 		if len(parts) > length {
-			check = false
-			break
+			status = false
+			return status
 		}
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
 			filePath := path.Join(dest, file.Name)
@@ -85,36 +83,34 @@ func Unzip(src string, dest string, length int) bool {
 				os.MkdirAll(filePath, os.ModePerm)
 			} else {
 				if err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
-					check = false
+					status = false
 					break
 				}
 				inFile, err := file.Open()
 				if err != nil {
-					check = false
+					status = false
 					break
 				}
 				outFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
 				if err != nil {
 					inFile.Close()
-					check = false
+					status = false
 					break
 				}
 				if _, err = io.Copy(outFile, inFile); err != nil {
 					outFile.Close()
 					inFile.Close()
-					check = false
+					status = false
 					break
 				}
 				outFile.Close()
 				inFile.Close()
 			}
 		} else {
-			check = false
+			status = false
 			break
 		}
 	}
-
-	status = check
 
 	return status
 }
