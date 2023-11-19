@@ -871,6 +871,12 @@ func (machine *Machine) DefaultIni(data INI) INI {
 }
 
 func (machine *Machine) DefaultUser(data USER) USER {
+	if data.Base.Name == "" {
+		data.Base.Name = "机床名称"
+	}
+	if data.Base.Describe == "" {
+		data.Base.Describe = "机床的描述信息"
+	}
 	if data.HandWheel.Status == "" {
 		data.HandWheel.Status = "NO"
 	}
