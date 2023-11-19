@@ -37,6 +37,7 @@ func UploadMachine(c *gin.Context) {
 	zip := FileUtils.Unzip(filePath, Config.Get.Basic.Workspace+"/configs/"+timestamp+"/")
 	if !zip {
 		os.Remove(filePath)
+		os.Remove(Config.Get.Basic.Workspace + "/configs/" + timestamp)
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}

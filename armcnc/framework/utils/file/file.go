@@ -9,6 +9,7 @@ package FileUtils
 
 import (
 	"archive/zip"
+	"fmt"
 	"io"
 	"os"
 	"path"
@@ -72,10 +73,16 @@ func Unzip(src string, dest string) bool {
 	defer reader.Close()
 
 	for _, file := range reader.File {
+		fmt.Println("--->", file.Name)
 		if strings.Contains(file.Name, "machine") || strings.Contains(file.Name, "launch") {
 			filePath := path.Join(dest, file.Name)
 			if file.FileInfo().IsDir() {
-				os.MkdirAll(filePath, os.ModePerm)
+				if !strings.Contains(file.Name, "launch") {
+					status = false
+					break
+				} else {
+					os.MkdirAll(filePath, os.ModePerm)
+				}
 			} else {
 				if err = os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
 					status = false
@@ -106,5 +113,53 @@ func Unzip(src string, dest string) bool {
 			break
 		}
 	}
+	return status
+}
+
+func Zip(src string, dest string) bool {
+	status := true
+	zipFile, err := os.Create(dest)
+	if err != nil {
+		status = false
+	}
+	defer zipFile.Close()
+
+	zipWriter := zip.NewWriter(zipFile)
+	defer zipWriter.Close()
+
+	err = filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		header, err := zip.FileInfoHeader(info)
+		if err != nil {
+			return err
+		}
+		header.Name = strings.TrimPrefix(path, src)
+		if info.IsDir() {
+			header.Name += "/"
+		}
+		header.Method = zip.Deflate
+		writer, err := zipWriter.CreateHeader(header)
+		if err != nil {
+			return err
+		}
+
+		if !info.IsDir() {
+			file, err := os.Open(path)
+			if err != nil {
+				return err
+			}
+			defer file.Close()
+			_, err = io.Copy(writer, file)
+		}
+
+		return err
+	})
+
+	if err != nil {
+		status = false
+	}
+
 	return status
 }
