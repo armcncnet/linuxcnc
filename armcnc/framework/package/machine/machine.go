@@ -134,204 +134,7 @@ func (machine *Machine) GetIni(path string) INI {
 		iniFile, err := IniUtils.Load(machine.Path + path + "/machine.ini")
 		if err == nil {
 			err = IniUtils.MapTo(iniFile, &data)
-			if data.AxisA.MaxVelocity == "" {
-				data.AxisA.MaxVelocity = "0.000"
-			}
-			if data.AxisA.MaxAcceleration == "" {
-				data.AxisA.MaxAcceleration = "0.000"
-			}
-			if data.AxisA.MinLimit == "" {
-				data.AxisA.MinLimit = "0.000"
-			}
-			if data.AxisA.MaxLimit == "" {
-				data.AxisA.MaxLimit = "0.000"
-			}
-			if data.Joint3.Type == "" {
-				data.Joint3.Type = "LINEAR"
-			}
-			if data.Joint3.Home == "" {
-				data.Joint3.Home = "0.000"
-			}
-			if data.Joint3.MaxVelocity == "" {
-				data.Joint3.MaxVelocity = "0.000"
-			}
-			if data.Joint3.MaxAcceleration == "" {
-				data.Joint3.MaxAcceleration = "0.000"
-			}
-			if data.Joint3.StepgenMaxaccel == "" {
-				data.Joint3.StepgenMaxaccel = "0.000"
-			}
-			if data.Joint3.Scale == "" {
-				data.Joint3.Scale = "1600"
-			}
-			if data.Joint3.Ferror == "" {
-				data.Joint3.Ferror = "1.000"
-			}
-			if data.Joint3.MinLimit == "" {
-				data.Joint3.MinLimit = "0.000"
-			}
-			if data.Joint3.MaxLimit == "" {
-				data.Joint3.MaxLimit = "0.000"
-			}
-			if data.Joint3.HomeOffset == "" {
-				data.Joint3.HomeOffset = "0.000"
-			}
-			if data.Joint3.HomeSearchVel == "" {
-				data.Joint3.HomeSearchVel = "0.000"
-			}
-			if data.Joint3.HomeLarchVel == "" {
-				data.Joint3.HomeLarchVel = "0.000"
-			}
-			if data.Joint3.HomeFinalVel == "" {
-				data.Joint3.HomeFinalVel = "0.000"
-			}
-			if data.Joint3.VolatileHome == "" {
-				data.Joint3.VolatileHome = "1"
-			}
-			if data.Joint3.HomeIgnoreLimits == "" {
-				data.Joint3.HomeIgnoreLimits = "NO"
-			}
-			if data.Joint3.HomeUseIndex == "" {
-				data.Joint3.HomeUseIndex = "NO"
-			}
-			if data.Joint3.HomeSequence == "" {
-				data.Joint3.HomeSequence = "0"
-			}
-			if data.Joint3.Backlash == "" {
-				data.Joint3.Backlash = "0.00"
-			}
-			if data.AxisB.MaxVelocity == "" {
-				data.AxisB.MaxVelocity = "0.000"
-			}
-			if data.AxisB.MaxAcceleration == "" {
-				data.AxisB.MaxAcceleration = "0.000"
-			}
-			if data.AxisB.MinLimit == "" {
-				data.AxisB.MinLimit = "0.000"
-			}
-			if data.AxisB.MaxLimit == "" {
-				data.AxisB.MaxLimit = "0.000"
-			}
-			if data.Joint4.Type == "" {
-				data.Joint4.Type = "LINEAR"
-			}
-			if data.Joint4.Home == "" {
-				data.Joint4.Home = "0.000"
-			}
-			if data.Joint4.MaxVelocity == "" {
-				data.Joint4.MaxVelocity = "0.000"
-			}
-			if data.Joint4.MaxAcceleration == "" {
-				data.Joint4.MaxAcceleration = "0.000"
-			}
-			if data.Joint4.StepgenMaxaccel == "" {
-				data.Joint4.StepgenMaxaccel = "0.000"
-			}
-			if data.Joint4.Scale == "" {
-				data.Joint4.Scale = "1600"
-			}
-			if data.Joint4.Ferror == "" {
-				data.Joint4.Ferror = "1.000"
-			}
-			if data.Joint4.MinLimit == "" {
-				data.Joint4.MinLimit = "0.000"
-			}
-			if data.Joint4.MaxLimit == "" {
-				data.Joint4.MaxLimit = "0.000"
-			}
-			if data.Joint4.HomeOffset == "" {
-				data.Joint4.HomeOffset = "0.000"
-			}
-			if data.Joint4.HomeSearchVel == "" {
-				data.Joint4.HomeSearchVel = "0.000"
-			}
-			if data.Joint4.HomeLarchVel == "" {
-				data.Joint4.HomeLarchVel = "0.000"
-			}
-			if data.Joint4.HomeFinalVel == "" {
-				data.Joint4.HomeFinalVel = "0.000"
-			}
-			if data.Joint4.VolatileHome == "" {
-				data.Joint4.VolatileHome = "1"
-			}
-			if data.Joint4.HomeIgnoreLimits == "" {
-				data.Joint4.HomeIgnoreLimits = "NO"
-			}
-			if data.Joint4.HomeUseIndex == "" {
-				data.Joint4.HomeUseIndex = "NO"
-			}
-			if data.Joint4.HomeSequence == "" {
-				data.Joint4.HomeSequence = "0"
-			}
-			if data.Joint4.Backlash == "" {
-				data.Joint4.Backlash = "0.00"
-			}
-			if data.AxisC.MaxVelocity == "" {
-				data.AxisC.MaxVelocity = "0.000"
-			}
-			if data.AxisC.MaxAcceleration == "" {
-				data.AxisC.MaxAcceleration = "0.000"
-			}
-			if data.AxisC.MinLimit == "" {
-				data.AxisC.MinLimit = "0.000"
-			}
-			if data.AxisC.MaxLimit == "" {
-				data.AxisC.MaxLimit = "0.000"
-			}
-			if data.Joint5.Type == "" {
-				data.Joint5.Type = "LINEAR"
-			}
-			if data.Joint5.Home == "" {
-				data.Joint5.Home = "0.000"
-			}
-			if data.Joint5.MaxVelocity == "" {
-				data.Joint5.MaxVelocity = "0.000"
-			}
-			if data.Joint5.MaxAcceleration == "" {
-				data.Joint5.MaxAcceleration = "0.000"
-			}
-			if data.Joint5.StepgenMaxaccel == "" {
-				data.Joint5.StepgenMaxaccel = "0.000"
-			}
-			if data.Joint5.Scale == "" {
-				data.Joint5.Scale = "1600"
-			}
-			if data.Joint5.Ferror == "" {
-				data.Joint5.Ferror = "1.000"
-			}
-			if data.Joint5.MinLimit == "" {
-				data.Joint5.MinLimit = "0.000"
-			}
-			if data.Joint5.MaxLimit == "" {
-				data.Joint5.MaxLimit = "0.000"
-			}
-			if data.Joint5.HomeOffset == "" {
-				data.Joint5.HomeOffset = "0.000"
-			}
-			if data.Joint5.HomeSearchVel == "" {
-				data.Joint5.HomeSearchVel = "0.000"
-			}
-			if data.Joint5.HomeLarchVel == "" {
-				data.Joint5.HomeLarchVel = "0.000"
-			}
-			if data.Joint5.HomeFinalVel == "" {
-				data.Joint5.HomeFinalVel = "0.000"
-			}
-			if data.Joint5.VolatileHome == "" {
-				data.Joint5.VolatileHome = "1"
-			}
-			if data.Joint5.HomeIgnoreLimits == "" {
-				data.Joint5.HomeIgnoreLimits = "NO"
-			}
-			if data.Joint5.HomeUseIndex == "" {
-				data.Joint5.HomeUseIndex = "NO"
-			}
-			if data.Joint5.HomeSequence == "" {
-				data.Joint5.HomeSequence = "0"
-			}
-			if data.Joint5.Backlash == "" {
-				data.Joint5.Backlash = "0.00"
-			}
+			data = machine.DefaultIni(data)
 		}
 	}
 	return data
@@ -527,6 +330,208 @@ func (machine *Machine) UpdateIni(path string, data IniJson) bool {
 		}
 	}
 	return status
+}
+
+func (machine *Machine) DefaultIni(data INI) INI {
+	if data.AxisA.MaxVelocity == "" {
+		data.AxisA.MaxVelocity = "0.000"
+	}
+	if data.AxisA.MaxAcceleration == "" {
+		data.AxisA.MaxAcceleration = "0.000"
+	}
+	if data.AxisA.MinLimit == "" {
+		data.AxisA.MinLimit = "0.000"
+	}
+	if data.AxisA.MaxLimit == "" {
+		data.AxisA.MaxLimit = "0.000"
+	}
+	if data.Joint3.Type == "" {
+		data.Joint3.Type = "LINEAR"
+	}
+	if data.Joint3.Home == "" {
+		data.Joint3.Home = "0.000"
+	}
+	if data.Joint3.MaxVelocity == "" {
+		data.Joint3.MaxVelocity = "0.000"
+	}
+	if data.Joint3.MaxAcceleration == "" {
+		data.Joint3.MaxAcceleration = "0.000"
+	}
+	if data.Joint3.StepgenMaxaccel == "" {
+		data.Joint3.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint3.Scale == "" {
+		data.Joint3.Scale = "1600"
+	}
+	if data.Joint3.Ferror == "" {
+		data.Joint3.Ferror = "1.000"
+	}
+	if data.Joint3.MinLimit == "" {
+		data.Joint3.MinLimit = "0.000"
+	}
+	if data.Joint3.MaxLimit == "" {
+		data.Joint3.MaxLimit = "0.000"
+	}
+	if data.Joint3.HomeOffset == "" {
+		data.Joint3.HomeOffset = "0.000"
+	}
+	if data.Joint3.HomeSearchVel == "" {
+		data.Joint3.HomeSearchVel = "0.000"
+	}
+	if data.Joint3.HomeLarchVel == "" {
+		data.Joint3.HomeLarchVel = "0.000"
+	}
+	if data.Joint3.HomeFinalVel == "" {
+		data.Joint3.HomeFinalVel = "0.000"
+	}
+	if data.Joint3.VolatileHome == "" {
+		data.Joint3.VolatileHome = "1"
+	}
+	if data.Joint3.HomeIgnoreLimits == "" {
+		data.Joint3.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint3.HomeUseIndex == "" {
+		data.Joint3.HomeUseIndex = "NO"
+	}
+	if data.Joint3.HomeSequence == "" {
+		data.Joint3.HomeSequence = "0"
+	}
+	if data.Joint3.Backlash == "" {
+		data.Joint3.Backlash = "0.00"
+	}
+	if data.AxisB.MaxVelocity == "" {
+		data.AxisB.MaxVelocity = "0.000"
+	}
+	if data.AxisB.MaxAcceleration == "" {
+		data.AxisB.MaxAcceleration = "0.000"
+	}
+	if data.AxisB.MinLimit == "" {
+		data.AxisB.MinLimit = "0.000"
+	}
+	if data.AxisB.MaxLimit == "" {
+		data.AxisB.MaxLimit = "0.000"
+	}
+	if data.Joint4.Type == "" {
+		data.Joint4.Type = "LINEAR"
+	}
+	if data.Joint4.Home == "" {
+		data.Joint4.Home = "0.000"
+	}
+	if data.Joint4.MaxVelocity == "" {
+		data.Joint4.MaxVelocity = "0.000"
+	}
+	if data.Joint4.MaxAcceleration == "" {
+		data.Joint4.MaxAcceleration = "0.000"
+	}
+	if data.Joint4.StepgenMaxaccel == "" {
+		data.Joint4.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint4.Scale == "" {
+		data.Joint4.Scale = "1600"
+	}
+	if data.Joint4.Ferror == "" {
+		data.Joint4.Ferror = "1.000"
+	}
+	if data.Joint4.MinLimit == "" {
+		data.Joint4.MinLimit = "0.000"
+	}
+	if data.Joint4.MaxLimit == "" {
+		data.Joint4.MaxLimit = "0.000"
+	}
+	if data.Joint4.HomeOffset == "" {
+		data.Joint4.HomeOffset = "0.000"
+	}
+	if data.Joint4.HomeSearchVel == "" {
+		data.Joint4.HomeSearchVel = "0.000"
+	}
+	if data.Joint4.HomeLarchVel == "" {
+		data.Joint4.HomeLarchVel = "0.000"
+	}
+	if data.Joint4.HomeFinalVel == "" {
+		data.Joint4.HomeFinalVel = "0.000"
+	}
+	if data.Joint4.VolatileHome == "" {
+		data.Joint4.VolatileHome = "1"
+	}
+	if data.Joint4.HomeIgnoreLimits == "" {
+		data.Joint4.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint4.HomeUseIndex == "" {
+		data.Joint4.HomeUseIndex = "NO"
+	}
+	if data.Joint4.HomeSequence == "" {
+		data.Joint4.HomeSequence = "0"
+	}
+	if data.Joint4.Backlash == "" {
+		data.Joint4.Backlash = "0.00"
+	}
+	if data.AxisC.MaxVelocity == "" {
+		data.AxisC.MaxVelocity = "0.000"
+	}
+	if data.AxisC.MaxAcceleration == "" {
+		data.AxisC.MaxAcceleration = "0.000"
+	}
+	if data.AxisC.MinLimit == "" {
+		data.AxisC.MinLimit = "0.000"
+	}
+	if data.AxisC.MaxLimit == "" {
+		data.AxisC.MaxLimit = "0.000"
+	}
+	if data.Joint5.Type == "" {
+		data.Joint5.Type = "LINEAR"
+	}
+	if data.Joint5.Home == "" {
+		data.Joint5.Home = "0.000"
+	}
+	if data.Joint5.MaxVelocity == "" {
+		data.Joint5.MaxVelocity = "0.000"
+	}
+	if data.Joint5.MaxAcceleration == "" {
+		data.Joint5.MaxAcceleration = "0.000"
+	}
+	if data.Joint5.StepgenMaxaccel == "" {
+		data.Joint5.StepgenMaxaccel = "0.000"
+	}
+	if data.Joint5.Scale == "" {
+		data.Joint5.Scale = "1600"
+	}
+	if data.Joint5.Ferror == "" {
+		data.Joint5.Ferror = "1.000"
+	}
+	if data.Joint5.MinLimit == "" {
+		data.Joint5.MinLimit = "0.000"
+	}
+	if data.Joint5.MaxLimit == "" {
+		data.Joint5.MaxLimit = "0.000"
+	}
+	if data.Joint5.HomeOffset == "" {
+		data.Joint5.HomeOffset = "0.000"
+	}
+	if data.Joint5.HomeSearchVel == "" {
+		data.Joint5.HomeSearchVel = "0.000"
+	}
+	if data.Joint5.HomeLarchVel == "" {
+		data.Joint5.HomeLarchVel = "0.000"
+	}
+	if data.Joint5.HomeFinalVel == "" {
+		data.Joint5.HomeFinalVel = "0.000"
+	}
+	if data.Joint5.VolatileHome == "" {
+		data.Joint5.VolatileHome = "1"
+	}
+	if data.Joint5.HomeIgnoreLimits == "" {
+		data.Joint5.HomeIgnoreLimits = "NO"
+	}
+	if data.Joint5.HomeUseIndex == "" {
+		data.Joint5.HomeUseIndex = "NO"
+	}
+	if data.Joint5.HomeSequence == "" {
+		data.Joint5.HomeSequence = "0"
+	}
+	if data.Joint5.Backlash == "" {
+		data.Joint5.Backlash = "0.00"
+	}
+	return data
 }
 
 func (machine *Machine) GetLaunch(path string) string {
