@@ -8,6 +8,7 @@
 package Service
 
 import (
+	"armcnc/framework/config"
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
@@ -29,9 +30,9 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/programs", "/opt/armcnc/programs/")
+	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
-	router.Static("/uploads", "/opt/armcnc/uploads/")
+	router.Static("/uploads", Config.Get.Basic.Workspace+"/uploads/")
 
 	message := router.Group("message")
 	{
