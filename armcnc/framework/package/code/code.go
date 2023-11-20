@@ -53,7 +53,7 @@ func (code *Code) Select() []Data {
 			item.Path = file.Name()
 			timeData, _ := times.Stat(code.Path + file.Name())
 			item.Time = timeData.BirthTime()
-			if strings.Contains(file.Name(), "demo") {
+			if file.Name() == "armcnc.ngc" || file.Name() == "demo.ngc" || file.Name() == "linuxcnc.ngc" {
 				item.Time = item.Time.Add(-10 * time.Minute)
 			}
 			firstLine := code.ReadFirstLine(file.Name())
