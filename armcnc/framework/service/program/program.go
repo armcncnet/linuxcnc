@@ -120,3 +120,22 @@ func UpdateContent(c *gin.Context) {
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }
+
+func Delete(c *gin.Context) {
+
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	program := ProgramPackage.Init()
+	status := program.Delete(fileName)
+	if !status {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}

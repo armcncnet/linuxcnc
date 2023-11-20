@@ -78,6 +78,8 @@ func Router() http.Handler {
 
 		program.POST("/update/content", ProgramService.UpdateContent)
 
+		program.GET("/delete", ProgramService.Delete)
+
 		program.POST("/upload", UploadService.UploadProgram)
 	}
 

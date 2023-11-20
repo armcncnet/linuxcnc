@@ -140,3 +140,15 @@ func (program *Program) UpdateContent(fileName string, content string) bool {
 	}
 	return status
 }
+
+func (program *Program) Delete(fileName string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(program.Path + fileName)
+	if exists {
+		err := os.RemoveAll(program.Path + fileName)
+		if err == nil {
+			status = true
+		}
+	}
+	return status
+}
