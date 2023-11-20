@@ -10,9 +10,12 @@ package ProgramService
 import (
 	"armcnc/framework/package/program"
 	"armcnc/framework/utils"
+	"armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
+	"os"
+	"time"
 )
 
 type responseSelect struct {
@@ -24,8 +27,8 @@ func Select(c *gin.Context) {
 	returnData := responseSelect{}
 	returnData.Code = make([]ProgramPackage.Data, 0)
 
-	code := ProgramPackage.Init()
-	returnData.Code = code.Select()
+	program := ProgramPackage.Init()
+	returnData.Code = program.Select()
 
 	Utils.Success(c, 0, "", returnData)
 	return
@@ -47,9 +50,9 @@ func ReadLine(c *gin.Context) {
 		return
 	}
 
-	code := ProgramPackage.Init()
-	returnData.Content = code.ReadContent(fileName)
-	read := code.ReadLine(fileName)
+	program := ProgramPackage.Init()
+	returnData.Content = program.ReadContent(fileName)
+	read := program.ReadLine(fileName)
 	returnData.Line = read.Line
 
 	Utils.Success(c, 0, "", returnData)
@@ -70,8 +73,8 @@ func ReadContent(c *gin.Context) {
 		return
 	}
 
-	code := ProgramPackage.Init()
-	returnData.Content = code.ReadContent(fileName)
+	program := ProgramPackage.Init()
+	returnData.Content = program.ReadContent(fileName)
 
 	Utils.Success(c, 0, "", returnData)
 	return
@@ -92,8 +95,19 @@ func UpdateContent(c *gin.Context) {
 		return
 	}
 
-	code := ProgramPackage.Init()
-	update := code.UpdateContent(requestJson.FileName, requestJson.Content)
+	program := ProgramPackage.Init()
+
+	if requestJson.FileName == "" {
+		requestJson.FileName = time.Now().Format("20060102150405") + ".ngc"
+		writeFile := FileUtils.WriteFile("", program.Path+requestJson.FileName)
+		if writeFile != nil {
+			os.RemoveAll(program.Path + requestJson.FileName)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+	}
+
+	update := program.UpdateContent(requestJson.FileName, requestJson.Content)
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
