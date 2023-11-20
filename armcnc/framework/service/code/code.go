@@ -53,3 +53,24 @@ func ReadLine(c *gin.Context) {
 	Utils.Success(c, 0, "", returnData)
 	return
 }
+
+type responseReadContent struct {
+	Content string `json:"content"`
+}
+
+func ReadContent(c *gin.Context) {
+
+	returnData := responseReadContent{}
+
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
+		Utils.Error(c, 10000, "", returnData)
+		return
+	}
+
+	code := CodePackage.Init()
+	returnData.Content = code.ReadContent(fileName)
+
+	Utils.Success(c, 0, "", returnData)
+	return
+}

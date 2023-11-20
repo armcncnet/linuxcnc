@@ -73,6 +73,8 @@ func Router() http.Handler {
 		code.GET("/select", CodeService.Select)
 
 		code.GET("/read/line", CodeService.ReadLine)
+
+		code.GET("/read/content", CodeService.ReadContent)
 	}
 
 	version := router.Group("version")
