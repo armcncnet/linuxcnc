@@ -15,6 +15,7 @@ import (
 	"github.com/goccy/go-json"
 	"io/ioutil"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -106,6 +107,9 @@ func UpdateContent(c *gin.Context) {
 			return
 		}
 	} else {
+		if !strings.Contains(requestJson.Content, "\n") {
+			requestJson.Content = requestJson.Content + "\n"
+		}
 		update := program.UpdateContent(requestJson.FileName, requestJson.Content)
 		if !update {
 			Utils.Error(c, 10000, "", Utils.EmptyData{})
