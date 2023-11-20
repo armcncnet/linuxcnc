@@ -99,18 +99,18 @@ func UpdateContent(c *gin.Context) {
 
 	if requestJson.FileName == "" {
 		requestJson.FileName = time.Now().Format("20060102150405") + ".ngc"
-		writeFile := FileUtils.WriteFile("", program.Path+requestJson.FileName)
+		writeFile := FileUtils.WriteFile(requestJson.Content+"\n", program.Path+requestJson.FileName)
 		if writeFile != nil {
 			os.RemoveAll(program.Path + requestJson.FileName)
 			Utils.Error(c, 10000, "", Utils.EmptyData{})
 			return
 		}
-	}
-
-	update := program.UpdateContent(requestJson.FileName, requestJson.Content)
-	if !update {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
+	} else {
+		update := program.UpdateContent(requestJson.FileName, requestJson.Content)
+		if !update {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
 	}
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
