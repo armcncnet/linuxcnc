@@ -16,7 +16,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
+	"os"
 	"strings"
+	"time"
 )
 
 type responseSelect struct {
@@ -74,8 +76,8 @@ func Get(c *gin.Context) {
 		returnData.Path = ""
 		returnData.User = machine.DefaultUser(returnData.User)
 		returnData.Ini = machine.DefaultIni(returnData.Ini)
-		returnData.Table = "T1 P1 D2.000 X0.000 Y0.000 Z0.000;"
-		returnData.Launch = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
+		returnData.Table = ""
+		returnData.Launch = ""
 		returnData.Hal = ""
 		returnData.Xml = ""
 	}
@@ -104,11 +106,66 @@ func Update(c *gin.Context) {
 		return
 	}
 
+	machine := MachinePackage.Init()
+
 	if requestJson.Path == "" {
-		
+		requestJson.Path = time.Now().Format("20060102150405")
+		mkdir, _ := FileUtils.PathMkdirAll(machine.Path + requestJson.Path + "/launch")
+		if !mkdir {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeHal := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.hal")
+		if writeHal != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeIni := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.ini")
+		if writeIni != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writePosition := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.position")
+		if writePosition != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeTbl := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.tbl")
+		if writeTbl != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeUser := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.user")
+		if writeUser != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeVar := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.var")
+		if writeVar != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		writeXml := FileUtils.WriteFile("", machine.Path+requestJson.Path+"/machine.xml")
+		if writeXml != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		launch := "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
+		writeLaunch := FileUtils.WriteFile(launch, machine.Path+requestJson.Path+"/launch/launch.py")
+		if writeLaunch != nil {
+			os.RemoveAll(machine.Path + requestJson.Path)
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
 	}
 
-	machine := MachinePackage.Init()
 	updateIni := machine.UpdateIni(requestJson.Path, requestJson.Ini)
 	if !updateIni {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
