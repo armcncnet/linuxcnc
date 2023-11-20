@@ -69,7 +69,7 @@ func ReadFile(path string) ([]byte, error) {
 	reader := bufio.NewReader(file)
 
 	var buffer bytes.Buffer
-	chunk := make([]byte, 16*1024)
+	chunk := make([]byte, 512*1024)
 	for {
 		n, err := reader.Read(chunk)
 		if err != nil {
