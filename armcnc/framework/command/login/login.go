@@ -8,7 +8,7 @@
 package LoginCommand
 
 import (
-	Config "armcnc/framework/config"
+	"armcnc/framework/config"
 	"armcnc/framework/utils"
 	"armcnc/framework/utils/request"
 	"bufio"

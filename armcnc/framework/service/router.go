@@ -8,10 +8,10 @@
 package Service
 
 import (
-	"armcnc/framework/service/code"
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
+	"armcnc/framework/service/program"
 	"armcnc/framework/service/upload"
 	"armcnc/framework/service/version"
 	"github.com/gin-contrib/cors"
@@ -68,15 +68,15 @@ func Router() http.Handler {
 		machine.POST("/upload", UploadService.UploadMachine)
 	}
 
-	code := router.Group("code")
+	code := router.Group("program")
 	{
-		code.GET("/select", CodeService.Select)
+		code.GET("/select", ProgramService.Select)
 
-		code.GET("/read/line", CodeService.ReadLine)
+		code.GET("/read/line", ProgramService.ReadLine)
 
-		code.GET("/read/content", CodeService.ReadContent)
+		code.GET("/read/content", ProgramService.ReadContent)
 
-		code.POST("/update/content", CodeService.UpdateContent)
+		code.POST("/update/content", ProgramService.UpdateContent)
 	}
 
 	version := router.Group("version")

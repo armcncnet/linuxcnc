@@ -1,14 +1,14 @@
 /**
  ******************************************************************************
- * @file    code.go
+ * @file    program.go
  * @author  ARMCNC site:www.armcnc.net github:armcnc.github.io
  ******************************************************************************
  */
 
-package CodeService
+package ProgramService
 
 import (
-	"armcnc/framework/package/code"
+	"armcnc/framework/package/program"
 	"armcnc/framework/utils"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
@@ -16,15 +16,15 @@ import (
 )
 
 type responseSelect struct {
-	Code []CodePackage.Data `json:"code"`
+	Code []ProgramPackage.Data `json:"code"`
 }
 
 func Select(c *gin.Context) {
 
 	returnData := responseSelect{}
-	returnData.Code = make([]CodePackage.Data, 0)
+	returnData.Code = make([]ProgramPackage.Data, 0)
 
-	code := CodePackage.Init()
+	code := ProgramPackage.Init()
 	returnData.Code = code.Select()
 
 	Utils.Success(c, 0, "", returnData)
@@ -47,7 +47,7 @@ func ReadLine(c *gin.Context) {
 		return
 	}
 
-	code := CodePackage.Init()
+	code := ProgramPackage.Init()
 	returnData.Content = code.ReadContent(fileName)
 	read := code.ReadLine(fileName)
 	returnData.Line = read.Line
@@ -70,7 +70,7 @@ func ReadContent(c *gin.Context) {
 		return
 	}
 
-	code := CodePackage.Init()
+	code := ProgramPackage.Init()
 	returnData.Content = code.ReadContent(fileName)
 
 	Utils.Success(c, 0, "", returnData)
@@ -92,7 +92,7 @@ func UpdateContent(c *gin.Context) {
 		return
 	}
 
-	code := CodePackage.Init()
+	code := ProgramPackage.Init()
 	update := code.UpdateContent(requestJson.FileName, requestJson.Content)
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})

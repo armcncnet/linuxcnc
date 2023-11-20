@@ -1,11 +1,11 @@
 /**
  ******************************************************************************
- * @file    code.go
+ * @file    program.go
  * @author  ARMCNC site:www.armcnc.net github:armcnc.github.io
  ******************************************************************************
  */
 
-package CodePackage
+package ProgramPackage
 
 import (
 	"armcnc/framework/config"
@@ -19,7 +19,7 @@ import (
 	"time"
 )
 
-type Code struct {
+type Program struct {
 	Path string `json:"path"`
 }
 
@@ -33,16 +33,16 @@ type Data struct {
 	Time     time.Time `json:"-"`
 }
 
-func Init() *Code {
-	return &Code{
+func Init() *Program {
+	return &Program{
 		Path: Config.Get.Basic.Workspace + "/files/",
 	}
 }
 
-func (code *Code) Select() []Data {
+func (program *Program) Select() []Data {
 	data := make([]Data, 0)
 
-	files, err := os.ReadDir(code.Path)
+	files, err := os.ReadDir(program.Path)
 	if err != nil {
 		return data
 	}
@@ -51,12 +51,12 @@ func (code *Code) Select() []Data {
 		item := Data{}
 		if !file.IsDir() {
 			item.Path = file.Name()
-			timeData, _ := times.Stat(code.Path + file.Name())
+			timeData, _ := times.Stat(program.Path + file.Name())
 			item.Time = timeData.BirthTime()
 			if file.Name() == "armcnc.ngc" || file.Name() == "demo.ngc" || file.Name() == "linuxcnc.ngc" {
 				item.Time = item.Time.Add(-525600 * time.Minute)
 			}
-			firstLine := code.ReadFirstLine(file.Name())
+			firstLine := program.ReadFirstLine(file.Name())
 			if firstLine.Version != "" {
 				item.Name = firstLine.Name
 				item.Describe = firstLine.Describe
@@ -73,11 +73,11 @@ func (code *Code) Select() []Data {
 	return data
 }
 
-func (code *Code) ReadContent(fileName string) string {
+func (program *Program) ReadContent(fileName string) string {
 	content := ""
-	exists, _ := FileUtils.PathExists(code.Path + fileName)
+	exists, _ := FileUtils.PathExists(program.Path + fileName)
 	if exists {
-		contentByte, err := FileUtils.ReadFile(code.Path + fileName)
+		contentByte, err := FileUtils.ReadFile(program.Path + fileName)
 		if err == nil {
 			content = string(contentByte)
 		}
@@ -85,11 +85,11 @@ func (code *Code) ReadContent(fileName string) string {
 	return content
 }
 
-func (code *Code) ReadLine(fileName string) Data {
+func (program *Program) ReadLine(fileName string) Data {
 	data := Data{}
 	data.Line = make([]string, 0)
 
-	file, err := os.Open(code.Path + fileName)
+	file, err := os.Open(program.Path + fileName)
 	if err != nil {
 		return data
 	}
@@ -103,10 +103,10 @@ func (code *Code) ReadLine(fileName string) Data {
 	return data
 }
 
-func (code *Code) ReadFirstLine(fileName string) Data {
+func (program *Program) ReadFirstLine(fileName string) Data {
 	data := Data{}
 
-	file, err := os.Open(code.Path + fileName)
+	file, err := os.Open(program.Path + fileName)
 	if err != nil {
 		return data
 	}
@@ -129,11 +129,11 @@ func (code *Code) ReadFirstLine(fileName string) Data {
 	return data
 }
 
-func (code *Code) UpdateContent(fileName string, content string) bool {
+func (program *Program) UpdateContent(fileName string, content string) bool {
 	status := false
-	exists, _ := FileUtils.PathExists(code.Path + fileName)
+	exists, _ := FileUtils.PathExists(program.Path + fileName)
 	if exists {
-		write := FileUtils.WriteFile(content, code.Path+fileName)
+		write := FileUtils.WriteFile(content, program.Path+fileName)
 		if write == nil {
 			status = true
 		}
