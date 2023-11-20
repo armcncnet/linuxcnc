@@ -9,6 +9,7 @@ package UploadService
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/package/program"
 	"armcnc/framework/utils"
 	"armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
@@ -62,6 +63,14 @@ func UploadProgram(c *gin.Context) {
 	newFileName := timestamp + ext
 	filePath := Config.Get.Basic.Workspace + "/programs/" + newFileName
 	if err := c.SaveUploadedFile(file, filePath); err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	program := ProgramPackage.Init()
+	check := program.ReadFirstLine(newFileName)
+	if check.Name == "" {
+		os.Remove(filePath)
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
