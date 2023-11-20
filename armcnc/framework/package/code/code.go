@@ -54,7 +54,7 @@ func (code *Code) Select() []Data {
 			timeData, _ := times.Stat(code.Path + file.Name())
 			item.Time = timeData.BirthTime()
 			if file.Name() == "armcnc.ngc" || file.Name() == "demo.ngc" || file.Name() == "linuxcnc.ngc" {
-				item.Time = item.Time.Add(-10 * time.Minute)
+				item.Time = item.Time.Add(-525600 * time.Minute)
 			}
 			firstLine := code.ReadFirstLine(file.Name())
 			if firstLine.Version != "" {
