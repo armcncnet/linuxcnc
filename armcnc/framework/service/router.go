@@ -29,7 +29,7 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/files", "/opt/armcnc/files/")
+	router.Static("/files", "/opt/armcnc/programs/")
 
 	router.Static("/uploads", "/opt/armcnc/uploads/")
 

@@ -35,7 +35,7 @@ type Data struct {
 
 func Init() *Program {
 	return &Program{
-		Path: Config.Get.Basic.Workspace + "/files/",
+		Path: Config.Get.Basic.Workspace + "/programs/",
 	}
 }
 

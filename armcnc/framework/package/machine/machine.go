@@ -388,7 +388,7 @@ func (machine *Machine) DefaultIni(data INI) INI {
 		data.Display.ProgramPrefix = "../../files"
 	}
 	if data.Display.OpenFile == "" {
-		data.Display.OpenFile = "../../files/armcnc.ngc"
+		data.Display.OpenFile = "../../programs/armcnc.ngc"
 	}
 	if data.Display.Increments == "" {
 		data.Display.Increments = "10mm,5mm,1mm,.5mm,.1mm,.05mm,.01mm,.005mm"
