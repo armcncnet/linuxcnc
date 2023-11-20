@@ -68,15 +68,17 @@ func Router() http.Handler {
 		machine.POST("/upload", UploadService.UploadMachine)
 	}
 
-	code := router.Group("program")
+	program := router.Group("program")
 	{
-		code.GET("/select", ProgramService.Select)
+		program.GET("/select", ProgramService.Select)
 
-		code.GET("/read/line", ProgramService.ReadLine)
+		program.GET("/read/line", ProgramService.ReadLine)
 
-		code.GET("/read/content", ProgramService.ReadContent)
+		program.GET("/read/content", ProgramService.ReadContent)
 
-		code.POST("/update/content", ProgramService.UpdateContent)
+		program.POST("/update/content", ProgramService.UpdateContent)
+
+		program.POST("/upload", UploadService.UploadProgram)
 	}
 
 	version := router.Group("version")

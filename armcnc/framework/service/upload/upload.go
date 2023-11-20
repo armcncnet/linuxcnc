@@ -48,3 +48,24 @@ func UploadMachine(c *gin.Context) {
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }
+
+func UploadProgram(c *gin.Context) {
+
+	file, err := c.FormFile("file")
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	timestamp := time.Now().Format("20060102150405")
+	ext := filepath.Ext(file.Filename)
+	newFileName := timestamp + ext
+	filePath := Config.Get.Basic.Workspace + "/programs/" + newFileName
+	if err := c.SaveUploadedFile(file, filePath); err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
