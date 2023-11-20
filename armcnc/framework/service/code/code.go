@@ -11,6 +11,8 @@ import (
 	"armcnc/framework/package/code"
 	"armcnc/framework/utils"
 	"github.com/gin-gonic/gin"
+	"github.com/goccy/go-json"
+	"io/ioutil"
 )
 
 type responseSelect struct {
@@ -72,5 +74,31 @@ func ReadContent(c *gin.Context) {
 	returnData.Content = code.ReadContent(fileName)
 
 	Utils.Success(c, 0, "", returnData)
+	return
+}
+
+type requestUpdateContent struct {
+	FileName string `json:"file_name"`
+	Content  string `json:"content"`
+}
+
+func UpdateContent(c *gin.Context) {
+
+	requestJson := requestUpdateContent{}
+	requestData, _ := ioutil.ReadAll(c.Request.Body)
+	err := json.Unmarshal(requestData, &requestJson)
+	if err != nil {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	code := CodePackage.Init()
+	update := code.UpdateContent(requestJson.FileName, requestJson.Content)
+	if !update {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }

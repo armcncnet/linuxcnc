@@ -128,3 +128,15 @@ func (code *Code) ReadFirstLine(fileName string) Data {
 	}
 	return data
 }
+
+func (code *Code) UpdateContent(fileName string, content string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(code.Path + fileName)
+	if exists {
+		write := FileUtils.WriteFile(content, code.Path+fileName)
+		if write == nil {
+			status = true
+		}
+	}
+	return status
+}

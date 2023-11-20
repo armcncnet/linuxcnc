@@ -75,6 +75,8 @@ func Router() http.Handler {
 		code.GET("/read/line", CodeService.ReadLine)
 
 		code.GET("/read/content", CodeService.ReadContent)
+
+		code.POST("/update/content", CodeService.UpdateContent)
 	}
 
 	version := router.Group("version")
