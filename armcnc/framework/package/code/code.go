@@ -29,6 +29,7 @@ type Data struct {
 	Describe string    `json:"describe"`
 	Version  string    `json:"version"`
 	Line     []string  `json:"line"`
+	Content  string    `json:"content"`
 	Time     time.Time `json:"-"`
 }
 
@@ -60,6 +61,8 @@ func (code *Code) Select() []Data {
 				item.Name = firstLine.Name
 				item.Describe = firstLine.Describe
 				item.Version = firstLine.Version
+				item.Line = make([]string, 0)
+				item.Content = ""
 				data = append(data, item)
 			}
 		}
