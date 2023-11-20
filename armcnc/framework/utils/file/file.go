@@ -9,6 +9,8 @@ package FileUtils
 
 import (
 	"archive/zip"
+	"bufio"
+	"bytes"
 	"io"
 	"os"
 	"path"
@@ -58,9 +60,27 @@ func WriteFile(data string, path string) error {
 }
 
 func ReadFile(path string) ([]byte, error) {
-	filePath := path
-	content, err := os.ReadFile(filePath)
-	return content, err
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer file.Close()
+
+	reader := bufio.NewReader(file)
+
+	var buffer bytes.Buffer
+	chunk := make([]byte, 50*1024)
+	for {
+		n, err := reader.Read(chunk)
+		if err != nil {
+			if err == io.EOF {
+				break
+			}
+			return nil, err
+		}
+		buffer.Write(chunk[:n])
+	}
+	return buffer.Bytes(), nil
 }
 
 func Unzip(src string, dest string, length int) bool {
