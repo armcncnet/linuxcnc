@@ -1,4 +1,4 @@
-({"name": "armcnc", "describe": "三轴机床测试示例", "version": "1.0.0"})
+({"name": "armcnc", "describe": "三轴机床测试程序示例", "version": "1.0.0"})
 G21 G90 G64 G40
 
 G0 Z3
