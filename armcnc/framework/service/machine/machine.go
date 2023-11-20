@@ -50,52 +50,35 @@ func Get(c *gin.Context) {
 	returnData := responseGet{}
 
 	path := c.DefaultQuery("path", "")
+
+	machine := MachinePackage.Init()
+	returnData.IsDefault = false
+	if path != "" {
+		if strings.Contains(path, "default_") {
+			returnData.IsDefault = true
+		}
+		returnData.Path = path
+		returnData.User = machine.GetUser(path)
+		if returnData.User.Base.Name == "" {
+			Utils.Error(c, 10000, "", Utils.EmptyData{})
+			return
+		}
+		returnData.Ini = machine.GetIni(path)
+		returnData.Table = machine.GetTable(path)
+		returnData.Launch = machine.GetLaunch(path)
+		returnData.Hal = machine.GetHal(path)
+		returnData.Xml = machine.GetXml(path)
+	}
+
 	if path == "" {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
+		returnData.Path = ""
+		returnData.User = machine.DefaultUser(returnData.User)
+		returnData.Ini = machine.DefaultIni(returnData.Ini)
+		returnData.Table = "T1 P1 D2.000 X0.000 Y0.000 Z0.000;"
+		returnData.Launch = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
+		returnData.Hal = ""
+		returnData.Xml = ""
 	}
-
-	machine := MachinePackage.Init()
-	returnData.IsDefault = false
-	if strings.Contains(path, "default_") {
-		returnData.IsDefault = true
-	}
-	returnData.Path = path
-	returnData.User = machine.GetUser(path)
-	returnData.Ini = machine.GetIni(path)
-	returnData.Table = machine.GetTable(path)
-	returnData.Launch = machine.GetLaunch(path)
-	returnData.Hal = machine.GetHal(path)
-	returnData.Xml = machine.GetXml(path)
-
-	Utils.Success(c, 0, "", returnData)
-	return
-}
-
-type responseNew struct {
-	IsDefault bool                `json:"is_default"`
-	Path      string              `json:"path"`
-	User      MachinePackage.USER `json:"user"`
-	Ini       MachinePackage.INI  `json:"ini"`
-	Table     string              `json:"table"`
-	Launch    string              `json:"launch"`
-	Hal       string              `json:"hal"`
-	Xml       string              `json:"xml"`
-}
-
-func New(c *gin.Context) {
-
-	returnData := responseNew{}
-
-	machine := MachinePackage.Init()
-	returnData.IsDefault = false
-	returnData.Path = ""
-	returnData.User = machine.DefaultUser(returnData.User)
-	returnData.Ini = machine.DefaultIni(returnData.Ini)
-	returnData.Table = "T1 P1 D2.000 X0.000 Y0.000 Z0.000;"
-	returnData.Launch = "#!/usr/bin/env python\n# -*- coding: utf-8 -*-\n\nimport armcnc as sdk\n\ndef armcnc_start(cnc):\n    while True:\n        pass\n\ndef armcnc_message(cnc, message):\n    pass\n\ndef armcnc_exit(cnc):\n    pass\n\nif __name__ == '__main__':\n    sdk.Init()"
-	returnData.Hal = ""
-	returnData.Xml = ""
 
 	Utils.Success(c, 0, "", returnData)
 	return
@@ -119,6 +102,10 @@ func Update(c *gin.Context) {
 	if err != nil {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
+	}
+
+	if requestJson.Path == "" {
+		
 	}
 
 	machine := MachinePackage.Init()
