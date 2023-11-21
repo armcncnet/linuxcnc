@@ -22,7 +22,6 @@ type Backup struct {
 }
 
 type Data struct {
-	Id   int       `json:"id"`
 	Name string    `json:"name"`
 	Path string    `json:"path"`
 	Date string    `json:"date"`
@@ -46,7 +45,6 @@ func (backup *Backup) Select() []Data {
 	for i, file := range files {
 		if strings.Contains(file.Name(), ".zip") {
 			item := Data{}
-			item.Id = i
 			item.Name = file.Name()
 			item.Path = file.Name()
 			timeData, _ := times.Stat(backup.Path + file.Name())
