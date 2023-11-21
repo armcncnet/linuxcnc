@@ -61,7 +61,8 @@ func ReadLine(c *gin.Context) {
 }
 
 type responseReadContent struct {
-	Content string `json:"content"`
+	IsDefault bool   `json:"is_default"`
+	Content   string `json:"content"`
 }
 
 func ReadContent(c *gin.Context) {
@@ -75,6 +76,10 @@ func ReadContent(c *gin.Context) {
 	}
 
 	program := ProgramPackage.Init()
+	returnData.IsDefault = false
+	if fileName == "armcnc.ngc" || fileName == "linuxcnc.ngc" {
+		returnData.IsDefault = true
+	}
 	returnData.Content = program.ReadContent(fileName)
 
 	Utils.Success(c, 0, "", returnData)
