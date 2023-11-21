@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/utils/file"
 	"github.com/djherbis/times"
 	"os"
+	"sort"
 	"time"
 )
 
@@ -20,10 +21,11 @@ type Backup struct {
 }
 
 type Data struct {
-	Id   int    `json:"id"`
-	Name string `json:"name"`
-	Path string `json:"path"`
-	Data string `json:"data"`
+	Id   int       `json:"id"`
+	Name string    `json:"name"`
+	Path string    `json:"path"`
+	Data string    `json:"data"`
+	Time time.Time `json:"-"`
 }
 
 func Init() *Backup {
@@ -46,10 +48,14 @@ func (backup *Backup) Select() []Data {
 		item.Name = file.Name()
 		item.Path = file.Name()
 		timeData, _ := times.Stat(backup.Path + file.Name())
-		createTime := timeData.BirthTime()
-		item.Data = createTime.Format("2006-01-02 15:04:05")
+		item.Time = timeData.BirthTime()
+		item.Data = item.Time.Format("2006-01-02 15:04:05")
 		data = append(data, item)
 	}
+
+	sort.Slice(data, func(i, j int) bool {
+		return data[i].Time.After(data[j].Time)
+	})
 
 	return data
 }
