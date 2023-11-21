@@ -12,8 +12,8 @@ import (
 	"armcnc/framework/utils/file"
 	"github.com/djherbis/times"
 	"os"
-	"path/filepath"
 	"sort"
+	"strings"
 	"time"
 )
 
@@ -44,8 +44,7 @@ func (backup *Backup) Select() []Data {
 	}
 
 	for i, file := range files {
-		ext := filepath.Ext(file.Name())
-		if ext == "zip" {
+		if strings.Contains(file.Name(), ".zip") {
 			item := Data{}
 			item.Id = i
 			item.Name = file.Name()
