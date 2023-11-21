@@ -195,7 +195,7 @@ func ZipFiles(src []string, dest string) bool {
 	defer zipWriter.Close()
 
 	for _, file := range src {
-		if err = FileToZip(zipWriter, file); err != nil {
+		if err = fileToZip(zipWriter, file); err != nil {
 			status = false
 		}
 	}
@@ -207,7 +207,7 @@ func ZipFiles(src []string, dest string) bool {
 	return status
 }
 
-func FileToZip(zipWriter *zip.Writer, filename string) error {
+func fileToZip(zipWriter *zip.Writer, filename string) error {
 	fileToZip, err := os.Open(filename)
 	if err != nil {
 		return err
