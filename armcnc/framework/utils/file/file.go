@@ -136,28 +136,26 @@ func Unzip(src string, dest string, length int) bool {
 }
 
 func ZipFile(src string, dest string) bool {
-	status := true
 	zipFile, err := os.Create(dest)
 	if err != nil {
-		status = false
+		return false
 	}
 	defer zipFile.Close()
 
 	zipWriter := zip.NewWriter(zipFile)
 	defer zipWriter.Close()
 
-	if err = fileToZip(src, zipWriter); err != nil {
-		status = false
+	if err := fileToZip(src, src, zipWriter); err != nil {
+		return false
 	}
 
-	return status
+	return true
 }
 
 func ZipFiles(src []string, dest string) bool {
-	status := true
 	zipFile, err := os.Create(dest)
 	if err != nil {
-		status = false
+		return false
 	}
 	defer zipFile.Close()
 
@@ -165,27 +163,35 @@ func ZipFiles(src []string, dest string) bool {
 	defer zipWriter.Close()
 
 	for _, file := range src {
-		if err = fileToZip(file, zipWriter); err != nil {
-			status = false
+		if err := fileToZip(file, file, zipWriter); err != nil {
+			return false
 		}
 	}
 
-	return status
+	return true
 }
 
-func fileToZip(src string, zipWriter *zip.Writer) error {
-	err := filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
+func fileToZip(basePath string, src string, zipWriter *zip.Writer) error {
+	return filepath.Walk(src, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
+
 		header, err := zip.FileInfoHeader(info)
 		if err != nil {
 			return err
 		}
-		header.Name = strings.TrimPrefix(path, src)
+
+		relPath, err := filepath.Rel(basePath, path)
+		if err != nil {
+			return err
+		}
+
+		header.Name = filepath.ToSlash(relPath)
 		if info.IsDir() {
 			header.Name += "/"
 		}
+
 		header.Method = zip.Deflate
 		writer, err := zipWriter.CreateHeader(header)
 		if err != nil {
@@ -200,8 +206,7 @@ func fileToZip(src string, zipWriter *zip.Writer) error {
 			defer file.Close()
 			_, err = io.Copy(writer, file)
 		}
+
 		return err
 	})
-
-	return err
 }
