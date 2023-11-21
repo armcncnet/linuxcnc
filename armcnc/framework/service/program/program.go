@@ -126,6 +126,33 @@ func UpdateContent(c *gin.Context) {
 	return
 }
 
+type responseDownload struct {
+	File string `json:"file"`
+}
+
+func Download(c *gin.Context) {
+
+	returnData := responseDownload{}
+
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	program := ProgramPackage.Init()
+	exists, _ := FileUtils.PathExists(program.Path + fileName)
+	if !exists {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	returnData.File = fileName
+
+	Utils.Success(c, 0, "", returnData)
+	return
+}
+
 func Delete(c *gin.Context) {
 
 	fileName := c.DefaultQuery("file_name", "")

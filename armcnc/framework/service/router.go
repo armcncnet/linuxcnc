@@ -77,6 +77,8 @@ func Router() http.Handler {
 
 		program.GET("/read/content", ProgramService.ReadContent)
 
+		program.GET("/download", ProgramService.Download)
+
 		program.POST("/update/content", ProgramService.UpdateContent)
 
 		program.GET("/delete", ProgramService.Delete)
