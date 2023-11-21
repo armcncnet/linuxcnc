@@ -20,6 +20,7 @@ type Backup struct {
 }
 
 type Data struct {
+	Id   int    `json:"id"`
 	Name string `json:"name"`
 	Path string `json:"path"`
 	Data string `json:"data"`
@@ -39,8 +40,9 @@ func (backup *Backup) Select() []Data {
 		return data
 	}
 
-	for _, file := range files {
+	for i, file := range files {
 		item := Data{}
+		item.Id = i
 		item.Name = file.Name()
 		item.Path = file.Name()
 		timeData, _ := times.Stat(backup.Path + file.Name())
