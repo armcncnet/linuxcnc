@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/utils/file"
 	"github.com/djherbis/times"
 	"os"
+	"path/filepath"
 	"sort"
 	"time"
 )
@@ -43,14 +44,17 @@ func (backup *Backup) Select() []Data {
 	}
 
 	for i, file := range files {
-		item := Data{}
-		item.Id = i
-		item.Name = file.Name()
-		item.Path = file.Name()
-		timeData, _ := times.Stat(backup.Path + file.Name())
-		item.Time = timeData.BirthTime()
-		item.Data = item.Time.Format("2006-01-02 15:04:05")
-		data = append(data, item)
+		ext := filepath.Ext(file.Name())
+		if ext == "zip" {
+			item := Data{}
+			item.Id = i
+			item.Name = file.Name()
+			item.Path = file.Name()
+			timeData, _ := times.Stat(backup.Path + file.Name())
+			item.Time = timeData.BirthTime()
+			item.Data = item.Time.Format("2006-01-02 15:04:05")
+			data = append(data, item)
+		}
 	}
 
 	sort.Slice(data, func(i, j int) bool {
