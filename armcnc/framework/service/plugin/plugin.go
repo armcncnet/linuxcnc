@@ -20,6 +20,7 @@ type responseSelect struct {
 func Select(c *gin.Context) {
 
 	returnData := responseSelect{}
+	returnData.Plugin = make([]PluginPackage.Data, 0)
 
 	plugin := PluginPackage.Init()
 	returnData.Plugin = plugin.Select()
