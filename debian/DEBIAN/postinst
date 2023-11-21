@@ -28,6 +28,8 @@ else
     sudo python3 -m pip install --break-system-packages --root-user-action=ignore pyserial -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
+find /opt/armcnc -type f -name ".gitkeep" -exec rm -f {} +
+
 sudo ldconfig
 sudo systemctl daemon-reload
 sudo systemctl enable armcnc_service.service
