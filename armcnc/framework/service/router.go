@@ -9,6 +9,7 @@ package Service
 
 import (
 	"armcnc/framework/config"
+	"armcnc/framework/service/backup"
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
@@ -92,9 +93,11 @@ func Router() http.Handler {
 		plugin.GET("/select", PluginService.Select)
 	}
 
-	version := router.Group("version")
+	settings := router.Group("settings")
 	{
-		version.GET("/check", VersionService.Check)
+		settings.GET("/backup/select", BackupService.Select)
+
+		settings.GET("/version/check", VersionService.Check)
 	}
 
 	return router
