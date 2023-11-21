@@ -42,7 +42,7 @@ func (backup *Backup) Select() []Data {
 		return data
 	}
 
-	for i, file := range files {
+	for _, file := range files {
 		if strings.Contains(file.Name(), ".zip") {
 			item := Data{}
 			item.Name = file.Name()
