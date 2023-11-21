@@ -32,7 +32,7 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/backup", Config.Get.Basic.Workspace+"/backup/")
+	router.Static("/backup", Config.Get.Basic.Workspace+"/backups/")
 
 	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
