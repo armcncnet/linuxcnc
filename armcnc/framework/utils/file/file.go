@@ -135,7 +135,7 @@ func Unzip(src string, dest string, length int) bool {
 	return status
 }
 
-func Zip(src string, dest string) bool {
+func ZipFile(src string, dest string) bool {
 	status := true
 	zipFile, err := os.Create(dest)
 	if err != nil {
