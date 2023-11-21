@@ -200,10 +200,6 @@ func ZipFiles(src []string, dest string) bool {
 		}
 	}
 
-	if err != nil {
-		status = false
-	}
-
 	return status
 }
 
