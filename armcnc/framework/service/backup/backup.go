@@ -28,3 +28,22 @@ func Select(c *gin.Context) {
 	Utils.Success(c, 0, "", returnData)
 	return
 }
+
+func Pack(c *gin.Context) {
+
+	Type := c.DefaultQuery("type", "")
+	if Type == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	backup := BackupPackage.Init()
+	status := backup.Pack(Type)
+	if !status {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}

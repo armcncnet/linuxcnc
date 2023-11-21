@@ -32,6 +32,8 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
+	router.Static("/backup", Config.Get.Basic.Workspace+"/backup/")
+
 	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
 	router.Static("/uploads", Config.Get.Basic.Workspace+"/uploads/")
@@ -96,6 +98,8 @@ func Router() http.Handler {
 	settings := router.Group("settings")
 	{
 		settings.GET("/backup/select", BackupService.Select)
+
+		settings.GET("/backup/pack", BackupService.Pack)
 
 		settings.GET("/version/check", VersionService.Check)
 	}

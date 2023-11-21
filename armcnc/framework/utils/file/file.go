@@ -182,3 +182,55 @@ func Zip(src string, dest string) bool {
 
 	return status
 }
+
+func ZipFiles(src []string, dest string) bool {
+	status := true
+	zipFile, err := os.Create(dest)
+	if err != nil {
+		status = false
+	}
+	defer zipFile.Close()
+
+	zipWriter := zip.NewWriter(zipFile)
+	defer zipWriter.Close()
+
+	for _, file := range src {
+		if err = FileToZip(zipWriter, file); err != nil {
+			status = false
+		}
+	}
+
+	if err != nil {
+		status = false
+	}
+
+	return status
+}
+
+func FileToZip(zipWriter *zip.Writer, filename string) error {
+	fileToZip, err := os.Open(filename)
+	if err != nil {
+		return err
+	}
+	defer fileToZip.Close()
+
+	info, err := fileToZip.Stat()
+	if err != nil {
+		return err
+	}
+
+	header, err := zip.FileInfoHeader(info)
+	if err != nil {
+		return err
+	}
+
+	header.Name = filepath.Base(filename)
+	header.Method = zip.Deflate
+
+	writer, err := zipWriter.CreateHeader(header)
+	if err != nil {
+		return err
+	}
+	_, err = io.Copy(writer, fileToZip)
+	return err
+}
