@@ -145,7 +145,12 @@ func ZipFile(src string, dest string) bool {
 	zipWriter := zip.NewWriter(zipFile)
 	defer zipWriter.Close()
 
-	if err := fileToZip(src, src, zipWriter); err != nil {
+	baseDir := filepath.Dir(src)
+	if strings.HasSuffix(src, "/") {
+		baseDir = src
+	}
+
+	if err := fileToZip(baseDir, src, zipWriter); err != nil {
 		return false
 	}
 
@@ -163,7 +168,11 @@ func ZipFiles(src []string, dest string) bool {
 	defer zipWriter.Close()
 
 	for _, file := range src {
-		if err := fileToZip(file, file, zipWriter); err != nil {
+		baseDir := filepath.Dir(file)
+		if strings.HasSuffix(file, "/") {
+			baseDir = file
+		}
+		if err := fileToZip(baseDir, file, zipWriter); err != nil {
 			return false
 		}
 	}
@@ -187,12 +196,16 @@ func fileToZip(basePath string, src string, zipWriter *zip.Writer) error {
 			return err
 		}
 
+		if relPath == "." || relPath == "" {
+			return nil
+		}
+
 		header.Name = filepath.ToSlash(relPath)
 		if info.IsDir() {
 			header.Name += "/"
 		}
-
 		header.Method = zip.Deflate
+
 		writer, err := zipWriter.CreateHeader(header)
 		if err != nil {
 			return err
