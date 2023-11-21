@@ -12,6 +12,7 @@ import (
 	"armcnc/framework/service/config"
 	"armcnc/framework/service/machine"
 	"armcnc/framework/service/message"
+	"armcnc/framework/service/plugin"
 	"armcnc/framework/service/program"
 	"armcnc/framework/service/upload"
 	"armcnc/framework/service/version"
@@ -84,6 +85,11 @@ func Router() http.Handler {
 		program.GET("/delete", ProgramService.Delete)
 
 		program.POST("/upload", UploadService.UploadProgram)
+	}
+
+	plugin := router.Group("plugin")
+	{
+		plugin.GET("/select", PluginService.Select)
 	}
 
 	version := router.Group("version")
