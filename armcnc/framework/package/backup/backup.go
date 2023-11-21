@@ -25,7 +25,7 @@ type Data struct {
 	Id   int       `json:"id"`
 	Name string    `json:"name"`
 	Path string    `json:"path"`
-	Data string    `json:"data"`
+	Date string    `json:"date"`
 	Time time.Time `json:"-"`
 }
 
@@ -51,7 +51,7 @@ func (backup *Backup) Select() []Data {
 			item.Path = file.Name()
 			timeData, _ := times.Stat(backup.Path + file.Name())
 			item.Time = timeData.BirthTime()
-			item.Data = item.Time.Format("2006-01-02 15:04:05")
+			item.Date = item.Time.Format("2006-01-02 15:04:05")
 			data = append(data, item)
 		}
 	}
