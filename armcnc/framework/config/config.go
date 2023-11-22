@@ -26,6 +26,7 @@ type DataBasic struct {
 	Name      string `ini:"name"`
 	Version   string `ini:"version"`
 	Workspace string `ini:"workspace"`
+	Runtime   string `ini:"runtime"`
 	Port      int    `ini:"port"`
 }
 
@@ -45,13 +46,14 @@ func Init() {
 	Get.Basic.Name = "armcnc"
 	Get.Basic.Version = "1.0.0"
 	Get.Basic.Workspace = "/opt/armcnc"
+	Get.Basic.Runtime = "/tmp/runtime"
 	Get.Basic.Port = 10081
 
 	Get.Authorization.Getaway = "https://gateway.geekros.com"
 
-	runtime, _ := FileUtils.PathExists("/tmp/runtime")
+	runtime, _ := FileUtils.PathExists(Get.Basic.Runtime)
 	if !runtime {
-		FileUtils.PathMkdirAll("/tmp/runtime")
+		FileUtils.PathMkdirAll(Get.Basic.Runtime)
 	}
 
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")

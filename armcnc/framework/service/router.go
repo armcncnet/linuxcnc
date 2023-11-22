@@ -38,7 +38,7 @@ func Router() http.Handler {
 
 	router.Static("/backups", Config.Get.Basic.Workspace+"/backups/")
 
-	router.Static("/runtime", "/tmp/runtime/")
+	router.Static("/runtime", Config.Get.Basic.Runtime+"/")
 
 	message := router.Group("message")
 	{
