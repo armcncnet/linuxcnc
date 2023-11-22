@@ -8,8 +8,10 @@
 package BackupService
 
 import (
+	"armcnc/framework/config"
 	"armcnc/framework/package/backup"
 	"armcnc/framework/utils"
+	"armcnc/framework/utils/file"
 	"github.com/gin-gonic/gin"
 )
 
@@ -40,6 +42,26 @@ func Pack(c *gin.Context) {
 	backup := BackupPackage.Init()
 	status := backup.Pack(Type)
 	if !status {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
+
+func Restore(c *gin.Context) {
+
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	backup := BackupPackage.Init()
+
+	zip := FileUtils.Unzip(backup.Path+fileName, Config.Get.Basic.Workspace+"/")
+	if !zip {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
 	}
