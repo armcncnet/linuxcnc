@@ -49,6 +49,11 @@ func Init() {
 
 	Get.Authorization.Getaway = "https://gateway.geekros.com"
 
+	runtime, _ := FileUtils.PathExists("/tmp/runtime")
+	if !runtime {
+		FileUtils.PathMkdirAll("/tmp/runtime")
+	}
+
 	exists, _ := FileUtils.PathExists(Get.Basic.Workspace + "/armcnc.ini")
 	if !exists {
 		iniFile := IniUtils.Empty()

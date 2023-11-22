@@ -32,11 +32,13 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/backup", Config.Get.Basic.Workspace+"/backups/")
-
 	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
-	router.Static("/uploads", Config.Get.Basic.Workspace+"/uploads/")
+	router.Static("/plugins", Config.Get.Basic.Workspace+"/plugins/")
+
+	router.Static("/backups", Config.Get.Basic.Workspace+"/backups/")
+
+	router.Static("/runtime", "/tmp/runtime/")
 
 	message := router.Group("message")
 	{
@@ -80,8 +82,6 @@ func Router() http.Handler {
 		program.GET("/read/line", ProgramService.ReadLine)
 
 		program.GET("/read/content", ProgramService.ReadContent)
-
-		program.GET("/download", ProgramService.Download)
 
 		program.POST("/update/content", ProgramService.UpdateContent)
 
