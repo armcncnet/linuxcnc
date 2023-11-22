@@ -99,3 +99,15 @@ func (backup *Backup) Pack(Type string) bool {
 
 	return status
 }
+
+func (backup *Backup) Delete(fileName string) bool {
+	status := false
+	exists, _ := FileUtils.PathExists(backup.Path + fileName)
+	if exists {
+		err := os.RemoveAll(backup.Path + fileName)
+		if err == nil {
+			status = true
+		}
+	}
+	return status
+}

@@ -101,6 +101,8 @@ func Router() http.Handler {
 
 		settings.GET("/backup/pack", BackupService.Pack)
 
+		settings.GET("/backup/delete", BackupService.Delete)
+
 		settings.GET("/version/check", VersionService.Check)
 	}
 

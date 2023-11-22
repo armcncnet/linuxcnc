@@ -47,3 +47,22 @@ func Pack(c *gin.Context) {
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
 }
+
+func Delete(c *gin.Context) {
+
+	fileName := c.DefaultQuery("file_name", "")
+	if fileName == "" {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	backup := BackupPackage.Init()
+	status := backup.Delete(fileName)
+	if !status {
+		Utils.Error(c, 10000, "", Utils.EmptyData{})
+		return
+	}
+
+	Utils.Success(c, 0, "", Utils.EmptyData{})
+	return
+}
