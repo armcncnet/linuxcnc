@@ -1,9 +1,14 @@
 loadrt [KINS]KINEMATICS
-#autoconverted  trivkins
-loadrt [EMCMOT]EMCMOT servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
+
+loadrt debounce cfg=1,6
+addf debounce.0 base-thread
+addf debounce.1 base-thread
+setp debounce.0.delay 100
+setp debounce.1.delay 60
 
 addf lcec.read-all            servo-thread
 addf cia402.0.read-all        servo-thread
