@@ -2,4 +2,18 @@
 # -*- coding: utf-8 -*-
 
 import hal
+import time
 
+h = hal.component("armcncio")
+h.newpin("armcncio_stop", hal.HAL_BIT, hal.HAL_IN)
+h.ready()
+
+try:
+    while True:
+        if h["emergency_stop"]:
+            print("急停开关激活")
+        else:
+            print("系统正常")
+        time.sleep(0.01)
+finally:
+    h.exit()
