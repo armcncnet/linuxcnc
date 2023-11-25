@@ -118,6 +118,7 @@ func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 			iniFile.Section("TOOL").Key("SEARCH_VELOCITY").SetValue(data.Tool.SearchVelocity)
 			iniFile.Section("TOOL").Key("LATCH_SEARCH_VELOCITY").SetValue(data.Tool.LatchSearchVelocity)
 			iniFile.Section("TOOL").Key("POCKETS").SetValue(data.Tool.Pockets)
+			iniFile.Section("IO").Key("ESTOP_PIN").SetValue(data.Io.EstopPin)
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
 				status = true
@@ -927,6 +928,9 @@ func (machine *Machine) DefaultUser(data USER) USER {
 	}
 	if data.Tool.Pockets == "" {
 		data.Tool.Pockets = "[]"
+	}
+	if data.IO.EstopPin == "" {
+		data.IO.EstopPin = ""
 	}
 	return data
 }
