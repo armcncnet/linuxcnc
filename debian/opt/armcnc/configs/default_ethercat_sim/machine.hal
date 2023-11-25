@@ -2,7 +2,6 @@ loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W armcncio [TRAJ]COORDINATES
 loadusr -W lcec_conf machine.xml
-loadrt not
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
@@ -162,12 +161,11 @@ net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-veloci
 #*********************
 
 net debounce-home-x debounce.1.0.in <= armcncio.gpio.x-home
-net debounce-home-x-out debounce.1.0.out
-net home-x-not-in <= debounce-home-x-out
-net home-x-not-out not.0.in <= home-x-not-in
-net home-x-not-out => joint.0.home-sw-in
-net home-x-not-out => joint.0.neg-lim-sw-in
-net home-x-not-out => joint.0.pos-lim-sw-in
+net both-home-x debounce.1.0.out
+
+net both-home-x => joint.0.home-sw-in
+net both-home-x => joint.0.neg-lim-sw-in
+net both-home-x => joint.0.pos-lim-sw-in
 
 #*********************
 #   Y-HOME
