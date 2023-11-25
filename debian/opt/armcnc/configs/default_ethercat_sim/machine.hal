@@ -157,14 +157,6 @@ net c-drv-target-pos      cia402.4.drv-target-position => lcec.0.4.target-positi
 net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-velocity
 
 #*********************
-#   HOME
-#*********************
-
-net probe-in debounce.0.0.in
-net probe-filt debounce.0.0.out => motion.probe-input
-net coolant-flood <= iocontrol.0.coolant-flood
-
-#*********************
 #   X-HOME
 #*********************
 
