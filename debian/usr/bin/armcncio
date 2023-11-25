@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import hal
+import time
+import Hobot.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.IN)
+
+h = hal.component("armcncio")
+h.newpin("gpio.estop", hal.HAL_BIT, hal.HAL_IN)
+h.ready()
+
+try:
+    while True:
+        estop_status = GPIO.input(17)
+        h["gpio.estop"] = estop_status
+        time.sleep(0.01)
+finally:
+    h.exit()
+    GPIO.cleanup()

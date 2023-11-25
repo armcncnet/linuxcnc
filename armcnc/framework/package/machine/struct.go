@@ -264,6 +264,9 @@ type USER struct {
 		LatchSearchVelocity string `ini:"LATCH_SEARCH_VELOCITY"`
 		Pockets             string `ini:"POCKETS"`
 	} `ini:"TOOL"`
+	IO struct {
+		EstopPin string `ini:"ESTOP_PIN"`
+	} `json:"Io"`
 }
 
 type UserJson struct {
@@ -293,4 +296,7 @@ type UserJson struct {
 		LatchSearchVelocity string `json:"LatchSearchVelocity"`
 		Pockets             string `json:"Pockets"`
 	} `json:"Tool"`
+	Io struct {
+		EstopPin string `json:"estop_pin"`
+	} `json:"Io"`
 }

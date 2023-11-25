@@ -1,5 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+loadusr -W armcncio [TRAJ]COORDINATES
 loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
@@ -159,4 +160,7 @@ net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-veloci
 #   E-STOP
 #*********************
 
-net estop iocontrol.0.user-enable-out  iocontrol.0.emc-enable-in
+net debounce-estop-ext debounce.1.4.in <= armcncio.gpio.estop
+net estop-ext debounce.1.4.out
+net estop-out <= iocontrol.0.user-enable-out
+net estop-ext => iocontrol.0.emc-enable-in
