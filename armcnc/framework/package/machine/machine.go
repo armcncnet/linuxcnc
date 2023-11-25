@@ -929,8 +929,8 @@ func (machine *Machine) DefaultUser(data USER) USER {
 	if data.Tool.Pockets == "" {
 		data.Tool.Pockets = "[]"
 	}
-	if data.IO.EstopPin == "" {
-		data.IO.EstopPin = ""
+	if data.Io.EstopPin == "" {
+		data.Io.EstopPin = ""
 	}
 	return data
 }
