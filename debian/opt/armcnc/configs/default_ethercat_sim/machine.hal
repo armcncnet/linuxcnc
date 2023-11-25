@@ -163,6 +163,10 @@ net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-veloci
 net debounce-home-x debounce.1.0.in <= armcncio.gpio.x-home
 net both-home-x debounce.1.0.out
 
+net both-home-x => joint.0.home-sw-in
+net both-home-x => joint.0.neg-lim-sw-in
+net both-home-x => joint.0.pos-lim-sw-in
+
 #*********************
 #   Y-HOME
 #*********************
