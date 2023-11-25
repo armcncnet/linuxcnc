@@ -26,3 +26,4 @@ POCKETS = []
 
 [IO]
 ESTOP_PIN = gpio.estop 17 IN
+X_HOME = gpio.x-home 18 IN

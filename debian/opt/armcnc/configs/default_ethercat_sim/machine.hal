@@ -27,7 +27,7 @@ addf cia402.4.write-all       servo-thread
 addf lcec.write-all           servo-thread
 
 #*******************
-#  AXIS X
+#  X-AXIS
 #*******************
 
 net x-pos-cmd    <= joint.0.motor-pos-cmd
@@ -53,7 +53,7 @@ net x-drv-target-pos      cia402.0.drv-target-position => lcec.0.0.target-positi
 net x-drv-target-velo     cia402.0.drv-target-velocity => lcec.0.0.target-velocity
 
 #*******************
-#  AXIS Y
+#  Y-AXIS
 #*******************
 
 net y-pos-cmd    <= joint.1.motor-pos-cmd
@@ -79,7 +79,7 @@ net y-drv-target-pos      cia402.1.drv-target-position => lcec.0.1.target-positi
 net y-drv-target-velo     cia402.1.drv-target-velocity => lcec.0.1.target-velocity
 
 #*******************
-#  AXIS Z
+#  Z-AXIS
 #*******************
 
 net z-pos-cmd    <= joint.2.motor-pos-cmd
@@ -105,7 +105,7 @@ net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.2.target-positi
 net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-velocity
 
 #*******************
-#  AXIS B
+#  B-AXIS
 #*******************
 
 net b-pos-cmd    <= joint.3.motor-pos-cmd
@@ -131,7 +131,7 @@ net b-drv-target-pos      cia402.3.drv-target-position => lcec.0.3.target-positi
 net b-drv-target-velo     cia402.3.drv-target-velocity => lcec.0.3.target-velocity
 
 #*******************
-#  AXIS C
+#  C-AXIS
 #*******************
 
 net c-pos-cmd    <= joint.4.motor-pos-cmd
@@ -155,6 +155,21 @@ net c-controlword         cia402.4.controlword         => lcec.0.4.cia-controlwo
 net c-modes-of-operation  cia402.4.opmode              => lcec.0.4.opmode
 net c-drv-target-pos      cia402.4.drv-target-position => lcec.0.4.target-position
 net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-velocity
+
+#*********************
+#   X-HOME
+#*********************
+
+net debounce-home-x debounce.1.0.in <= armcncio.gpio.x-home
+net both-home-x debounce.1.0.out
+
+#*********************
+#   Y-HOME
+#*********************
+
+#*********************
+#   Z-HOME
+#*********************
 
 #*********************
 #   E-STOP
