@@ -9,7 +9,7 @@ loadrt debounce cfg=1,6
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
-setp debounce.1.delay 100
+setp debounce.1.delay 80
 
 addf lcec.read-all            servo-thread
 addf cia402.0.read-all        servo-thread
