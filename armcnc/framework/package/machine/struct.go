@@ -50,6 +50,7 @@ type INI struct {
 		CommTimeout string `ini:"COMM_TIMEOUT"`
 		BasePeriod  string `ini:"BASE_PERIOD"`
 		ServoPeriod string `ini:"SERVO_PERIOD"`
+		HomeMod     string `ini:"HOMEMOD"`
 	} `ini:"EMCMOT"`
 	Emcio struct {
 		Emcio     string `ini:"EMCIO"`
@@ -165,6 +166,7 @@ type IniJson struct {
 		CommTimeout string `json:"CommTimeout"`
 		BasePeriod  string `json:"BasePeriod"`
 		ServoPeriod string `json:"ServoPeriod"`
+		HomeMod     string `json:"HomeMod"`
 	} `json:"Emcmot"`
 	Emcio struct {
 		Emcio     string `json:"Emcio"`
