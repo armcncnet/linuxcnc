@@ -57,6 +57,8 @@ net both-home-x debounce.1.0.out
 net both-home-x => joint.0.home-sw-in
 net both-home-x => joint.0.neg-lim-sw-in
 net both-home-x => joint.0.pos-lim-sw-in
+net x-request-custom-homing <= joint.0.request-custom-homing
+net x-is-custom-homing => joint.0.is-custom-homing
 
 #*******************
 #  AXIS Y
