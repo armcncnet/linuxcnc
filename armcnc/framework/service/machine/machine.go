@@ -13,6 +13,7 @@ import (
 	"armcnc/framework/package/machine"
 	"armcnc/framework/utils"
 	"armcnc/framework/utils/file"
+	"armcnc/framework/utils/socket"
 	"github.com/gin-gonic/gin"
 	"github.com/goccy/go-json"
 	"io/ioutil"
@@ -213,6 +214,16 @@ func UpdateUser(c *gin.Context) {
 	if !update {
 		Utils.Error(c, 10000, "", Utils.EmptyData{})
 		return
+	}
+
+	if requestJson.User.HandWheel.Status == "YES" {
+		message := SocketUtils.SocketMessageFormat{}
+		message.Command = "service:package:status"
+		message.Data = struct {
+			Package string `json:"package"`
+			Status  string `json:"status"`
+		}{Package: "handwheel", Status: "YES"}
+		SocketUtils.SendMessage(message.Command, message.Message, message.Data)
 	}
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
