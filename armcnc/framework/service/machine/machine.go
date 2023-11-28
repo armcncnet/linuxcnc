@@ -216,15 +216,13 @@ func UpdateUser(c *gin.Context) {
 		return
 	}
 
-	if requestJson.User.HandWheel.Status == "YES" {
-		message := SocketUtils.SocketMessageFormat{}
-		message.Command = "service:package:status"
-		message.Data = struct {
-			Package string `json:"package"`
-			Status  string `json:"status"`
-		}{Package: "handwheel", Status: "YES"}
-		SocketUtils.SendMessage(message.Command, message.Message, message.Data)
-	}
+	message := SocketUtils.SocketMessageFormat{}
+	message.Command = "service:package:status"
+	message.Data = struct {
+		Package string `json:"package"`
+		Status  string `json:"status"`
+	}{Package: "handwheel", Status: requestJson.User.HandWheel.Status}
+	SocketUtils.SendMessage(message.Command, message.Message, message.Data)
 
 	Utils.Success(c, 0, "", Utils.EmptyData{})
 	return
