@@ -62,8 +62,6 @@ func Router() http.Handler {
 
 		machine.GET("/delete", MachineService.Delete)
 
-		machine.POST("/update/user", MachineService.UpdateUser)
-
 		machine.POST("/update/launch", MachineService.UpdateLaunch)
 
 		machine.POST("/update/hal", MachineService.UpdateHal)

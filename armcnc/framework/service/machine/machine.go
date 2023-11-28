@@ -185,37 +185,6 @@ func Update(c *gin.Context) {
 		return
 	}
 
-	Utils.Success(c, 0, "", Utils.EmptyData{})
-	return
-}
-
-type requestUpdateUser struct {
-	Path string                  `json:"path"`
-	User MachinePackage.UserJson `json:"user"`
-}
-
-func UpdateUser(c *gin.Context) {
-
-	requestJson := requestUpdateUser{}
-	requestData, _ := ioutil.ReadAll(c.Request.Body)
-	err := json.Unmarshal(requestData, &requestJson)
-	if err != nil {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
-	}
-
-	if requestJson.Path == "" {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
-	}
-
-	machine := MachinePackage.Init()
-	update := machine.UpdateUser(requestJson.Path, requestJson.User)
-	if !update {
-		Utils.Error(c, 10000, "", Utils.EmptyData{})
-		return
-	}
-
 	if requestJson.Path == Config.Get.Machine.Path {
 		message := SocketUtils.SocketMessageFormat{}
 		message.Command = "service:package:status"
