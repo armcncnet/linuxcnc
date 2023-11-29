@@ -10,7 +10,9 @@ package LaunchPackage
 import (
 	"armcnc/framework/config"
 	"armcnc/framework/utils/file"
+	"os"
 	"os/exec"
+	"path/filepath"
 )
 
 type Launch struct {
@@ -42,6 +44,7 @@ func (launch *Launch) Start(machine string) {
 func (launch *Launch) OnStart() {
 	exists, _ := FileUtils.PathExists("/tmp/linuxcnc.lock")
 	if !exists {
+		launch.OnRemoveTmp()
 		cmd := exec.Command("systemctl", "start", "armcnc_linuxcnc.service")
 		cmd.Output()
 		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
@@ -50,6 +53,7 @@ func (launch *Launch) OnStart() {
 }
 
 func (launch *Launch) OnRestart() {
+	launch.OnRemoveTmp()
 	cmd := exec.Command("systemctl", "restart", "armcnc_linuxcnc.service")
 	cmd.Output()
 	cmd = exec.Command("systemctl", "restart", "armcnc_launch.service")
@@ -61,4 +65,13 @@ func (launch *Launch) OnStop() {
 	cmd.Output()
 	cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 	cmd.Output()
+}
+
+func (launch *Launch) OnRemoveTmp() {
+	files, err := filepath.Glob(filepath.Join("/tmp/", "linuxcnc.*"))
+	if err == nil {
+		for _, file := range files {
+			os.Remove(file)
+		}
+	}
 }
