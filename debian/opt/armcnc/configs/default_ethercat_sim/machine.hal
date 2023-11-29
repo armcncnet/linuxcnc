@@ -54,18 +54,13 @@ net both-home-x => joint.0.home-sw-in
 net both-home-x => joint.0.neg-lim-sw-in
 net both-home-x => joint.0.pos-lim-sw-in
 
+# Here are the two added configurations:
+net x-request-custom-homing <= joint.0.request-custom-homing
+net x-is-custom-homing => joint.0.is-custom-homing
+
 #*******************
 #  AXIS Y
 #*******************
-
-net y-pos-cmd    <= joint.1.motor-pos-cmd
-net y-vel-cmd    <= joint.1.vel-cmd
-net y-pos-fb     <= joint.1.motor-pos-fb
-net y-enable     <= joint.1.amp-enable-out
-
-net y-pos-cmd    => cia402.1.pos-cmd
-net y-pos-fb     => cia402.1.pos-fb
-net y-enable     => cia402.1.enable
 
 setp cia402.1.csp-mode 1
 setp cia402.1.pos-scale 10000
@@ -74,6 +69,11 @@ net y-statusword      lcec.0.1.cia-statusword  => cia402.1.statusword
 net y-opmode-display  lcec.0.1.opmode-display  => cia402.1.opmode-display
 net y-drv-act-pos     lcec.0.1.actual-position => cia402.1.drv-actual-position
 net y-drv-act-velo    lcec.0.1.actual-velocity => cia402.1.drv-actual-velocity
+
+net y-enable     <= joint.1.amp-enable-out => cia402.1.enable
+net y-amp-fault  => joint.1.amp-fault-in <= cia402.1.drv-fault
+net y-pos-cmd    <= joint.1.motor-pos-cmd => cia402.1.pos-cmd
+net y-pos-fb     => joint.1.motor-pos-fb <= cia402.1.pos-fb
 
 net y-controlword         cia402.1.controlword         => lcec.0.1.cia-controlword
 net y-modes-of-operation  cia402.1.opmode              => lcec.0.1.opmode
@@ -84,15 +84,6 @@ net y-drv-target-velo     cia402.1.drv-target-velocity => lcec.0.1.target-veloci
 #  AXIS Z
 #*******************
 
-net z-pos-cmd    <= joint.2.motor-pos-cmd
-net z-vel-cmd    <= joint.2.vel-cmd
-net z-pos-fb     <= joint.2.motor-pos-fb
-net z-enable     <= joint.2.amp-enable-out
-
-net z-pos-cmd    => cia402.2.pos-cmd
-net z-pos-fb     => cia402.2.pos-fb
-net z-enable     => cia402.2.enable
-
 setp cia402.2.csp-mode 1
 setp cia402.2.pos-scale 10000
 
@@ -100,6 +91,11 @@ net z-statusword      lcec.0.2.cia-statusword  => cia402.2.statusword
 net z-opmode-display  lcec.0.2.opmode-display  => cia402.2.opmode-display
 net z-drv-act-pos     lcec.0.2.actual-position => cia402.2.drv-actual-position
 net z-drv-act-velo    lcec.0.2.actual-velocity => cia402.2.drv-actual-velocity
+
+net z-enable     <= joint.2.amp-enable-out => cia402.2.enable
+net z-amp-fault  => joint.2.amp-fault-in <= cia402.2.drv-fault
+net z-pos-cmd    <= joint.2.motor-pos-cmd => cia402.2.pos-cmd
+net z-pos-fb     => joint.2.motor-pos-fb <= cia402.2.pos-fb
 
 net z-controlword         cia402.2.controlword         => lcec.0.2.cia-controlword
 net z-modes-of-operation  cia402.2.opmode              => lcec.0.2.opmode
@@ -110,15 +106,6 @@ net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-veloci
 #  AXIS B
 #*******************
 
-net b-pos-cmd    <= joint.3.motor-pos-cmd
-net b-vel-cmd    <= joint.3.vel-cmd
-net b-pos-fb     <= joint.3.motor-pos-fb
-net b-enable     <= joint.3.amp-enable-out
-
-net b-pos-cmd    => cia402.3.pos-cmd
-net b-pos-fb     => cia402.3.pos-fb
-net b-enable     => cia402.3.enable
-
 setp cia402.3.csp-mode 1
 setp cia402.3.pos-scale 10000
 
@@ -126,6 +113,11 @@ net b-statusword      lcec.0.3.cia-statusword  => cia402.3.statusword
 net b-opmode-display  lcec.0.3.opmode-display  => cia402.3.opmode-display
 net b-drv-act-pos     lcec.0.3.actual-position => cia402.3.drv-actual-position
 net b-drv-act-velo    lcec.0.3.actual-velocity => cia402.3.drv-actual-velocity
+
+net b-enable     <= joint.3.amp-enable-out => cia402.3.enable
+net b-amp-fault  => joint.3.amp-fault-in <= cia402.3.drv-fault
+net b-pos-cmd    <= joint.3.motor-pos-cmd => cia402.3.pos-cmd
+net b-pos-fb     => joint.3.motor-pos-fb <= cia402.3.pos-fb
 
 net b-controlword         cia402.3.controlword         => lcec.0.3.cia-controlword
 net b-modes-of-operation  cia402.3.opmode              => lcec.0.3.opmode
@@ -136,15 +128,6 @@ net b-drv-target-velo     cia402.3.drv-target-velocity => lcec.0.3.target-veloci
 #  AXIS C
 #*******************
 
-net c-pos-cmd    <= joint.4.motor-pos-cmd
-net c-vel-cmd    <= joint.4.vel-cmd
-net c-pos-fb     <= joint.4.motor-pos-fb
-net c-enable     <= joint.4.amp-enable-out
-
-net c-pos-cmd    => cia402.4.pos-cmd
-net c-pos-fb     => cia402.4.pos-fb
-net c-enable     => cia402.4.enable
-
 setp cia402.4.csp-mode 1
 setp cia402.4.pos-scale 10000
 
@@ -152,6 +135,11 @@ net c-statusword      lcec.0.4.cia-statusword  => cia402.4.statusword
 net c-opmode-display  lcec.0.4.opmode-display  => cia402.4.opmode-display
 net c-drv-act-pos     lcec.0.4.actual-position => cia402.4.drv-actual-position
 net c-drv-act-velo    lcec.0.4.actual-velocity => cia402.4.drv-actual-velocity
+
+net c-enable     <= joint.4.amp-enable-out => cia402.4.enable
+net c-amp-fault  => joint.4.amp-fault-in <= cia402.4.drv-fault
+net c-pos-cmd    <= joint.4.motor-pos-cmd => cia402.4.pos-cmd
+net c-pos-fb     => joint.4.motor-pos-fb <= cia402.4.pos-fb
 
 net c-controlword         cia402.4.controlword         => lcec.0.4.cia-controlword
 net c-modes-of-operation  cia402.4.opmode              => lcec.0.4.opmode
