@@ -1,6 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
-loadusr -W armcncio [TRAJ]COORDINATES
+# loadusr -W armcncio [TRAJ]COORDINATES
 loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
@@ -48,11 +48,11 @@ net x-modes-of-operation  cia402.0.opmode              => lcec.0.0.opmode
 net x-drv-target-pos      cia402.0.drv-target-position => lcec.0.0.target-position
 net x-drv-target-velo     cia402.0.drv-target-velocity => lcec.0.0.target-velocity
 
-net debounce-home-x debounce.1.0.in <= armcncio.gpio.x-home
-net both-home-x debounce.1.0.out
-net both-home-x => joint.0.home-sw-in
-net both-home-x => joint.0.neg-lim-sw-in
-net both-home-x => joint.0.pos-lim-sw-in
+# net debounce-home-x debounce.1.0.in <= armcncio.gpio.x-home
+# net both-home-x debounce.1.0.out
+# net both-home-x => joint.0.home-sw-in
+# net both-home-x => joint.0.neg-lim-sw-in
+# net both-home-x => joint.0.pos-lim-sw-in
 
 #*******************
 #  AXIS Y
@@ -146,7 +146,9 @@ net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-veloci
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.4.in <= armcncio.gpio.estop
-net estop-ext debounce.1.4.out
-net estop-out <= iocontrol.0.user-enable-out
-net estop-ext => iocontrol.0.emc-enable-in
+# net debounce-estop-ext debounce.1.4.in <= armcncio.gpio.estop
+# net estop-ext debounce.1.4.out
+# net estop-out <= iocontrol.0.user-enable-out
+# net estop-ext => iocontrol.0.emc-enable-in
+
+setp iocontrol.0.emc-enable-in 1
