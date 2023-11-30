@@ -1,6 +1,6 @@
 [BASE]
 NAME = 五轴机床仿真示例
-DESCRIBE = 适用于XYZBC五轴机床仿真示例
+DESCRIBE = [EtherCAT]适用于XYZBC五轴机床仿真示例
 CONTROL = 4
 
 [HANDWHEEL]

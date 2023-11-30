@@ -1,6 +1,6 @@
 [BASE]
-NAME = 三轴机床示例
-DESCRIBE = [EtherCAT]适用于XYZ三轴机床示例
+NAME = 四轴圆雕机床示例
+DESCRIBE = [EtherCAT]适用于XYZA四轴圆雕机床示例
 CONTROL = 4
 
 [HANDWHEEL]
