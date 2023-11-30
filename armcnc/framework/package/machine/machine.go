@@ -177,7 +177,6 @@ func (machine *Machine) UpdateIni(path string, data IniJson) bool {
 			iniFile.Section("EMCMOT").Key("COMM_TIMEOUT").SetValue(data.Emcmot.CommTimeout)
 			iniFile.Section("EMCMOT").Key("BASE_PERIOD").SetValue(data.Emcmot.BasePeriod)
 			iniFile.Section("EMCMOT").Key("SERVO_PERIOD").SetValue(data.Emcmot.ServoPeriod)
-			iniFile.Section("EMCMOT").Key("HOMEMOD").SetValue(data.Emcmot.HomeMod)
 			iniFile.Section("EMCIO").Key("EMCIO").SetValue(data.Emcio.Emcio)
 			iniFile.Section("EMCIO").Key("CYCLE_TIME").SetValue(data.Emcio.CycleTime)
 			iniFile.Section("EMCIO").Key("TOOL_TABLE").SetValue(data.Emcio.ToolTable)
@@ -427,9 +426,6 @@ func (machine *Machine) DefaultIni(data INI) INI {
 	}
 	if data.Emcmot.ServoPeriod == "" {
 		data.Emcmot.ServoPeriod = "1000000"
-	}
-	if data.Emcmot.HomeMod == "" {
-		data.Emcmot.HomeMod = "armcnc_home"
 	}
 	if data.Emcio.Emcio == "" {
 		data.Emcio.Emcio = "io"
