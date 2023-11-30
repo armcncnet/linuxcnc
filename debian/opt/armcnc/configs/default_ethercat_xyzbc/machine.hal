@@ -5,7 +5,7 @@ loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
-loadrt debounce cfg=1,6
+loadrt debounce cfg=1,8
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
@@ -128,6 +128,12 @@ net b-modes-of-operation  cia402.3.opmode              => lcec.0.3.opmode
 net b-drv-target-pos      cia402.3.drv-target-position => lcec.0.3.target-position
 net b-drv-target-velo     cia402.3.drv-target-velocity => lcec.0.3.target-velocity
 
+net debounce-home-b debounce.1.3.in <= armcncio.gpio.b-home
+net both-home-b debounce.1.3.out
+net both-home-b => joint.3.home-sw-in
+net both-home-b => joint.3.neg-lim-sw-in
+net both-home-b => joint.3.pos-lim-sw-in
+
 #*******************
 #  AXIS C
 #*******************
@@ -149,11 +155,17 @@ net c-modes-of-operation  cia402.4.opmode              => lcec.0.4.opmode
 net c-drv-target-pos      cia402.4.drv-target-position => lcec.0.4.target-position
 net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-velocity
 
+net debounce-home-c debounce.1.4.in <= armcncio.gpio.c-home
+net both-home-c debounce.1.4.out
+net both-home-c => joint.4.home-sw-in
+net both-home-c => joint.4.neg-lim-sw-in
+net both-home-c => joint.4.pos-lim-sw-in
+
 #*********************
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.4.in <= armcncio.gpio.estop
-net estop-ext debounce.1.4.out
+net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.estop
+net estop-ext debounce.1.5.out
 net estop-out <= iocontrol.0.user-enable-out
 net estop-ext => iocontrol.0.emc-enable-in

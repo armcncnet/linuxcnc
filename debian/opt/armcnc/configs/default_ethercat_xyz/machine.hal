@@ -5,7 +5,7 @@ loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
-loadrt debounce cfg=1,6
+loadrt debounce cfg=1,8
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
@@ -107,7 +107,7 @@ net both-home-z => joint.2.pos-lim-sw-in
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.4.in <= armcncio.gpio.estop
-net estop-ext debounce.1.4.out
+net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.estop
+net estop-ext debounce.1.5.out
 net estop-out <= iocontrol.0.user-enable-out
 net estop-ext => iocontrol.0.emc-enable-in
