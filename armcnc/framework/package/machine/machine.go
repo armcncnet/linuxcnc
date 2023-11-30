@@ -119,6 +119,12 @@ func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 			iniFile.Section("TOOL").Key("LATCH_SEARCH_VELOCITY").SetValue(data.Tool.LatchSearchVelocity)
 			iniFile.Section("TOOL").Key("POCKETS").SetValue(data.Tool.Pockets)
 			iniFile.Section("IO").Key("ESTOP_PIN").SetValue(data.Io.EstopPin)
+			iniFile.Section("IO").Key("X_HOME_PIN").SetValue(data.Io.XHomePin)
+			iniFile.Section("IO").Key("Y_HOME_PIN").SetValue(data.Io.YHomePin)
+			iniFile.Section("IO").Key("Z_HOME_PIN").SetValue(data.Io.ZHomePin)
+			iniFile.Section("IO").Key("A_HOME_PIN").SetValue(data.Io.AHomePin)
+			iniFile.Section("IO").Key("B_HOME_PIN").SetValue(data.Io.BHomePin)
+			iniFile.Section("IO").Key("C_HOME_PIN").SetValue(data.Io.CHomePin)
 			err = IniUtils.SaveTo(iniFile, machine.Path+path+"/machine.user")
 			if err == nil {
 				status = true
@@ -931,6 +937,24 @@ func (machine *Machine) DefaultUser(data USER) USER {
 	}
 	if data.Io.EstopPin == "" {
 		data.Io.EstopPin = ""
+	}
+	if data.Io.XHomePin == "" {
+		data.Io.XHomePin = ""
+	}
+	if data.Io.YHomePin == "" {
+		data.Io.YHomePin = ""
+	}
+	if data.Io.ZHomePin == "" {
+		data.Io.ZHomePin = ""
+	}
+	if data.Io.AHomePin == "" {
+		data.Io.AHomePin = ""
+	}
+	if data.Io.BHomePin == "" {
+		data.Io.BHomePin = ""
+	}
+	if data.Io.CHomePin == "" {
+		data.Io.CHomePin = ""
 	}
 	return data
 }

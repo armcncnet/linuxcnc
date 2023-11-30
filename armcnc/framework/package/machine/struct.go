@@ -266,6 +266,12 @@ type USER struct {
 	} `ini:"TOOL"`
 	Io struct {
 		EstopPin string `ini:"ESTOP_PIN"`
+		XHomePin string `json:"X_HOME_PIN"`
+		YHomePin string `json:"Y_HOME_PIN"`
+		ZHomePin string `json:"Z_HOME_PIN"`
+		AHomePin string `json:"A_HOME_PIN"`
+		BHomePin string `json:"B_HOME_PIN"`
+		CHomePin string `json:"C_HOME_PIN"`
 	} `ini:"IO"`
 }
 
@@ -298,5 +304,11 @@ type UserJson struct {
 	} `json:"Tool"`
 	Io struct {
 		EstopPin string `json:"EstopPin"`
+		XHomePin string `json:"XHomePin"`
+		YHomePin string `json:"YHomePin"`
+		ZHomePin string `json:"ZHomePin"`
+		AHomePin string `json:"AHomePin"`
+		BHomePin string `json:"BHomePin"`
+		CHomePin string `json:"CHomePin"`
 	} `json:"Io"`
 }
