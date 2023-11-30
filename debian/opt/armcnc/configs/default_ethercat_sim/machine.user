@@ -25,5 +25,10 @@ LATCH_SEARCH_VELOCITY = 0.000
 POCKETS = []
 
 [IO]
-ESTOP_PIN = gpio.estop 17 IN
+ESTOP_PIN = gpio.estop 2 IN
 X_HOME_PIN = gpio.x-home 16 IN
+Y_HOME_PIN = gpio.y-home 20 IN
+Z_HOME_PIN = gpio.z-home 21 IN
+A_HOME_PIN = gpio.a-home 25 IN
+B_HOME_PIN = gpio.b-home 8 IN
+C_HOME_PIN = gpio.c-home 7 IN
