@@ -68,7 +68,7 @@ func Router() http.Handler {
 
 		machine.POST("/update/xml", MachineService.UpdateXml)
 
-		machine.GET("/set/current/machine", MachineService.SetCurrentMachine)
+		machine.GET("/default", MachineService.Default)
 
 		machine.POST("/upload", UploadService.UploadMachine)
 	}

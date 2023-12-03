@@ -346,7 +346,7 @@ func Delete(c *gin.Context) {
 	return
 }
 
-func SetCurrentMachine(c *gin.Context) {
+func Default(c *gin.Context) {
 
 	path := c.DefaultQuery("path", "")
 	if path == "" {

@@ -102,7 +102,7 @@ net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.2.target-positi
 net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-velocity
 
 net debounce-home-z debounce.1.2.in <= armcncio.gpio.z-home
-net both-home-z debounce.2.1.out
+net both-home-z debounce.1.2.out
 net both-home-z => joint.2.home-sw-in
 net both-home-z => joint.2.neg-lim-sw-in
 net both-home-z => joint.2.pos-lim-sw-in
