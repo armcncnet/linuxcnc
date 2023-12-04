@@ -119,6 +119,8 @@ func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 			iniFile.Section("TOOL").Key("LATCH_SEARCH_VELOCITY").SetValue(data.Tool.LatchSearchVelocity)
 			iniFile.Section("TOOL").Key("POCKETS").SetValue(data.Tool.Pockets)
 			iniFile.Section("IO").Key("ESTOP_PIN").SetValue(data.Io.EstopPin)
+			iniFile.Section("IO").Key("SPINDLE_PIN").SetValue(data.Io.SpindlePin)
+			iniFile.Section("IO").Key("SPINDLE_PWM_PIN").SetValue(data.Io.SpindlePwmPin)
 			iniFile.Section("IO").Key("X_HOME_PIN").SetValue(data.Io.XHomePin)
 			iniFile.Section("IO").Key("Y_HOME_PIN").SetValue(data.Io.YHomePin)
 			iniFile.Section("IO").Key("Z_HOME_PIN").SetValue(data.Io.ZHomePin)
@@ -936,25 +938,31 @@ func (machine *Machine) DefaultUser(data USER) USER {
 		data.Tool.Pockets = "[]"
 	}
 	if data.Io.EstopPin == "" {
-		data.Io.EstopPin = ""
+		data.Io.EstopPin = "gpio.estop 2 IN"
+	}
+	if data.Io.SpindlePin == "" {
+		data.Io.SpindlePin = "gpio.spindle 6 OUT"
+	}
+	if data.Io.SpindlePwmPin == "" {
+		data.Io.SpindlePwmPin = "gpio.spindle-pwm 13 OUT"
 	}
 	if data.Io.XHomePin == "" {
-		data.Io.XHomePin = ""
+		data.Io.XHomePin = "gpio.x-home 26 IN"
 	}
 	if data.Io.YHomePin == "" {
-		data.Io.YHomePin = ""
+		data.Io.YHomePin = "gpio.y-home 20 IN"
 	}
 	if data.Io.ZHomePin == "" {
-		data.Io.ZHomePin = ""
+		data.Io.ZHomePin = "gpio.z-home 21 IN"
 	}
 	if data.Io.AHomePin == "" {
-		data.Io.AHomePin = ""
+		data.Io.AHomePin = "gpio.a-home 25 IN"
 	}
 	if data.Io.BHomePin == "" {
-		data.Io.BHomePin = ""
+		data.Io.BHomePin = "gpio.b-home 8 IN"
 	}
 	if data.Io.CHomePin == "" {
-		data.Io.CHomePin = ""
+		data.Io.CHomePin = "gpio.c-home 7 IN"
 	}
 	return data
 }
