@@ -27,7 +27,7 @@ POCKETS = []
 [IO]
 ESTOP_PIN = gpio.estop 2 IN
 SPINDLE_ENABLE_PIN = gpio.spindle-enable 6 OUT
-SPINDLE_PWM_PIN = gpio.spindle-pwm 13 OUT
+SPINDLE_PWM_PIN = gpio.spindle-pwm 13 OUT 400 24000
 X_HOME_PIN = gpio.x-home 26 IN NOT
 Y_HOME_PIN = gpio.y-home 20 IN NOT
 Z_HOME_PIN = gpio.z-home 21 IN NOT
