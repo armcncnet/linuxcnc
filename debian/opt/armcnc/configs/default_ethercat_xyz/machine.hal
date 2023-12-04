@@ -104,6 +104,13 @@ net both-home-z => joint.2.neg-lim-sw-in
 net both-home-z => joint.2.pos-lim-sw-in
 
 #*********************
+#   SPINDLE
+#*********************
+
+net spindle-rpm spindle.0.speed-out armcncio.gpio.spindle-pwm
+net spindle-enable spindle.0.on armcncio.gpio.spindle-enable
+
+#*********************
 #   E-STOP
 #*********************
 
