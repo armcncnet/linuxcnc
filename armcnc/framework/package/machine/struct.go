@@ -265,15 +265,15 @@ type USER struct {
 		Pockets             string `ini:"POCKETS"`
 	} `ini:"TOOL"`
 	Io struct {
-		EstopPin      string `ini:"ESTOP_PIN"`
-		SpindlePin    string `ini:"SPINDLE_PIN"`
-		SpindlePwmPin string `ini:"SPINDLE_PWM_PIN"`
-		XHomePin      string `ini:"X_HOME_PIN"`
-		YHomePin      string `ini:"Y_HOME_PIN"`
-		ZHomePin      string `ini:"Z_HOME_PIN"`
-		AHomePin      string `ini:"A_HOME_PIN"`
-		BHomePin      string `ini:"B_HOME_PIN"`
-		CHomePin      string `ini:"C_HOME_PIN"`
+		EstopPin         string `ini:"ESTOP_PIN"`
+		SpindleEnablePin string `ini:"SPINDLE_ENABLE_PIN"`
+		SpindlePwmPin    string `ini:"SPINDLE_PWM_PIN"`
+		XHomePin         string `ini:"X_HOME_PIN"`
+		YHomePin         string `ini:"Y_HOME_PIN"`
+		ZHomePin         string `ini:"Z_HOME_PIN"`
+		AHomePin         string `ini:"A_HOME_PIN"`
+		BHomePin         string `ini:"B_HOME_PIN"`
+		CHomePin         string `ini:"C_HOME_PIN"`
 	} `ini:"IO"`
 }
 
@@ -305,14 +305,14 @@ type UserJson struct {
 		Pockets             string `json:"Pockets"`
 	} `json:"Tool"`
 	Io struct {
-		EstopPin      string `json:"EstopPin"`
-		SpindlePin    string `json:"SpindlePin"`
-		SpindlePwmPin string `json:"SpindlePwmPin"`
-		XHomePin      string `json:"XHomePin"`
-		YHomePin      string `json:"YHomePin"`
-		ZHomePin      string `json:"ZHomePin"`
-		AHomePin      string `json:"AHomePin"`
-		BHomePin      string `json:"BHomePin"`
-		CHomePin      string `json:"CHomePin"`
+		EstopPin         string `json:"EstopPin"`
+		SpindleEnablePin string `json:"SpindleEnablePin"`
+		SpindlePwmPin    string `json:"SpindlePwmPin"`
+		XHomePin         string `json:"XHomePin"`
+		YHomePin         string `json:"YHomePin"`
+		ZHomePin         string `json:"ZHomePin"`
+		AHomePin         string `json:"AHomePin"`
+		BHomePin         string `json:"BHomePin"`
+		CHomePin         string `json:"CHomePin"`
 	} `json:"Io"`
 }

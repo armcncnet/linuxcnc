@@ -119,7 +119,7 @@ func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 			iniFile.Section("TOOL").Key("LATCH_SEARCH_VELOCITY").SetValue(data.Tool.LatchSearchVelocity)
 			iniFile.Section("TOOL").Key("POCKETS").SetValue(data.Tool.Pockets)
 			iniFile.Section("IO").Key("ESTOP_PIN").SetValue(data.Io.EstopPin)
-			iniFile.Section("IO").Key("SPINDLE_PIN").SetValue(data.Io.SpindlePin)
+			iniFile.Section("IO").Key("SPINDLE_ENABLE_PIN").SetValue(data.Io.SpindleEnablePin)
 			iniFile.Section("IO").Key("SPINDLE_PWM_PIN").SetValue(data.Io.SpindlePwmPin)
 			iniFile.Section("IO").Key("X_HOME_PIN").SetValue(data.Io.XHomePin)
 			iniFile.Section("IO").Key("Y_HOME_PIN").SetValue(data.Io.YHomePin)
@@ -940,8 +940,8 @@ func (machine *Machine) DefaultUser(data USER) USER {
 	if data.Io.EstopPin == "" {
 		data.Io.EstopPin = "gpio.estop 2 IN"
 	}
-	if data.Io.SpindlePin == "" {
-		data.Io.SpindlePin = "gpio.spindle 6 OUT"
+	if data.Io.SpindleEnablePin == "" {
+		data.Io.SpindleEnablePin = "gpio.spindle-enable 6 OUT"
 	}
 	if data.Io.SpindlePwmPin == "" {
 		data.Io.SpindlePwmPin = "gpio.spindle-pwm 13 OUT"
