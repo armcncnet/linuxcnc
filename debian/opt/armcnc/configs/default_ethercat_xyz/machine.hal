@@ -1,9 +1,9 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
+loadrt armcncio in_pins="2,6,13,26,20,21,25,8,7" out_pins="1,18"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
-loadrt armcnc_driver
 
 loadrt debounce cfg=1,8
 addf debounce.0 base-thread
@@ -11,9 +11,7 @@ addf debounce.1 base-thread
 setp debounce.0.delay 100
 setp debounce.1.delay 60
 
-addf armcnc_driver.gpio.write base-thread
-addf armcnc_driver.gpio.read  base-thread
-
+addf armcncio.gpio.read       base-thread
 addf lcec.read-all            servo-thread
 addf cia402.0.read-all        servo-thread
 addf cia402.1.read-all        servo-thread
@@ -24,6 +22,7 @@ addf cia402.0.write-all       servo-thread
 addf cia402.1.write-all       servo-thread
 addf cia402.2.write-all       servo-thread
 addf lcec.write-all           servo-thread
+addf armcncio.gpio.write      base-thread
 
 #*******************
 #  AXIS X
@@ -46,7 +45,7 @@ net x-modes-of-operation  cia402.0.opmode              => lcec.0.0.opmode
 net x-drv-target-pos      cia402.0.drv-target-position => lcec.0.0.target-position
 net x-drv-target-velo     cia402.0.drv-target-velocity => lcec.0.0.target-velocity
 
-net debounce-home-x debounce.1.0.in <= armcnc_driver.gpio.x-home
+net debounce-home-x debounce.1.0.in <= armcncio.gpio.pin26-in-not
 net both-home-x debounce.1.0.out
 net both-home-x => joint.0.home-sw-in
 net both-home-x => joint.0.neg-lim-sw-in
@@ -73,7 +72,7 @@ net y-modes-of-operation  cia402.1.opmode              => lcec.0.1.opmode
 net y-drv-target-pos      cia402.1.drv-target-position => lcec.0.1.target-position
 net y-drv-target-velo     cia402.1.drv-target-velocity => lcec.0.1.target-velocity
 
-net debounce-home-y debounce.1.1.in <= armcnc_driver.gpio.y-home
+net debounce-home-y debounce.1.1.in <= armcncio.gpio.pin20-in-not
 net both-home-y debounce.1.1.out
 net both-home-y => joint.1.home-sw-in
 net both-home-y => joint.1.neg-lim-sw-in
@@ -100,7 +99,7 @@ net z-modes-of-operation  cia402.2.opmode              => lcec.0.2.opmode
 net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.2.target-position
 net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-velocity
 
-net debounce-home-z debounce.1.2.in <= armcnc_driver.gpio.z-home
+net debounce-home-z debounce.1.2.in <= armcncio.gpio.pin21-in-not
 net both-home-z debounce.1.2.out
 net both-home-z => joint.2.home-sw-in
 net both-home-z => joint.2.neg-lim-sw-in
@@ -110,14 +109,14 @@ net both-home-z => joint.2.pos-lim-sw-in
 #   SPINDLE
 #*********************
 
-net spindle-rpm spindle.0.speed-out armcnc_driver.gpio.spindle-pwm
-net spindle-enable spindle.0.on armcnc_driver.gpio.spindle-enable
+# net spindle-rpm spindle.0.speed-out armcnc_driver.gpio.spindle-pwm
+# net spindle-enable spindle.0.on armcnc_driver.gpio.spindle-enable
 
 #*********************
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.5.in <= armcnc_driver.gpio.estop
+net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.pin2-in
 net estop-ext debounce.1.5.out
 net estop-out <= iocontrol.0.user-enable-out
 net estop-ext => iocontrol.0.emc-enable-in

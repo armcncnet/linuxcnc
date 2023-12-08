@@ -23,14 +23,3 @@ LATCH_SEARCH_DISTANCE = 0.000
 SEARCH_VELOCITY = 0.000
 LATCH_SEARCH_VELOCITY = 0.000
 POCKETS = []
-
-[IO]
-ESTOP_PIN = gpio.estop 2 IN
-SPINDLE_ENABLE_PIN = gpio.spindle-enable 6 IN
-SPINDLE_PWM_PIN = gpio.spindle-pwm 13 IN 400 24000
-X_HOME_PIN = gpio.x-home 16 IN
-Y_HOME_PIN = gpio.y-home 20 IN
-Z_HOME_PIN = gpio.z-home 21 IN
-A_HOME_PIN = gpio.a-home 25 IN
-B_HOME_PIN = gpio.b-home 8 IN
-C_HOME_PIN = gpio.c-home 7 IN
