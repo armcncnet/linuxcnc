@@ -1,7 +1,7 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
-loadrt armcncio in_pins="2,6,13,26,20,21,25,8,7" out_pins="1,18"
+loadrt armcncio in_pins="2,6,13,26,20,21,25,8,7" out_pins="1,18" pwm_types="p,p,p,p,p,f"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
@@ -11,7 +11,8 @@ addf debounce.1 base-thread
 setp debounce.0.delay 100
 setp debounce.1.delay 60
 
-addf armcncio.gpio.read       base-thread
+addf armcncio.gpio.read       servo-thread
+addf armcncio.pwm.read        servo-thread
 addf lcec.read-all            servo-thread
 addf cia402.0.read-all        servo-thread
 addf cia402.1.read-all        servo-thread
@@ -26,7 +27,8 @@ addf cia402.2.write-all       servo-thread
 addf cia402.3.write-all       servo-thread
 addf cia402.4.write-all       servo-thread
 addf lcec.write-all           servo-thread
-addf armcncio.gpio.write      base-thread
+addf armcncio.gpio.write      servo-thread
+addf armcncio.pwm.write       servo-thread
 
 #*******************
 #  AXIS X
