@@ -1,11 +1,11 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
-loadrt armcncio in_pins="2,6,13,26,20,21,25,8,7" out_pins="1,18" pwm_types="p,p,p,p,p,f"
+loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins=PIN2,PIN6,PIN13,PIN26,PIN20,PIN21,PIN25,PIN8,PIN7 out_pins=PIN16,PIN23,PIN24
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
-loadrt debounce cfg=1,8
+loadrt debounce cfg=1,10
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
@@ -51,7 +51,7 @@ net x-modes-of-operation  cia402.0.opmode              => lcec.0.0.opmode
 net x-drv-target-pos      cia402.0.drv-target-position => lcec.0.0.target-position
 net x-drv-target-velo     cia402.0.drv-target-velocity => lcec.0.0.target-velocity
 
-net debounce-home-x debounce.1.0.in <= armcncio.gpio.pin26-in-not
+net debounce-home-x debounce.1.0.in <= armcncio.gpio.PIN26-in-not
 net both-home-x debounce.1.0.out
 net both-home-x => joint.0.home-sw-in
 net both-home-x => joint.0.neg-lim-sw-in
@@ -78,7 +78,7 @@ net y-modes-of-operation  cia402.1.opmode              => lcec.0.1.opmode
 net y-drv-target-pos      cia402.1.drv-target-position => lcec.0.1.target-position
 net y-drv-target-velo     cia402.1.drv-target-velocity => lcec.0.1.target-velocity
 
-net debounce-home-y debounce.1.1.in <= armcncio.gpio.pin20-in-not
+net debounce-home-y debounce.1.1.in <= armcncio.gpio.PIN20-in-not
 net both-home-y debounce.1.1.out
 net both-home-y => joint.1.home-sw-in
 net both-home-y => joint.1.neg-lim-sw-in
@@ -105,7 +105,7 @@ net z-modes-of-operation  cia402.2.opmode              => lcec.0.2.opmode
 net z-drv-target-pos      cia402.2.drv-target-position => lcec.0.2.target-position
 net z-drv-target-velo     cia402.2.drv-target-velocity => lcec.0.2.target-velocity
 
-net debounce-home-z debounce.1.2.in <= armcncio.gpio.pin21-in-not
+net debounce-home-z debounce.1.2.in <= armcncio.gpio.PIN21-in-not
 net both-home-z debounce.1.2.out
 net both-home-z => joint.2.home-sw-in
 net both-home-z => joint.2.neg-lim-sw-in
@@ -132,12 +132,6 @@ net b-modes-of-operation  cia402.3.opmode              => lcec.0.3.opmode
 net b-drv-target-pos      cia402.3.drv-target-position => lcec.0.3.target-position
 net b-drv-target-velo     cia402.3.drv-target-velocity => lcec.0.3.target-velocity
 
-# net debounce-home-b debounce.1.3.in <= armcnc_driver.gpio.b-home
-# net both-home-b debounce.1.3.out
-# net both-home-b => joint.3.home-sw-in
-# net both-home-b => joint.3.neg-lim-sw-in
-# net both-home-b => joint.3.pos-lim-sw-in
-
 #*******************
 #  AXIS C
 #*******************
@@ -159,24 +153,26 @@ net c-modes-of-operation  cia402.4.opmode              => lcec.0.4.opmode
 net c-drv-target-pos      cia402.4.drv-target-position => lcec.0.4.target-position
 net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-velocity
 
-# net debounce-home-c debounce.1.4.in <= armcnc_driver.gpio.c-home
-# net both-home-c debounce.1.4.out
-# net both-home-c => joint.4.home-sw-in
-# net both-home-c => joint.4.neg-lim-sw-in
-# net both-home-c => joint.4.pos-lim-sw-in
-
 #*********************
 #   SPINDLE
 #*********************
 
-# net spindle-rpm spindle.0.speed-out armcnc_driver.gpio.spindle-pwm
-# net spindle-enable spindle.0.on armcnc_driver.gpio.spindle-enable
+setp armcncio.pwm.5.freq-cmd    400
+setp armcncio.pwm.5.dc-scale    24000
+setp armcncio.pwm.5.pwm-port    0
+setp armcncio.pwm.5.pwm-pin     23
+setp armcncio.pwm.5.pwm-invert 0
+setp armcncio.pwm.5.dir-port    0
+setp armcncio.pwm.5.dir-pin     24
+setp armcncio.pwm.5.dir-invert 1
+net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.dc-cmd
+net spindle-enable  spindle.0.on        armcncio.pwm.5.enable   armcncio.gpio.PIN16-out
 
 #*********************
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.pin2-in
+net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.PIN2-in
 net estop-ext debounce.1.5.out
 net estop-out <= iocontrol.0.user-enable-out
 net estop-ext => iocontrol.0.emc-enable-in
