@@ -38,7 +38,7 @@ EOF
 
 sudo apt -y update && sudo apt -y upgrade
 if [ ! -f "/usr/bin/linuxcnc" ]; then
-    sudo apt install -y linuxcnc-uspace=2.9.0~pre1+git20230208.f1270d6ed7-1 linuxcnc-uspace-dev=2.9.0~pre1+git20230208.f1270d6ed7-1
+    sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
 fi
 sudo apt install -y armcnc
 
