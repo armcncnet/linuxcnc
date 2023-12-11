@@ -2,6 +2,15 @@
 
 # 安装完成之后执行业务
 
+# shellcheck disable=SC2002
+if cat "/root/.bashrc" | grep "source /opt/tros/setup.bash" > /dev/null; then
+    echo Setting up tros...
+else
+    echo Setting up tros...
+    sudo sh -c 'echo "source /opt/tros/setup.bash" >> /root/.bashrc'
+    source /root/.bashrc
+fi
+
 sudo python3 -m pip install --upgrade --break-system-packages --root-user-action=ignore armcnc
 
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('websocket') else exit(1)" >/dev/null 2>&1; then
@@ -26,6 +35,36 @@ if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('serial') else exi
     echo "pyserial package is installed."
 else
     sudo python3 -m pip install --break-system-packages --root-user-action=ignore pyserial -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('roslibpy') else exit(1)" >/dev/null 2>&1; then
+    echo "roslibpy package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore roslibpy -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('em') else exit(1)" >/dev/null 2>&1; then
+    echo "empy package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore empy -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('colcon_common_extensions') else exit(1)" >/dev/null 2>&1; then
+    echo "colcon-common-extensions package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore colcon-common-extensions -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('pymongo') else exit(1)" >/dev/null 2>&1; then
+    echo "pymongo package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore pymongo -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
+fi
+
+if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('tornado') else exit(1)" >/dev/null 2>&1; then
+    echo "tornado package is installed."
+else
+    sudo python3 -m pip install --break-system-packages --root-user-action=ignore tornado -i https://pypi.tuna.tsinghua.edu.cn/simple --trusted-host pypi.tuna.tsinghua.edu.cn
 fi
 
 find /opt/armcnc -type f -name ".gitkeep" -exec rm -f {} +

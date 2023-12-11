@@ -16,30 +16,27 @@ if [ ! -f "/etc/apt/sources.list.d/armcnc.list" ]; then
     echo "deb [arch=${architecture}] https://mirrors.geekros.com/ focal main" | sudo tee /etc/apt/sources.list.d/armcnc.list
 fi
 
-cat <<'EOF' > /etc/set_mac_address.sh
-#!/bin/bash
-mac_file=/etc/network/mac_address
-
-if [ -s ${mac_file} ] && [ -f ${mac_file} ]; then
-    ifconfig eth0 down
-    ifconfig eth0 hw ether $(cat ${mac_file})
-    ifconfig eth0 up
-else
-    openssl rand -rand /dev/urandom:/sys/class/socinfo/soc_uid -hex 6 | sed -e 's/../&:/g;s/:$//' -e 's/^\(.\)[13579bdf]/\10/' > $mac_file
-    ifconfig eth0 down
-    ifconfig eth0 hw ether $(cat ${mac_file})
-    ifconfig eth0 up
-fi
-
-if [ -e /etc/ethercat.conf ]; then
-    systemctl restart ethercat.service
-fi
-EOF
-
 sudo apt -y update && sudo apt -y upgrade
+
 if [ ! -f "/usr/bin/linuxcnc" ]; then
     sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
 fi
+
+if [ ! -f "/etc/ethercat.conf" ]; then
+    sudo apt install -y ethercat-master libethercat-dev linuxcnc-ethercat
+    sudo touch /etc/udev/rules.d/99-ethercat.rules
+    cat <<-EOF > /etc/udev/rules.d/99-ethercat.rules
+KERNEL=="EtherCAT[0-9]", MODE="0777"
+EOF
+    sudo ldconfig
+    # shellcheck disable=SC2046
+    sudo hobot-sign-file $(modinfo -n ec_master)
+    # shellcheck disable=SC2046
+    sudo hobot-sign-file $(modinfo -n ec_generic)
+    sudo systemctl enable ethercat.service
+    sudo systemctl start ethercat.service
+fi
+
 sudo apt install -y armcnc
 
 echo "Install ARMCNC successfully"
