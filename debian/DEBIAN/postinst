@@ -70,6 +70,6 @@ fi
 find /opt/armcnc -type f -name ".gitkeep" -exec rm -f {} +
 
 sudo ldconfig
-sudo systemctl daemon-reload
-sudo systemctl enable armcnc_service.service
-sudo systemctl restart armcnc_service.service
+sudo systemctl daemon-reload > /dev/null 2>&1
+sudo systemctl enable armcnc_service.service > /dev/null 2>&1
+sudo systemctl restart armcnc_service.service > /dev/null 2>&1
