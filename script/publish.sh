@@ -59,5 +59,10 @@ sudo dpkg --build debian/ && dpkg-name debian.deb
 
 sudo rm -rf debian/usr/local/bin/armcnc
 sudo rm -rf debian/usr/lib/linuxcnc/modules/armcncio.so
+sudo rm -rf debian/opt/armcnc/www/index.html
+sudo rm -rf debian/opt/armcnc/www/favicon.ico
+sudo rm -rf debian/opt/armcnc/www/assets
+sudo rm -rf debian/opt/armcnc/www/monacoeditorwork
+sudo rm -rf debian/opt/armcnc/www/static
 
 echo "Publish successfully"
