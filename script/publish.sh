@@ -17,7 +17,6 @@ cd ../
 sudo rm -rf *.deb
 
 sudo chmod +x debian/DEBIAN/*
-# find ./debian -type f -name ".gitkeep" -exec rm -f {} +
 
 sudo rm -rf debian/DEBIAN/control
 sudo touch debian/DEBIAN/control && sudo chmod +x debian/DEBIAN/control
