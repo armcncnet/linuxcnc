@@ -16,6 +16,10 @@ cd ../
 # shellcheck disable=SC2035
 sudo rm -rf *.deb
 
+if [ -f "/usr/lib/linuxcnc/modules/armcncio.so" ]; then
+    cp /usr/lib/linuxcnc/modules/armcncio.so debian/usr/lib/linuxcnc/modules/
+fi
+
 sudo chmod +x debian/DEBIAN/*
 
 sudo rm -rf debian/DEBIAN/control
@@ -44,5 +48,6 @@ cd ../
 sudo dpkg --build debian/ && dpkg-name debian.deb
 
 sudo rm -rf debian/usr/local/bin/armcnc
+sudo rm -rf debian/usr/lib/linuxcnc/modules/armcncio.so
 
 echo "Publish successfully"
