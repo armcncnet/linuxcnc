@@ -16,8 +16,18 @@ cd ../
 # shellcheck disable=SC2035
 sudo rm -rf *.deb
 
-if [ -f "/usr/lib/linuxcnc/modules/armcncio.so" ]; then
+if [ ! -f "/usr/lib/linuxcnc/modules/armcncio.so" ]; then
+    echo "Not build armcncio.so"
+    exit 0
+else
     cp /usr/lib/linuxcnc/modules/armcncio.so debian/usr/lib/linuxcnc/modules/
+fi
+
+if [ ! -f "/root/desktop/template/dist/index.html" ]; then
+    echo "Not build desktop"
+    exit 0
+else
+    cp -r /root/desktop/template/dist/* debian/opt/armcnc/www/
 fi
 
 sudo chmod +x debian/DEBIAN/*
