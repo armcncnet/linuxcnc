@@ -16,7 +16,7 @@ if [ ! -f "/etc/apt/sources.list.d/armcnc.list" ]; then
     echo "deb [arch=${architecture}] https://mirrors.geekros.com/ focal main" | sudo tee /etc/apt/sources.list.d/armcnc.list
 fi
 
-sudo apt -y update
+sudo apt -y update && sudo apt -y upgrade
 
 if [ ! -f "/usr/bin/linuxcnc" ]; then
     sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
