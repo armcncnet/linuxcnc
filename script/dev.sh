@@ -8,9 +8,7 @@ lsb_release -a
 
 architecture=$(dpkg --print-architecture)
 
-sudo apt install -y nodejs npm nsis libgtk-3-dev libwebkit2gtk-4.0-dev
-
-sudo npm install -g yarn
+sudo apt -y update && sudo apt -y upgrade
 
 if [ ! -d "/usr/local/go/bin/" ]; then
     sudo wget -q https://studygolang.com/dl/golang/go1.19.4.linux-"${architecture}".tar.gz && sudo tar -C /usr/local -xzf go1.19.4.linux-"${architecture}".tar.gz && sudo rm -rf go1.19.4.linux-"${architecture}".tar.gz
