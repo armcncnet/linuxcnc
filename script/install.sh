@@ -24,6 +24,9 @@ fi
 
 if [ ! -f "/etc/ethercat.conf" ]; then
     sudo apt install -y ethercat-master libethercat-dev linuxcnc-ethercat
+    MAC_ADDRESS=$(cat /etc/network/mac_address)
+    sed -i "s/^MASTER0_DEVICE=\".*\"/MASTER0_DEVICE=\"$MAC_ADDRESS\"/" /etc/ethercat.conf
+    sed -i "s/^DEVICE_MODULES=\".*\"/DEVICE_MODULES=\"generic\"/" /etc/ethercat.conf
     sudo touch /etc/udev/rules.d/99-ethercat.rules
     cat <<-EOF > /etc/udev/rules.d/99-ethercat.rules
 KERNEL=="EtherCAT[0-9]", MODE="0777"
@@ -34,7 +37,7 @@ EOF
     # shellcheck disable=SC2046
     sudo hobot-sign-file $(modinfo -n ec_generic)
     sudo systemctl enable ethercat.service
-    sudo systemctl start ethercat.service
+    sudo systemctl restart ethercat.service
 fi
 
 sudo apt install -y armcnc
