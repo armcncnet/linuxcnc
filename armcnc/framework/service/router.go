@@ -34,13 +34,16 @@ func Router() http.Handler {
 
 	router.Static("/", Config.Get.Basic.Workspace+"/www/")
 
-	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
+	resources := router.Group("resources")
+	{
+		resources.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
-	router.Static("/plugins", Config.Get.Basic.Workspace+"/plugins/")
+		resources.Static("/plugins", Config.Get.Basic.Workspace+"/plugins/")
 
-	router.Static("/backups", Config.Get.Basic.Workspace+"/backups/")
+		resources.Static("/backups", Config.Get.Basic.Workspace+"/backups/")
 
-	router.Static("/runtime", Config.Get.Basic.Runtime+"/")
+		resources.Static("/runtime", Config.Get.Basic.Runtime+"/")
+	}
 
 	message := router.Group("message")
 	{
