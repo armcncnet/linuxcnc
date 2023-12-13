@@ -34,6 +34,12 @@ func Router() http.Handler {
 
 	router.Static("/www", Config.Get.Basic.Workspace+"/www/")
 
+	router.Static("/assets", Config.Get.Basic.Workspace+"/www/assets/")
+
+	router.Static("/static", Config.Get.Basic.Workspace+"/www/static/")
+
+	router.Static("/monacoeditorwork", Config.Get.Basic.Workspace+"/www/monacoeditorwork/")
+
 	resources := router.Group("resources")
 	{
 		resources.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
