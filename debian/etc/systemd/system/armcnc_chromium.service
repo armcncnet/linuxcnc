@@ -8,7 +8,7 @@ User=armcnc
 WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/tmp/environment
 Environment=DISPLAY=:0.0
-ExecStart=/usr/bin/chromium --start-fullscreen --disable-pinch --app=http://localhost:10081/www
+ExecStart=/usr/bin/chromium --start-fullscreen --disable-pinch --app=http://127.0.0.1:10081/www
 Restart=on-failure
 
 [Install]
