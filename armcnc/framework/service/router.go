@@ -32,7 +32,7 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/", Config.Get.Basic.Workspace+"/www/")
+	router.Static("/www", Config.Get.Basic.Workspace+"/www/")
 
 	resources := router.Group("resources")
 	{
