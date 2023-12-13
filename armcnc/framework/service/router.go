@@ -32,6 +32,8 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
+	router.Static("/", Config.Get.Basic.Workspace+"/www/")
+
 	router.Static("/programs", Config.Get.Basic.Workspace+"/programs/")
 
 	router.Static("/plugins", Config.Get.Basic.Workspace+"/plugins/")

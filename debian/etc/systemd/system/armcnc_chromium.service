@@ -1,0 +1,14 @@
+[Unit]
+Description=armcnc_chromium
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=armcnc
+WorkingDirectory=/opt/armcnc/
+EnvironmentFile=/tmp/environment
+ExecStart=/usr/bin/chromium --start-fullscreen --disable-pinch --app=http://127.0.0.1:10081
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
