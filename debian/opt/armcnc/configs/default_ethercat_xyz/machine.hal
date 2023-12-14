@@ -120,8 +120,7 @@ setp armcncio.pwm.5.dir-port    0
 setp armcncio.pwm.5.dir-pin     24
 setp armcncio.pwm.5.dir-invert 1
 net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.dc-cmd
-net spindle-enable  spindle.0.on        armcncio.pwm.5.enable   armcncio.gpio.pin16-out
-
+net spindle-enable  spindle.0.on        armcncio.pwm.5.enable   armcncio.gpio.pin16-out-not
 
 #*********************
 #   E-STOP
