@@ -135,7 +135,7 @@ net a-drv-target-velo     cia402.3.drv-target-velocity => lcec.0.3.target-veloci
 #*********************
 
 setp armcncio.pwm.5.freq-cmd    400
-setp armcncio.pwm.5.dc-scale    24000
+setp armcncio.pwm.5.dc-scale    [SPINDLE_0]MAX_FORWARD_VELOCITY
 setp armcncio.pwm.5.pwm-port    0
 setp armcncio.pwm.5.pwm-pin     23
 setp armcncio.pwm.5.pwm-invert 0
