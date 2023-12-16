@@ -102,6 +102,7 @@ func (machine *Machine) UpdateUser(path string, data UserJson) bool {
 			iniFile.Section("BASE").Key("NAME").SetValue(data.Base.Name)
 			iniFile.Section("BASE").Key("DESCRIBE").SetValue(data.Base.Describe)
 			iniFile.Section("BASE").Key("CONTROL").SetValue(strconv.Itoa(data.Base.Control))
+			iniFile.Section("SPINDLE").Key("DEFAULT_SPINDLE_SPEED").SetValue(data.Spindle.DefaultSpindleSpeed)
 			iniFile.Section("HANDWHEEL").Key("X_VELOCITY").SetValue(data.HandWheel.XVelocity)
 			iniFile.Section("HANDWHEEL").Key("Y_VELOCITY").SetValue(data.HandWheel.YVelocity)
 			iniFile.Section("HANDWHEEL").Key("Z_VELOCITY").SetValue(data.HandWheel.ZVelocity)
@@ -876,6 +877,9 @@ func (machine *Machine) DefaultUser(data USER) USER {
 	}
 	if data.Base.Describe == "" {
 		data.Base.Describe = "机床的描述信息"
+	}
+	if data.Spindle.DefaultSpindleSpeed == "" {
+		data.Spindle.DefaultSpindleSpeed = "1200"
 	}
 	if data.HandWheel.Status == "" {
 		data.HandWheel.Status = "NO"

@@ -243,6 +243,9 @@ type USER struct {
 		Describe string `ini:"DESCRIBE"`
 		Control  int    `ini:"CONTROL"`
 	} `ini:"BASE"`
+	Spindle struct {
+		DefaultSpindleSpeed string `ini:"DEFAULT_SPINDLE_SPEED"`
+	} `ini:"SPINDLE"`
 	HandWheel struct {
 		Status    string `ini:"STATUS"`
 		XVelocity string `ini:"X_VELOCITY"`
@@ -272,6 +275,9 @@ type UserJson struct {
 		Describe string `json:"Describe"`
 		Control  int    `json:"Control"`
 	} `json:"Base"`
+	Spindle struct {
+		DefaultSpindleSpeed string `ini:"DefaultSpindleSpeed"`
+	} `json:"Spindle"`
 	HandWheel struct {
 		Status    string `json:"Status"`
 		XVelocity string `json:"XVelocity"`
