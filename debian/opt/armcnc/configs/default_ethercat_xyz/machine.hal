@@ -115,10 +115,11 @@ setp armcncio.pwm.5.freq-cmd        400
 setp armcncio.pwm.5.dc-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
 setp armcncio.pwm.5.pwm-pin         16
 setp armcncio.pwm.5.forward-pin     23
-setp armcncio.pwm.5.forward-pin-not 0
+setp armcncio.pwm.5.forward-pin-not 1
 setp armcncio.pwm.5.reverse-pin     24
-setp armcncio.pwm.5.reverse-pin-not 0
+setp armcncio.pwm.5.reverse-pin-not 1
 net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.dc-cmd
+net spindle-enable  spindle.0.on        armcncio.pwm.5.enable
 
 #*********************
 #   E-STOP
