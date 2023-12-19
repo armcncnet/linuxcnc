@@ -1,7 +1,7 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
-loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,26,20,21,25,8,7" out_pins="16,23,24"
+loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21,25,8,7" out_pins="16,23,24"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 
@@ -47,7 +47,7 @@ net x-modes-of-operation  cia402.0.opmode              => lcec.0.0.opmode
 net x-drv-target-pos      cia402.0.drv-target-position => lcec.0.0.target-position
 net x-drv-target-velo     cia402.0.drv-target-velocity => lcec.0.0.target-velocity
 
-net debounce-home-x debounce.1.0.in <= armcncio.gpio.pin26-in-not
+net debounce-home-x debounce.1.0.in <= armcncio.gpio.pin19-in-not
 net both-home-x debounce.1.0.out
 net both-home-x => joint.0.home-sw-in
 net both-home-x => joint.0.neg-lim-sw-in

@@ -1,0 +1,83 @@
+loadrt [KINS]KINEMATICS
+loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
+loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,26,20,21,25,8,7" out_pins="16,23,24"
+
+loadrt debounce cfg=1,10
+addf debounce.0 base-thread
+addf debounce.1 base-thread
+setp debounce.0.delay 100
+setp debounce.1.delay 60
+
+addf armcncio.gpio.read       servo-thread
+addf armcncio.pwm.read        servo-thread
+addf motion-command-handler   servo-thread
+addf motion-controller        servo-thread
+addf armcncio.gpio.write      servo-thread
+addf armcncio.pwm.write       servo-thread
+
+#*******************
+#  AXIS X
+#*******************
+
+setp armcncio.pwm.0.pos-scale       [JOINT_0]SCALE
+setp armcncio.pwm.0.dc-cmd          0.5
+setp armcncio.pwm.0.dc-max-t        5000
+setp armcncio.pwm.0.dir-hold        50000
+setp armcncio.pwm.0.dir-setup       50000
+setp armcncio.pwm.0.pwm-pin         15
+setp armcncio.pwm.5.forward-pin     23
+setp armcncio.pwm.5.forward-pin-not 0
+setp armcncio.pwm.5.reverse-pin     24
+setp armcncio.pwm.5.reverse-pin-not 0
+net x-position-cmd          joint.0.motor-pos-cmd   armcncio.pwm.0.pos-cmd
+net x-position-feedback     joint.0.motor-pos-fb    armcncio.pwm.0.pos-fb
+net x-enable                joint.0.amp-enable-out  armcncio.pwm.0.enable
+
+net debounce-home-x debounce.1.0.in <= armcncio.gpio.pin26-in-not
+net both-home-x debounce.1.0.out
+net both-home-x => joint.0.home-sw-in
+net both-home-x => joint.0.neg-lim-sw-in
+net both-home-x => joint.0.pos-lim-sw-in
+
+#*******************
+#  AXIS Y
+#*******************
+
+net debounce-home-y debounce.1.1.in <= armcncio.gpio.pin20-in-not
+net both-home-y debounce.1.1.out
+net both-home-y => joint.1.home-sw-in
+net both-home-y => joint.1.neg-lim-sw-in
+net both-home-y => joint.1.pos-lim-sw-in
+
+#*******************
+#  AXIS Z
+#*******************
+
+net debounce-home-z debounce.1.2.in <= armcncio.gpio.pin21-in-not
+net both-home-z debounce.1.2.out
+net both-home-z => joint.2.home-sw-in
+net both-home-z => joint.2.neg-lim-sw-in
+net both-home-z => joint.2.pos-lim-sw-in
+
+#*********************
+#   SPINDLE
+#*********************
+
+setp armcncio.pwm.5.freq-cmd        400
+setp armcncio.pwm.5.dc-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
+setp armcncio.pwm.5.pwm-pin         16
+setp armcncio.pwm.5.forward-pin     23
+setp armcncio.pwm.5.forward-pin-not 1
+setp armcncio.pwm.5.reverse-pin     24
+setp armcncio.pwm.5.reverse-pin-not 1
+net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.dc-cmd
+net spindle-enable  spindle.0.on        armcncio.pwm.5.enable
+
+#*********************
+#   E-STOP
+#*********************
+
+net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.pin2-in
+net estop-ext debounce.1.5.out
+net estop-out <= iocontrol.0.user-enable-out
+net estop-ext => iocontrol.0.emc-enable-in
