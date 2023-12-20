@@ -2,12 +2,12 @@
 
 # 移除之前执行业务
 
-sudo systemctl stop armcnc_chromium.service
-sudo systemctl disable armcnc_chromium.service
-sudo systemctl stop armcnc_launch.service
-sudo systemctl disable armcnc_launch.service
-sudo systemctl stop armcnc_linuxcnc.service
-sudo systemctl disable armcnc_linuxcnc.service
-sudo systemctl stop armcnc_service.service
-sudo systemctl disable armcnc_service.service
-sudo systemctl daemon-reload
+sudo systemctl stop armcnc_chromium.service > /dev/null 2>&1
+sudo systemctl disable armcnc_chromium.service > /dev/null 2>&1
+sudo systemctl stop armcnc_launch.service > /dev/null 2>&1
+sudo systemctl disable armcnc_launch.service > /dev/null 2>&1
+sudo systemctl stop armcnc_linuxcnc.service > /dev/null 2>&1
+sudo systemctl disable armcnc_linuxcnc.service > /dev/null 2>&1
+sudo systemctl stop armcnc_service.service > /dev/null 2>&1
+sudo systemctl disable armcnc_service.service > /dev/null 2>&1
+sudo systemctl daemon-reload > /dev/null 2>&1
