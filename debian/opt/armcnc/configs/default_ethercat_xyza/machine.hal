@@ -4,8 +4,8 @@ loadusr -W lcec_conf machine.xml
 loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21,25,8,7" out_pins="16,23,24"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
-
 loadrt debounce cfg=1,10
+
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100

@@ -1,8 +1,8 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21,25,8,7" out_pins="16,23,24"
-
 loadrt debounce cfg=1,10
+
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
@@ -28,7 +28,7 @@ setp armcncio.pwm.0.step-direction-pin        23
 setp armcncio.pwm.0.step-direction-pin-not    0
 setp armcncio.pwm.0.step-direction-hold-time  50000
 setp armcncio.pwm.0.step-direction-setup-time 50000
-net x-position-cmd          joint.0.motor-pos-cmd   armcncio.pwm.0.position-command
+net x-position-command      joint.0.motor-pos-cmd   armcncio.pwm.0.position-command
 net x-position-feedback     joint.0.motor-pos-fb    armcncio.pwm.0.position-feedback
 net x-enable                joint.0.amp-enable-out  armcncio.pwm.0.enable
 
@@ -51,7 +51,7 @@ setp armcncio.pwm.1.step-direction-pin        23
 setp armcncio.pwm.1.step-direction-pin-not    0
 setp armcncio.pwm.1.step-direction-hold-time  50000
 setp armcncio.pwm.1.step-direction-setup-time 50000
-net y-position-cmd          joint.1.motor-pos-cmd   armcncio.pwm.1.position-command
+net y-position-command      joint.1.motor-pos-cmd   armcncio.pwm.1.position-command
 net y-position-feedback     joint.1.motor-pos-fb    armcncio.pwm.1.position-feedback
 net y-enable                joint.1.amp-enable-out  armcncio.pwm.1.enable
 
@@ -74,7 +74,7 @@ setp armcncio.pwm.2.step-direction-pin        23
 setp armcncio.pwm.2.step-direction-pin-not    0
 setp armcncio.pwm.2.step-direction-hold-time  50000
 setp armcncio.pwm.2.step-direction-setup-time 50000
-net z-position-cmd          joint.2.motor-pos-cmd   armcncio.pwm.2.position-command
+net z-position-command      joint.2.motor-pos-cmd   armcncio.pwm.2.position-command
 net z-position-feedback     joint.2.motor-pos-fb    armcncio.pwm.2.position-feedback
 net z-enable                joint.2.amp-enable-out  armcncio.pwm.2.enable
 
@@ -97,7 +97,7 @@ setp armcncio.pwm.3.step-direction-pin        23
 setp armcncio.pwm.3.step-direction-pin-not    0
 setp armcncio.pwm.3.step-direction-hold-time  50000
 setp armcncio.pwm.3.step-direction-setup-time 50000
-net b-position-cmd          joint.3.motor-pos-cmd   armcncio.pwm.3.position-command
+net b-position-command      joint.3.motor-pos-cmd   armcncio.pwm.3.position-command
 net b-position-feedback     joint.3.motor-pos-fb    armcncio.pwm.3.position-feedback
 net b-enable                joint.3.amp-enable-out  armcncio.pwm.3.enable
 
@@ -114,7 +114,7 @@ setp armcncio.pwm.4.step-direction-pin        23
 setp armcncio.pwm.4.step-direction-pin-not    0
 setp armcncio.pwm.4.step-direction-hold-time  50000
 setp armcncio.pwm.4.step-direction-setup-time 50000
-net b-position-cmd          joint.4.motor-pos-cmd   armcncio.pwm.4.position-command
+net b-position-command      joint.4.motor-pos-cmd   armcncio.pwm.4.position-command
 net b-position-feedback     joint.4.motor-pos-fb    armcncio.pwm.4.position-feedback
 net b-enable                joint.4.amp-enable-out  armcncio.pwm.4.enable
 
@@ -137,7 +137,4 @@ net spindle-enable  spindle.0.on        armcncio.pwm.5.enable
 #   E-STOP
 #*********************
 
-net debounce-estop-ext debounce.1.5.in <= armcncio.gpio.pin2-in
-net estop-ext debounce.1.5.out
-net estop-out <= iocontrol.0.user-enable-out
-net estop-ext => iocontrol.0.emc-enable-in
+setp iocontrol.0.emc-enable-in 1

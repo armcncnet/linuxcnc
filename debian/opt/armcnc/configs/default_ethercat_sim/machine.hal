@@ -3,8 +3,8 @@ loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EM
 loadusr -W lcec_conf machine.xml
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
+loadrt debounce cfg=1,10
 
-loadrt debounce cfg=1,8
 addf debounce.0 base-thread
 addf debounce.1 base-thread
 setp debounce.0.delay 100
