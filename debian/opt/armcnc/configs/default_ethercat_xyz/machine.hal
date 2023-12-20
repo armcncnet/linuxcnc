@@ -111,13 +111,13 @@ net both-home-z => joint.2.pos-lim-sw-in
 #   SPINDLE
 #*********************
 
-setp armcncio.pwm.5.freq-cmd        400
-setp armcncio.pwm.5.dc-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
-setp armcncio.pwm.5.pwm-pin         16
-setp armcncio.pwm.5.forward-pin     23
-setp armcncio.pwm.5.forward-pin-not 1
-setp armcncio.pwm.5.reverse-pin     24
-setp armcncio.pwm.5.reverse-pin-not 1
+setp armcncio.pwm.5.freq-cmd                400
+setp armcncio.pwm.5.dc-scale                [SPINDLE_0]MAX_FORWARD_VELOCITY
+setp armcncio.pwm.5.pwm-pin                 16
+setp armcncio.pwm.5.spindle-forward-pin     23
+setp armcncio.pwm.5.spindle-forward-pin-not 1
+setp armcncio.pwm.5.spindle-reverse-pin     24
+setp armcncio.pwm.5.spindle-reverse-pin-not 1
 net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.dc-cmd
 net spindle-enable  spindle.0.on        armcncio.pwm.5.enable
 
