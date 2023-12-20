@@ -67,7 +67,7 @@ net both-home-y => joint.1.pos-lim-sw-in
 
 setp armcncio.pwm.2.position-scale            [JOINT_2]SCALE
 setp armcncio.pwm.2.duty-cycle-command        0.5
-setp armcncio.pwm.2.duty-cycle-max_time       5000
+setp armcncio.pwm.2.duty-cycle-max-time       5000
 setp armcncio.pwm.2.pwm-pin                   15
 setp armcncio.pwm.2.pwm-pin-not               0
 setp armcncio.pwm.2.step-direction-pin        23
@@ -90,7 +90,7 @@ net both-home-z => joint.2.pos-lim-sw-in
 
 setp armcncio.pwm.3.position-scale            [JOINT_3]SCALE
 setp armcncio.pwm.3.duty-cycle-command        0.5
-setp armcncio.pwm.3.duty-cycle-max_time       5000
+setp armcncio.pwm.3.duty-cycle-max-time       5000
 setp armcncio.pwm.3.pwm-pin                   15
 setp armcncio.pwm.3.pwm-pin-not               0
 setp armcncio.pwm.3.step-direction-pin        23
@@ -107,7 +107,7 @@ net b-enable                joint.3.amp-enable-out  armcncio.pwm.3.enable
 
 setp armcncio.pwm.4.position-scale            [JOINT_4]SCALE
 setp armcncio.pwm.4.duty-cycle-command        0.5
-setp armcncio.pwm.4.duty-cycle-max_time       5000
+setp armcncio.pwm.4.duty-cycle-max-time       5000
 setp armcncio.pwm.4.pwm-pin                   15
 setp armcncio.pwm.4.pwm-pin-not               0
 setp armcncio.pwm.4.step-direction-pin        23
