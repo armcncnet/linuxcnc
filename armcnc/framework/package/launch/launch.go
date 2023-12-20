@@ -33,7 +33,7 @@ func (launch *Launch) Start(machine string) {
 	write := FileUtils.WriteFile("MACHINE_PATH="+machine, "/tmp/environment")
 	if write == nil {
 		if machine != "" {
-			launch.OnRestart()
+			launch.OnStart()
 		} else {
 			launch.OnStop()
 		}
