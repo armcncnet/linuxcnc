@@ -19,7 +19,7 @@ addf armcncio.pwm.write       servo-thread
 #  AXIS X
 #*******************
 
-setp armcncio.pwm.0.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.0.position-scale              [JOINT_0]SCALE
 setp armcncio.pwm.0.duty-cycle-command          0.5
 setp armcncio.pwm.0.duty-cycle-max-time         5000
 setp armcncio.pwm.0.pwm-pin                     7
@@ -65,7 +65,7 @@ net both-home-y => joint.1.pos-lim-sw-in
 #  AXIS Z
 #*******************
 
-setp armcncio.pwm.2.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.2.position-scale              [JOINT_2]SCALE
 setp armcncio.pwm.2.duty-cycle-command          0.5
 setp armcncio.pwm.2.duty-cycle-max-time         5000
 setp armcncio.pwm.2.pwm-pin                     7
@@ -88,7 +88,7 @@ net both-home-z => joint.2.pos-lim-sw-in
 #  AXIS B
 #*******************
 
-setp armcncio.pwm.3.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.3.position-scale              [JOINT_3]SCALE
 setp armcncio.pwm.3.duty-cycle-command          0.5
 setp armcncio.pwm.3.duty-cycle-max-time         5000
 setp armcncio.pwm.3.pwm-pin                     7
@@ -105,7 +105,7 @@ net b-enable                joint.3.amp-enable-out  armcncio.pwm.3.enable
 #  AXIS C
 #*******************
 
-setp armcncio.pwm.4.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.4.position-scale              [JOINT_4]SCALE
 setp armcncio.pwm.4.duty-cycle-command          0.5
 setp armcncio.pwm.4.duty-cycle-max-time         5000
 setp armcncio.pwm.4.pwm-pin                     7
