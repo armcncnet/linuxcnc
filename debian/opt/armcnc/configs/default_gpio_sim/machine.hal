@@ -70,8 +70,8 @@ setp armcncio.pwm.2.duty-cycle-command          0.5
 setp armcncio.pwm.2.duty-cycle-max-time         5000
 setp armcncio.pwm.2.pwm-pin                     22
 setp armcncio.pwm.2.pwm-pin-not                 0
-setp armcncio.pwm.2.step-direction-pin          8
-setp armcncio.pwm.2.step-direction-pin-not      10
+setp armcncio.pwm.2.step-direction-pin          10
+setp armcncio.pwm.2.step-direction-pin-not      0
 setp armcncio.pwm.2.step-direction-hold-time    50000
 setp armcncio.pwm.2.step-direction-setup-time   50000
 net z-position-command      joint.2.motor-pos-cmd   armcncio.pwm.2.position-command
