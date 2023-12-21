@@ -24,8 +24,6 @@ setp armcncio.pwm.0.duty-cycle-command          0.5
 setp armcncio.pwm.0.duty-cycle-max-time         5000
 setp armcncio.pwm.0.pwm-pin                     7
 setp armcncio.pwm.0.pwm-pin-not                 0
-setp armcncio.pwm.0.direction-pin               8
-setp armcncio.pwm.0.direction-pin-not           0
 setp armcncio.pwm.0.step-direction-pin          8
 setp armcncio.pwm.0.step-direction-pin-not      0
 setp armcncio.pwm.0.step-direction-hold-time    50000
@@ -49,8 +47,6 @@ setp armcncio.pwm.1.duty-cycle-command          0.5
 setp armcncio.pwm.1.duty-cycle-max-time         5000
 setp armcncio.pwm.1.pwm-pin                     7
 setp armcncio.pwm.1.pwm-pin-not                 0
-setp armcncio.pwm.1.direction-pin               8
-setp armcncio.pwm.1.direction-pin-not           0
 setp armcncio.pwm.1.step-direction-pin          8
 setp armcncio.pwm.1.step-direction-pin-not      0
 setp armcncio.pwm.1.step-direction-hold-time    50000
@@ -74,8 +70,6 @@ setp armcncio.pwm.2.duty-cycle-command          0.5
 setp armcncio.pwm.2.duty-cycle-max-time         5000
 setp armcncio.pwm.2.pwm-pin                     7
 setp armcncio.pwm.2.pwm-pin-not                 0
-setp armcncio.pwm.2.direction-pin               8
-setp armcncio.pwm.2.direction-pin-not           0
 setp armcncio.pwm.2.step-direction-pin          8
 setp armcncio.pwm.2.step-direction-pin-not      0
 setp armcncio.pwm.2.step-direction-hold-time    50000
@@ -99,8 +93,6 @@ setp armcncio.pwm.3.duty-cycle-command          0.5
 setp armcncio.pwm.3.duty-cycle-max-time         5000
 setp armcncio.pwm.3.pwm-pin                     7
 setp armcncio.pwm.3.pwm-pin-not                 0
-setp armcncio.pwm.3.direction-pin               8
-setp armcncio.pwm.3.direction-pin-not           0
 setp armcncio.pwm.3.step-direction-pin          8
 setp armcncio.pwm.3.step-direction-pin-not      0
 setp armcncio.pwm.3.step-direction-hold-time    50000
@@ -118,8 +110,6 @@ setp armcncio.pwm.4.duty-cycle-command          0.5
 setp armcncio.pwm.4.duty-cycle-max-time         5000
 setp armcncio.pwm.4.pwm-pin                     7
 setp armcncio.pwm.4.pwm-pin-not                 0
-setp armcncio.pwm.4.direction-pin               8
-setp armcncio.pwm.4.direction-pin-not           0
 setp armcncio.pwm.4.step-direction-pin          8
 setp armcncio.pwm.4.step-direction-pin-not      0
 setp armcncio.pwm.4.step-direction-hold-time    50000
@@ -136,8 +126,6 @@ setp armcncio.pwm.5.frequency-command       400
 setp armcncio.pwm.5.duty-cycle-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
 setp armcncio.pwm.5.pwm-pin                 16
 setp armcncio.pwm.5.pwm-pin-not             0
-setp armcncio.pwm.4.direction-pin           23
-setp armcncio.pwm.4.direction-pin-not       1
 setp armcncio.pwm.5.spindle-forward-pin     23
 setp armcncio.pwm.5.spindle-forward-pin-not 1
 setp armcncio.pwm.5.spindle-reverse-pin     24
