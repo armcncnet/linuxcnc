@@ -124,9 +124,9 @@ setp armcncio.pwm.4.step-direction-pin          8
 setp armcncio.pwm.4.step-direction-pin-not      0
 setp armcncio.pwm.4.step-direction-hold-time    50000
 setp armcncio.pwm.4.step-direction-setup-time   50000
-net b-position-command      joint.4.motor-pos-cmd   armcncio.pwm.4.position-command
-net b-position-feedback     joint.4.motor-pos-fb    armcncio.pwm.4.position-feedback
-net b-enable                joint.4.amp-enable-out  armcncio.pwm.4.enable
+net c-position-command      joint.4.motor-pos-cmd   armcncio.pwm.4.position-command
+net c-position-feedback     joint.4.motor-pos-fb    armcncio.pwm.4.position-feedback
+net c-enable                joint.4.amp-enable-out  armcncio.pwm.4.enable
 
 #*********************
 #   SPINDLE
