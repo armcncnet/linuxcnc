@@ -1,6 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
-loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21,25,8,7" out_pins="16,23,24"
+loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21" out_pins="7,8,16,23,24"
 loadrt debounce cfg=1,10
 
 addf debounce.0 base-thread
@@ -19,15 +19,17 @@ addf armcncio.pwm.write       servo-thread
 #  AXIS X
 #*******************
 
-setp armcncio.pwm.0.position-scale            [JOINT_0]SCALE
-setp armcncio.pwm.0.duty-cycle-command        0.5
-setp armcncio.pwm.0.duty-cycle-max-time       5000
-setp armcncio.pwm.0.pwm-pin                   15
-setp armcncio.pwm.0.pwm-pin-not               0
-setp armcncio.pwm.0.step-direction-pin        23
-setp armcncio.pwm.0.step-direction-pin-not    0
-setp armcncio.pwm.0.step-direction-hold-time  50000
-setp armcncio.pwm.0.step-direction-setup-time 50000
+setp armcncio.pwm.0.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.0.duty-cycle-command          0.5
+setp armcncio.pwm.0.duty-cycle-max-time         5000
+setp armcncio.pwm.0.pwm-pin                     7
+setp armcncio.pwm.0.pwm-pin-not                 0
+setp armcncio.pwm.0.direction-pin               8
+setp armcncio.pwm.0.direction-pin-not           0
+setp armcncio.pwm.0.step-direction-pin          8
+setp armcncio.pwm.0.step-direction-pin-not      0
+setp armcncio.pwm.0.step-direction-hold-time    50000
+setp armcncio.pwm.0.step-direction-setup-time   50000
 net x-position-command      joint.0.motor-pos-cmd   armcncio.pwm.0.position-command
 net x-position-feedback     joint.0.motor-pos-fb    armcncio.pwm.0.position-feedback
 net x-enable                joint.0.amp-enable-out  armcncio.pwm.0.enable
@@ -42,15 +44,17 @@ net both-home-x => joint.0.pos-lim-sw-in
 #  AXIS Y
 #*******************
 
-setp armcncio.pwm.1.position-scale            [JOINT_1]SCALE
-setp armcncio.pwm.1.duty-cycle-command        0.5
-setp armcncio.pwm.1.duty-cycle-max-time       5000
-setp armcncio.pwm.1.pwm-pin                   15
-setp armcncio.pwm.1.pwm-pin-not               0
-setp armcncio.pwm.1.step-direction-pin        23
-setp armcncio.pwm.1.step-direction-pin-not    0
-setp armcncio.pwm.1.step-direction-hold-time  50000
-setp armcncio.pwm.1.step-direction-setup-time 50000
+setp armcncio.pwm.1.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.1.duty-cycle-command          0.5
+setp armcncio.pwm.1.duty-cycle-max-time         5000
+setp armcncio.pwm.1.pwm-pin                     7
+setp armcncio.pwm.1.pwm-pin-not                 0
+setp armcncio.pwm.1.direction-pin               8
+setp armcncio.pwm.1.direction-pin-not           0
+setp armcncio.pwm.1.step-direction-pin          8
+setp armcncio.pwm.1.step-direction-pin-not      0
+setp armcncio.pwm.1.step-direction-hold-time    50000
+setp armcncio.pwm.1.step-direction-setup-time   50000
 net y-position-command      joint.1.motor-pos-cmd   armcncio.pwm.1.position-command
 net y-position-feedback     joint.1.motor-pos-fb    armcncio.pwm.1.position-feedback
 net y-enable                joint.1.amp-enable-out  armcncio.pwm.1.enable
@@ -65,15 +69,17 @@ net both-home-y => joint.1.pos-lim-sw-in
 #  AXIS Z
 #*******************
 
-setp armcncio.pwm.2.position-scale            [JOINT_2]SCALE
-setp armcncio.pwm.2.duty-cycle-command        0.5
-setp armcncio.pwm.2.duty-cycle-max-time       5000
-setp armcncio.pwm.2.pwm-pin                   15
-setp armcncio.pwm.2.pwm-pin-not               0
-setp armcncio.pwm.2.step-direction-pin        23
-setp armcncio.pwm.2.step-direction-pin-not    0
-setp armcncio.pwm.2.step-direction-hold-time  50000
-setp armcncio.pwm.2.step-direction-setup-time 50000
+setp armcncio.pwm.2.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.2.duty-cycle-command          0.5
+setp armcncio.pwm.2.duty-cycle-max-time         5000
+setp armcncio.pwm.2.pwm-pin                     7
+setp armcncio.pwm.2.pwm-pin-not                 0
+setp armcncio.pwm.2.direction-pin               8
+setp armcncio.pwm.2.direction-pin-not           0
+setp armcncio.pwm.2.step-direction-pin          8
+setp armcncio.pwm.2.step-direction-pin-not      0
+setp armcncio.pwm.2.step-direction-hold-time    50000
+setp armcncio.pwm.2.step-direction-setup-time   50000
 net z-position-command      joint.2.motor-pos-cmd   armcncio.pwm.2.position-command
 net z-position-feedback     joint.2.motor-pos-fb    armcncio.pwm.2.position-feedback
 net z-enable                joint.2.amp-enable-out  armcncio.pwm.2.enable
@@ -88,15 +94,17 @@ net both-home-z => joint.2.pos-lim-sw-in
 #  AXIS B
 #*******************
 
-setp armcncio.pwm.3.position-scale            [JOINT_3]SCALE
-setp armcncio.pwm.3.duty-cycle-command        0.5
-setp armcncio.pwm.3.duty-cycle-max-time       5000
-setp armcncio.pwm.3.pwm-pin                   15
-setp armcncio.pwm.3.pwm-pin-not               0
-setp armcncio.pwm.3.step-direction-pin        23
-setp armcncio.pwm.3.step-direction-pin-not    0
-setp armcncio.pwm.3.step-direction-hold-time  50000
-setp armcncio.pwm.3.step-direction-setup-time 50000
+setp armcncio.pwm.3.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.3.duty-cycle-command          0.5
+setp armcncio.pwm.3.duty-cycle-max-time         5000
+setp armcncio.pwm.3.pwm-pin                     7
+setp armcncio.pwm.3.pwm-pin-not                 0
+setp armcncio.pwm.3.direction-pin               8
+setp armcncio.pwm.3.direction-pin-not           0
+setp armcncio.pwm.3.step-direction-pin          8
+setp armcncio.pwm.3.step-direction-pin-not      0
+setp armcncio.pwm.3.step-direction-hold-time    50000
+setp armcncio.pwm.3.step-direction-setup-time   50000
 net b-position-command      joint.3.motor-pos-cmd   armcncio.pwm.3.position-command
 net b-position-feedback     joint.3.motor-pos-fb    armcncio.pwm.3.position-feedback
 net b-enable                joint.3.amp-enable-out  armcncio.pwm.3.enable
@@ -105,15 +113,17 @@ net b-enable                joint.3.amp-enable-out  armcncio.pwm.3.enable
 #  AXIS C
 #*******************
 
-setp armcncio.pwm.4.position-scale            [JOINT_4]SCALE
-setp armcncio.pwm.4.duty-cycle-command        0.5
-setp armcncio.pwm.4.duty-cycle-max-time       5000
-setp armcncio.pwm.4.pwm-pin                   15
-setp armcncio.pwm.4.pwm-pin-not               0
-setp armcncio.pwm.4.step-direction-pin        23
-setp armcncio.pwm.4.step-direction-pin-not    0
-setp armcncio.pwm.4.step-direction-hold-time  50000
-setp armcncio.pwm.4.step-direction-setup-time 50000
+setp armcncio.pwm.4.position-scale              [JOINT_1]SCALE
+setp armcncio.pwm.4.duty-cycle-command          0.5
+setp armcncio.pwm.4.duty-cycle-max-time         5000
+setp armcncio.pwm.4.pwm-pin                     7
+setp armcncio.pwm.4.pwm-pin-not                 0
+setp armcncio.pwm.4.direction-pin               8
+setp armcncio.pwm.4.direction-pin-not           0
+setp armcncio.pwm.4.step-direction-pin          8
+setp armcncio.pwm.4.step-direction-pin-not      0
+setp armcncio.pwm.4.step-direction-hold-time    50000
+setp armcncio.pwm.4.step-direction-setup-time   50000
 net b-position-command      joint.4.motor-pos-cmd   armcncio.pwm.4.position-command
 net b-position-feedback     joint.4.motor-pos-fb    armcncio.pwm.4.position-feedback
 net b-enable                joint.4.amp-enable-out  armcncio.pwm.4.enable
@@ -126,6 +136,8 @@ setp armcncio.pwm.5.frequency-command       400
 setp armcncio.pwm.5.duty-cycle-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
 setp armcncio.pwm.5.pwm-pin                 16
 setp armcncio.pwm.5.pwm-pin-not             0
+setp armcncio.pwm.4.direction-pin           23
+setp armcncio.pwm.4.direction-pin-not       1
 setp armcncio.pwm.5.spindle-forward-pin     23
 setp armcncio.pwm.5.spindle-forward-pin-not 1
 setp armcncio.pwm.5.spindle-reverse-pin     24
