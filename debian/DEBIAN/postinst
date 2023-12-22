@@ -32,7 +32,7 @@ fi
 
 find /opt/armcnc -type f -name ".gitkeep" -exec rm -f {} +
 
-if [ "$architecture" = "arm64" ]; then
+if [ "$architecture" = "amd64" ]; then
     sudo rm -rf /usr/lib/linuxcnc/modules/cia402.so
     sudo mv /usr/lib/linuxcnc/modules/cia402_amd64.so /usr/lib/linuxcnc/modules/cia402.so
 else
