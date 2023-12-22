@@ -2,6 +2,8 @@
 
 # 安装完成之后执行业务
 
+architecture=$(dpkg --print-architecture)
+
 sudo python3 -m pip install --upgrade --break-system-packages --root-user-action=ignore armcnc
 
 if python3 -c "import pkgutil; exit(0) if pkgutil.find_loader('websocket') else exit(1)" >/dev/null 2>&1; then
@@ -29,6 +31,13 @@ else
 fi
 
 find /opt/armcnc -type f -name ".gitkeep" -exec rm -f {} +
+
+if [ "$architecture" = "arm64" ]; then
+    sudo rm -rf /usr/lib/linuxcnc/modules/cia402.so
+    sudo mv /usr/lib/linuxcnc/modules/cia402_amd64.so /usr/lib/linuxcnc/modules/cia402.so
+else
+    sudo rm -rf /usr/lib/linuxcnc/modules/cia402_amd64.so
+fi
 
 sudo ldconfig
 sudo systemctl daemon-reload > /dev/null 2>&1
