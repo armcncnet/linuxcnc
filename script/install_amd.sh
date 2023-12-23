@@ -103,6 +103,7 @@ KERNEL=="EtherCAT[0-9]", MODE="0777"
 EOF
     sudo ldconfig
     sudo systemctl enable ethercat.service
+    sudo systemctl restart ethercat.service
 fi
 
 sudo apt install -y armcnc
