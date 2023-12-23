@@ -45,8 +45,6 @@ EOF
 
     if [ ! -f "/etc/set_mac_address.sh" ]; then
         sudo touch /etc/network/mac_address
-        mac_addr=$(openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//')
-        mac_addr=$(printf '%02X' $((0x${mac%%:*} & 0xFE | 0x02))):${mac#*:}
         sudo cat <<EOF > /etc/set_mac_address.sh
 #!/bin/bash
 mac_file=/etc/network/mac_address
@@ -56,7 +54,7 @@ if [ -s \${mac_file} ] && [ -f \${mac_file} ]; then
     ifconfig $wired_card hw ether \$(cat \${mac_file})
     ifconfig $wired_card up
 else
-    echo $mac_addr > \$mac_file
+    openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//' > \$mac_file
     ifconfig $wired_card down
     ifconfig $wired_card hw ether \$(cat \$mac_file)
     ifconfig $wired_card up
@@ -95,6 +93,7 @@ fi
 
 if [ ! -f "/etc/ethercat.conf" ]; then
     sudo apt install -y ethercat-master libethercat-dev linuxcnc-ethercat
+    sudo /etc/set_mac_address.sh
     MAC_ADDRESS=$(cat /etc/network/mac_address)
     sed -i "s/^MASTER0_DEVICE=\".*\"/MASTER0_DEVICE=\"$MAC_ADDRESS\"/" /etc/ethercat.conf
     sed -i "s/^DEVICE_MODULES=\".*\"/DEVICE_MODULES=\"generic\"/" /etc/ethercat.conf
