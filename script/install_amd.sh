@@ -102,6 +102,7 @@ if [ ! -f "/etc/ethercat.conf" ]; then
 KERNEL=="EtherCAT[0-9]", MODE="0777"
 EOF
     sudo ldconfig
+    sudo /etc/set_mac_address.sh
     sudo systemctl enable ethercat.service
     sudo systemctl restart ethercat.service
 fi
