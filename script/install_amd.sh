@@ -85,7 +85,7 @@ EOF
 fi
 
 sudo apt -y update
-sudo apt install -y vim git wget curl make cmake net-tools htop geany
+sudo apt install -y vim git wget curl make cmake net-tools htop geany chromium
 
 if [ ! -f "/usr/bin/linuxcnc" ]; then
     sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
