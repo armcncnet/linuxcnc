@@ -88,6 +88,7 @@ sudo apt -y update
 sudo apt install -y git wget curl make cmake net-tools grub-customizer htop geany
 
 if [ ! -f "/usr/bin/linuxcnc" ]; then
+    sudo apt install -y linux-image-rt-amd64 linux-headers-rt-amd64
     sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
 fi
 
@@ -103,7 +104,6 @@ KERNEL=="EtherCAT[0-9]", MODE="0777"
 EOF
     sudo ldconfig
     sudo systemctl enable ethercat.service
-    sudo systemctl restart ethercat.service
 fi
 
 sudo apt install -y armcnc
