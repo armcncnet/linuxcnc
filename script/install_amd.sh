@@ -38,8 +38,10 @@ EOF
     sudo sed -i 's/#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
     sudo sed -i 's/#\?PubkeyAuthentication .*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 
-    sudo sed -i 's/#\?AutomaticLoginEnable .*/AutomaticLoginEnable=True/' /etc/gdm3/daemon.conf
-    sudo sed -i 's/#\?AutomaticLogin .*/AutomaticLogin=armcnc/' /etc/gdm3/daemon.conf
+    sudo sed -i 's/^\s*#\?\s*AutomaticLoginEnable=.*/AutomaticLoginEnable=True/' /etc/gdm3/daemon.conf
+    sudo sed -i 's/^\s*#\?\s*AutomaticLogin=.*/AutomaticLogin=armcnc/' /etc/gdm3/daemon.conf
+
+    sudo cp -aRf /etc/skel/. /root/
 
     wired_card=$(nmcli device status | grep 'ethernet' | awk '{print $1}')
 
