@@ -85,16 +85,15 @@ EOF
 fi
 
 sudo apt -y update
-sudo apt install -y git wget curl make cmake net-tools grub-customizer htop geany
+sudo apt install -y vim git wget curl make cmake net-tools htop geany
 
 if [ ! -f "/usr/bin/linuxcnc" ]; then
-    sudo apt install -y linux-image-rt-amd64 linux-headers-rt-amd64
     sudo apt install -y linuxcnc-uspace linuxcnc-uspace-dev
 fi
 
 if [ ! -f "/etc/ethercat.conf" ]; then
     sudo apt install -y ethercat-master libethercat-dev linuxcnc-ethercat
-    sudo /etc/set_mac_address.sh
+    sudo openssl rand -hex 6 | sed 's/\(..\)/\1:/g; s/:$//' > /etc/network/mac_address
     MAC_ADDRESS=$(cat /etc/network/mac_address)
     sed -i "s/^MASTER0_DEVICE=\".*\"/MASTER0_DEVICE=\"$MAC_ADDRESS\"/" /etc/ethercat.conf
     sed -i "s/^DEVICE_MODULES=\".*\"/DEVICE_MODULES=\"generic\"/" /etc/ethercat.conf
