@@ -38,8 +38,36 @@ EOF
     sudo sed -i 's/#\?PermitRootLogin .*/PermitRootLogin yes/' /etc/ssh/sshd_config
     sudo sed -i 's/#\?PubkeyAuthentication .*/PubkeyAuthentication yes/' /etc/ssh/sshd_config
 
-    sudo sed -i 's/^\s*#\?\s*AutomaticLoginEnable=.*/AutomaticLoginEnable=True/' /etc/gdm3/daemon.conf
-    sudo sed -i 's/^\s*#\?\s*AutomaticLogin=.*/AutomaticLogin=armcnc/' /etc/gdm3/daemon.conf
+    sudo cat <<-EOF > /etc/gdm3/daemon.conf
+# GDM configuration storage
+#
+# See /usr/share/gdm/gdm.schemas for a list of available options.
+
+[daemon]
+# Uncomment the line below to force the login screen to use Xorg
+#WaylandEnable=false
+
+# Enabling automatic login
+AutomaticLoginEnable = true
+AutomaticLogin = armcnc
+
+# Enabling timed login
+#  TimedLoginEnable = true
+#  TimedLogin = user1
+#  TimedLoginDelay = 10
+
+[security]
+
+[xdmcp]
+
+[chooser]
+
+[debug]
+# Uncomment the line below to turn on debugging
+# More verbose logs
+# Additionally lets the X server dump core if it crashes
+#Enable=true
+EOF
 
     sudo cp -aRf /etc/skel/. /root/
 
