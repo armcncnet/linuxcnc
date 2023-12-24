@@ -1,7 +1,7 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
-loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="2,6,13,19,20,21,25,8,7" out_pins="16,23,24"
+loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="19,20,21" out_pins="4,5,6,9,10,11,12,13,22,16,23,24,27"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 loadrt debounce cfg=1,10
