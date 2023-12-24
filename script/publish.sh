@@ -23,13 +23,6 @@ else
     cp /usr/lib/linuxcnc/modules/armcncio.so debian/usr/lib/linuxcnc/modules/
 fi
 
-if [ ! -f "/root/desktop/template/dist/index.html" ]; then
-    echo "Not build desktop"
-    exit 0
-else
-    cp -r /root/desktop/template/dist/* debian/opt/armcnc/www/
-fi
-
 sudo chmod +x debian/DEBIAN/*
 
 sudo rm -rf debian/DEBIAN/control
@@ -59,10 +52,5 @@ sudo dpkg --build debian/ && dpkg-name debian.deb
 
 sudo rm -rf debian/usr/local/bin/armcnc
 sudo rm -rf debian/usr/lib/linuxcnc/modules/armcncio.so
-sudo rm -rf debian/opt/armcnc/www/index.html
-sudo rm -rf debian/opt/armcnc/www/favicon.ico
-sudo rm -rf debian/opt/armcnc/www/assets
-sudo rm -rf debian/opt/armcnc/www/monacoeditorwork
-sudo rm -rf debian/opt/armcnc/www/static
 
 echo "Publish successfully"

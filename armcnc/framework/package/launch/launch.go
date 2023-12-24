@@ -13,7 +13,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"time"
 )
 
 type Launch struct {
@@ -50,11 +49,6 @@ func (launch *Launch) OnStart() {
 		cmd.Output()
 		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
 		cmd.Output()
-		go func() {
-			time.Sleep(5 * time.Second)
-			cmd = exec.Command("systemctl", "start", "armcnc_chromium.service")
-			cmd.Output()
-		}()
 	}
 }
 
@@ -70,8 +64,6 @@ func (launch *Launch) OnStop() {
 	cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
 	cmd.Output()
 	cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
-	cmd.Output()
-	cmd = exec.Command("systemctl", "stop", "armcnc_chromium.service")
 	cmd.Output()
 }
 
