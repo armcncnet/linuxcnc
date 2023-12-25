@@ -68,7 +68,7 @@ func Start() *cobra.Command {
 					return
 				}
 				Config.Get.Authorization.Token = response.Data.LoginToken
-				update := Config.Save()
+				update := Config.Update()
 				if !update {
 					Config.Get.Authorization.Token = ""
 					log.Println("[login]：" + color.Red.Text("Login failed, please try again"))

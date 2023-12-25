@@ -100,7 +100,7 @@ func Init() {
 	}
 }
 
-func Save() bool {
+func Update() bool {
 	status := true
 	iniFile := IniUtils.Empty()
 	err := IniUtils.ReflectFrom(iniFile, Get)

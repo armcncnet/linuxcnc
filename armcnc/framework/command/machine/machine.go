@@ -54,7 +54,7 @@ func Start() *cobra.Command {
 						return
 					}
 					Config.Get.Machine.Path = args[1]
-					save := Config.Save()
+					save := Config.Update()
 					if !save {
 						log.Println("[machine]：" + color.Red.Text("Machine tool configuration failed. Please check and try again"))
 						return

@@ -362,7 +362,7 @@ func Default(c *gin.Context) {
 			return
 		}
 		Config.Get.Machine.Path = path
-		save := Config.Save()
+		save := Config.Update()
 		if !save {
 			Utils.Error(c, 10000, "", Utils.EmptyData{})
 			return
