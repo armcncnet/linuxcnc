@@ -11,6 +11,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"net"
 	"net/http"
+	"os/exec"
 	"regexp"
 )
 
@@ -64,4 +65,13 @@ func GetIP(name string) string {
 func EmailValid(email string) bool {
 	emailRegex := regexp.MustCompile(`^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,4}$`)
 	return emailRegex.MatchString(email)
+}
+
+func IsGraphicalTargetActive() bool {
+	cmd := exec.Command("systemctl", "is-active", "graphical.target")
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return false
+	}
+	return string(output) == "active\n"
 }

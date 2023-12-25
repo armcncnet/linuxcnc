@@ -9,6 +9,7 @@ package LaunchPackage
 
 import (
 	"armcnc/framework/config"
+	Utils "armcnc/framework/utils"
 	"armcnc/framework/utils/file"
 	"os"
 	"os/exec"
@@ -51,7 +52,9 @@ func (launch *Launch) OnStart() {
 		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
 		cmd.Output()
 		go func() {
-			time.Sleep(5 * time.Second)
+			for !Utils.IsGraphicalTargetActive() {
+				time.Sleep(1 * time.Second) // 每秒检查一次状态
+			}
 			cmd = exec.Command("systemctl", "start", "armcnc_chromium.service")
 			cmd.Output()
 		}()
