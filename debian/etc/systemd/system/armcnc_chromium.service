@@ -8,7 +8,7 @@ User=armcnc
 WorkingDirectory=/opt/armcnc/
 EnvironmentFile=/tmp/environment
 Environment=DISPLAY=:0.0
-ExecStart=/usr/bin/chromium --disable-popup-blocking --no-first-run --disable-desktop-notifications --incognito --kiosk --disable-pinch "http://127.0.0.1:10081/www"
+ExecStart=/usr/bin/chromium --disable-popup-blocking --no-first-run --disable-desktop-notifications --incognito --kiosk --disable-pinch "http://127.0.0.1:10081/touch"
 Restart=on-failure
 
 [Install]

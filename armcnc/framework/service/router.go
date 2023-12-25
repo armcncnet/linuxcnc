@@ -32,13 +32,13 @@ func Router() http.Handler {
 
 	router.Use(cors.Default())
 
-	router.Static("/www", Config.Get.Basic.Workspace+"/www/")
+	router.Static("/touch", Config.Get.Basic.Workspace+"/touch/")
 
-	router.Static("/assets", Config.Get.Basic.Workspace+"/www/assets/")
+	router.Static("/assets", Config.Get.Basic.Workspace+"/touch/assets/")
 
-	router.Static("/static", Config.Get.Basic.Workspace+"/www/static/")
+	router.Static("/static", Config.Get.Basic.Workspace+"/touch/static/")
 
-	router.Static("/monacoeditorwork", Config.Get.Basic.Workspace+"/www/monacoeditorwork/")
+	router.Static("/monacoeditorwork", Config.Get.Basic.Workspace+"/touch/monacoeditorwork/")
 
 	resources := router.Group("resources")
 	{
