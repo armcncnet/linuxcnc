@@ -1,6 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
-loadrt armcncio ins="2,19,20,21" outs="16,23,24"
+loadrt armcncio ins="2,19,20,21" outs="4,5,6,9,10,11,12,13,16,22,23,24.27"
 loadrt stepgen step_type=0,0,0,0,0
 loadrt debounce cfg=1,10
 
