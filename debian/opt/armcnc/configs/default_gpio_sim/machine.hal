@@ -83,8 +83,8 @@ net c-step-enable   stepgen.4.enable    =>  armcncio.step.4.step-enable
 
 setp armcncio.spindle.0.frequency-command       400
 setp armcncio.spindle.0.duty-cycle-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
-setp armcncio.spindle.0.pwm-pin                 16
-setp armcncio.spindle.0.pwm-pin-not             0
+setp armcncio.spindle.0.spindle-pin             16
+setp armcncio.spindle.0.spindle-pin-not         0
 setp armcncio.spindle.0.spindle-forward-pin     23
 setp armcncio.spindle.0.spindle-forward-pin-not 1
 setp armcncio.spindle.0.spindle-reverse-pin     24
