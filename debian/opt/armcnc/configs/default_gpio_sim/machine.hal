@@ -40,8 +40,8 @@ setp armcncio.pwm.1.pwm-pin                     12
 setp armcncio.pwm.1.pwm-pin-not                 0
 setp armcncio.pwm.1.step-direction-pin          4
 setp armcncio.pwm.1.step-direction-pin-not      0
-net x-step stepgen.1.step => armcncio.pwm.1.pwm-pin
-net x-step-dir stepgen.1.dir => armcncio.pwm.1.step-direction-pin
+net y-step stepgen.1.step => armcncio.pwm.1.pwm-pin
+net y-step-dir stepgen.1.dir => armcncio.pwm.1.step-direction-pin
 
 #*******************
 #  AXIS Z
@@ -52,8 +52,8 @@ setp armcncio.pwm.2.pwm-pin                     22
 setp armcncio.pwm.2.pwm-pin-not                 0
 setp armcncio.pwm.2.step-direction-pin          10
 setp armcncio.pwm.2.step-direction-pin-not      0
-net x-step stepgen.2.step => armcncio.pwm.2.pwm-pin
-net x-step-dir stepgen.2.dir => armcncio.pwm.2.step-direction-pin
+net z-step stepgen.2.step => armcncio.pwm.2.pwm-pin
+net z-step-dir stepgen.2.dir => armcncio.pwm.2.step-direction-pin
 
 #*******************
 #  AXIS B
@@ -64,8 +64,8 @@ setp armcncio.pwm.3.pwm-pin                     5
 setp armcncio.pwm.3.pwm-pin-not                 0
 setp armcncio.pwm.3.step-direction-pin          6
 setp armcncio.pwm.3.step-direction-pin-not      0
-net x-step stepgen.3.step => armcncio.pwm.3.pwm-pin
-net x-step-dir stepgen.3.dir => armcncio.pwm.3.step-direction-pin
+net b-step stepgen.3.step => armcncio.pwm.3.pwm-pin
+net b-step-dir stepgen.3.dir => armcncio.pwm.3.step-direction-pin
 
 #*******************
 #  AXIS C
@@ -76,8 +76,8 @@ setp armcncio.pwm.4.pwm-pin                     9
 setp armcncio.pwm.4.pwm-pin-not                 0
 setp armcncio.pwm.4.step-direction-pin          11
 setp armcncio.pwm.4.step-direction-pin-not      0
-net x-step stepgen.4.step => armcncio.pwm.4.pwm-pin
-net x-step-dir stepgen.4.dir => armcncio.pwm.4.step-direction-pin
+net c-step stepgen.4.step => armcncio.pwm.4.pwm-pin
+net c-step-dir stepgen.4.dir => armcncio.pwm.4.step-direction-pin
 
 #*********************
 #   E-STOP
