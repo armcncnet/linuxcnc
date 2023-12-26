@@ -11,22 +11,22 @@ addf debounce.1 base-thread
 setp debounce.0.delay 100
 setp debounce.1.delay 60
 
-addf armcncio.gpio.read       servo-thread
-addf lcec.read-all            servo-thread
-addf cia402.0.read-all        servo-thread
-addf cia402.1.read-all        servo-thread
-addf cia402.2.read-all        servo-thread
-addf cia402.3.read-all        servo-thread
-addf cia402.4.read-all        servo-thread
-addf motion-command-handler   servo-thread
-addf motion-controller        servo-thread
-addf cia402.0.write-all       servo-thread
-addf cia402.1.write-all       servo-thread
-addf cia402.2.write-all       servo-thread
-addf cia402.3.write-all       servo-thread
-addf cia402.4.write-all       servo-thread
-addf lcec.write-all           servo-thread
-addf armcncio.gpio.write      servo-thread
+addf armcncio.read          servo-thread
+addf lcec.read-all          servo-thread
+addf cia402.0.read-all      servo-thread
+addf cia402.1.read-all      servo-thread
+addf cia402.2.read-all      servo-thread
+addf cia402.3.read-all      servo-thread
+addf cia402.4.read-all      servo-thread
+addf motion-command-handler servo-thread
+addf motion-controller      servo-thread
+addf cia402.0.write-all     servo-thread
+addf cia402.1.write-all     servo-thread
+addf cia402.2.write-all     servo-thread
+addf cia402.3.write-all     servo-thread
+addf cia402.4.write-all     servo-thread
+addf lcec.write-all         servo-thread
+addf armcncio.write         servo-thread
 
 #*******************
 #  AXIS X
