@@ -1,6 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
-loadrt armcncio pwm_types="p,p,p,p,p,f" in_pins="19,20,21" out_pins="4,5,6,9,10,11,12,13,22,16,23,24,27"
+loadrt armcncio ins="2,19,20,21" outs="16,23,24"
 loadrt stepgen step_type=0,0,0,0,0
 loadrt debounce cfg=1,10
 
@@ -10,74 +10,72 @@ setp debounce.0.delay 100
 setp debounce.1.delay 60
 
 addf armcncio.gpio.read       servo-thread
-addf armcncio.pwm.read        servo-thread
 addf stepgen.make-pulses      base-thread
 addf stepgen.capture-position servo-thread
 addf motion-command-handler   servo-thread
 addf motion-controller        servo-thread
 addf stepgen.update-freq      servo-thread
 addf armcncio.gpio.write      servo-thread
-addf armcncio.pwm.write       servo-thread
 
 #*******************
 #  AXIS X
 #*******************
 
-setp armcncio.pwm.0.position-scale              [JOINT_0]SCALE
-setp armcncio.pwm.0.pwm-pin                     13
-setp armcncio.pwm.0.pwm-pin-not                 0
-setp armcncio.pwm.0.step-direction-pin          27
-setp armcncio.pwm.0.step-direction-pin-not      0
-net x-step stepgen.0.step => armcncio.pwm.0.pwm-pin
-net x-step-dir stepgen.0.dir => armcncio.pwm.0.step-direction-pin
+setp armcncio.step.0.step-port                   13
+setp armcncio.step.0.step-pin-not                0
+setp armcncio.step.0.step-direction-port         27
+setp armcncio.step.0.step-direction-pin-not      0
+net x-step          stepgen.0.step      =>  armcncio.step.0.step-pin
+net x-step-dir      stepgen.0.dir       =>  armcncio.step.0.step-direction-pin
+net x-step-enable   stepgen.0.enable    =>  armcncio.step.0.step-enable
 
 #*******************
 #  AXIS Y
 #*******************
 
-setp armcncio.pwm.1.position-scale              [JOINT_1]SCALE
-setp armcncio.pwm.1.pwm-pin                     12
-setp armcncio.pwm.1.pwm-pin-not                 0
-setp armcncio.pwm.1.step-direction-pin          4
-setp armcncio.pwm.1.step-direction-pin-not      0
-net y-step stepgen.1.step => armcncio.pwm.1.pwm-pin
-net y-step-dir stepgen.1.dir => armcncio.pwm.1.step-direction-pin
+setp armcncio.step.1.step-port                   12
+setp armcncio.step.1.step-pin-not                0
+setp armcncio.step.1.step-direction-port         4
+setp armcncio.step.1.step-direction-pin-not      0
+net y-step          stepgen.1.step      =>  armcncio.step.1.step-pin
+net y-step-dir      stepgen.1.dir       =>  armcncio.step.1.step-direction-pin
+net y-step-enable   stepgen.1.enable    =>  armcncio.step.1.step-enable
 
 #*******************
 #  AXIS Z
 #*******************
 
-setp armcncio.pwm.2.position-scale              [JOINT_2]SCALE
-setp armcncio.pwm.2.pwm-pin                     22
-setp armcncio.pwm.2.pwm-pin-not                 0
-setp armcncio.pwm.2.step-direction-pin          10
-setp armcncio.pwm.2.step-direction-pin-not      0
-net z-step stepgen.2.step => armcncio.pwm.2.pwm-pin
-net z-step-dir stepgen.2.dir => armcncio.pwm.2.step-direction-pin
+setp armcncio.step.2.step-port                   22
+setp armcncio.step.2.step-pin-not                0
+setp armcncio.step.2.step-direction-port         10
+setp armcncio.step.2.step-direction-pin-not      0
+net z-step          stepgen.2.step      =>  armcncio.step.2.step-pin
+net z-step-dir      stepgen.2.dir       =>  armcncio.step.2.step-direction-pin
+net z-step-enable   stepgen.2.enable    =>  armcncio.step.2.step-enable
 
 #*******************
 #  AXIS B
 #*******************
 
-setp armcncio.pwm.3.position-scale              [JOINT_3]SCALE
-setp armcncio.pwm.3.pwm-pin                     5
-setp armcncio.pwm.3.pwm-pin-not                 0
-setp armcncio.pwm.3.step-direction-pin          6
-setp armcncio.pwm.3.step-direction-pin-not      0
-net b-step stepgen.3.step => armcncio.pwm.3.pwm-pin
-net b-step-dir stepgen.3.dir => armcncio.pwm.3.step-direction-pin
+setp armcncio.step.3.step-port                   5
+setp armcncio.step.3.step-pin-not                0
+setp armcncio.step.3.step-direction-port         6
+setp armcncio.step.3.step-direction-pin-not      0
+net b-step          stepgen.3.step      =>  armcncio.step.3.step-pin
+net b-step-dir      stepgen.3.dir       =>  armcncio.step.3.step-direction-pin
+net b-step-enable   stepgen.3.enable    =>  armcncio.step.3.step-enable
 
 #*******************
 #  AXIS C
 #*******************
 
-setp armcncio.pwm.4.position-scale              [JOINT_4]SCALE
-setp armcncio.pwm.4.pwm-pin                     9
-setp armcncio.pwm.4.pwm-pin-not                 0
-setp armcncio.pwm.4.step-direction-pin          11
-setp armcncio.pwm.4.step-direction-pin-not      0
-net c-step stepgen.4.step => armcncio.pwm.4.pwm-pin
-net c-step-dir stepgen.4.dir => armcncio.pwm.4.step-direction-pin
+setp armcncio.step.4.step-port                   9
+setp armcncio.step.4.step-pin-not                0
+setp armcncio.step.4.step-direction-port         11
+setp armcncio.step.4.step-direction-pin-not      0
+net c-step          stepgen.4.step      =>  armcncio.step.4.step-pin
+net c-step-dir      stepgen.4.dir       =>  armcncio.step.4.step-direction-pin
+net c-step-enable   stepgen.4.enable    =>  armcncio.step.4.step-enable
 
 #*********************
 #   E-STOP
