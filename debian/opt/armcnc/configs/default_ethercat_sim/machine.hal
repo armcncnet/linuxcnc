@@ -1,7 +1,6 @@
 loadrt [KINS]KINEMATICS
 loadrt [EMCMOT]EMCMOT base_period_nsec=[EMCMOT]BASE_PERIOD servo_period_nsec=[EMCMOT]SERVO_PERIOD num_joints=[KINS]JOINTS
 loadusr -W lcec_conf machine.xml
-loadrt armcncio ins="2,19,20,21" outs="4,5,6,9,10,11,12,13,16,22,23,24.27"
 loadrt lcec
 loadrt cia402 count=[KINS]JOINTS
 loadrt debounce cfg=1,10
@@ -11,7 +10,6 @@ addf debounce.1 base-thread
 setp debounce.0.delay 100
 setp debounce.1.delay 60
 
-addf armcncio.read            servo-thread
 addf lcec.read-all            servo-thread
 addf cia402.0.read-all        servo-thread
 addf cia402.1.read-all        servo-thread
@@ -26,7 +24,6 @@ addf cia402.2.write-all       servo-thread
 addf cia402.3.write-all       servo-thread
 addf cia402.4.write-all       servo-thread
 addf lcec.write-all           servo-thread
-addf armcncio.write           servo-thread
 
 #*******************
 #  AXIS X
@@ -132,21 +129,6 @@ net c-controlword         cia402.4.controlword         => lcec.0.4.cia-controlwo
 net c-modes-of-operation  cia402.4.opmode              => lcec.0.4.opmode
 net c-drv-target-pos      cia402.4.drv-target-position => lcec.0.4.target-position
 net c-drv-target-velo     cia402.4.drv-target-velocity => lcec.0.4.target-velocity
-
-#*********************
-#   SPINDLE
-#*********************
-
-setp armcncio.spindle.0.frequency-command       400
-setp armcncio.spindle.0.duty-cycle-scale        [SPINDLE_0]MAX_FORWARD_VELOCITY
-setp armcncio.spindle.0.spindle-pin             16
-setp armcncio.spindle.0.spindle-pin-not         0
-setp armcncio.spindle.0.spindle-forward-pin     23
-setp armcncio.spindle.0.spindle-forward-pin-not 1
-setp armcncio.spindle.0.spindle-reverse-pin     24
-setp armcncio.spindle.0.spindle-reverse-pin-not 1
-net spindle-rpm     spindle.0.speed-out armcncio.spindle.0.duty-cycle-command
-net spindle-enable  spindle.0.on        armcncio.spindle.0.spindle-enable
 
 #*********************
 #   E-STOP
