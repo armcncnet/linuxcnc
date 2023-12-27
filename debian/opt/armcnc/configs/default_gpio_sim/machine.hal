@@ -36,7 +36,7 @@ net x-position-feedback stepgen.0.position-fb => joint.0.motor-pos-fb
 net x-step              stepgen.0.step  =>  armcncio.step.0.step-pin
 net x-step-direction    stepgen.0.dir   =>  armcncio.step.0.step-direction-pin
 net x-position-command  joint.0.motor-pos-cmd   =>  stepgen.0.position-cmd
-net x-step-enable       joint.0.amp-enable-out  =>  stepgen.0.enable => armcncio.step.0.step-enable
+net x-step-enable       joint.0.amp-enable-out  =>  stepgen.0.enable
 
 #*******************
 #  AXIS Y
@@ -57,7 +57,7 @@ net y-position-feedback stepgen.1.position-fb => joint.1.motor-pos-fb
 net y-step              stepgen.1.step  =>  armcncio.step.1.step-pin
 net y-step-direction    stepgen.1.dir   =>  armcncio.step.1.step-direction-pin
 net y-position-command  joint.1.motor-pos-cmd   =>  stepgen.1.position-cmd
-net y-step-enable       joint.1.amp-enable-out  =>  stepgen.1.enable => armcncio.step.1.step-enable
+net y-step-enable       joint.1.amp-enable-out  =>  stepgen.1.enable
 
 #*******************
 #  AXIS Z
@@ -78,7 +78,7 @@ net z-position-feedback stepgen.2.position-fb => joint.2.motor-pos-fb
 net z-step              stepgen.2.step  =>  armcncio.step.2.step-pin
 net z-step-direction    stepgen.2.dir   =>  armcncio.step.2.step-direction-pin
 net z-position-command  joint.2.motor-pos-cmd   =>  stepgen.2.position-cmd
-net z-step-enable       joint.2.amp-enable-out  =>  stepgen.2.enable => armcncio.step.2.step-enable
+net z-step-enable       joint.2.amp-enable-out  =>  stepgen.2.enable
 
 #*******************
 #  AXIS B
@@ -99,7 +99,7 @@ net b-position-feedback stepgen.3.position-fb => joint.3.motor-pos-fb
 net b-step              stepgen.3.step  =>  armcncio.step.3.step-pin
 net b-step-direction    stepgen.3.dir   =>  armcncio.step.3.step-direction-pin
 net b-position-command  joint.3.motor-pos-cmd   =>  stepgen.3.position-cmd
-net b-step-enable       joint.3.amp-enable-out  =>  stepgen.3.enable => armcncio.step.3.step-enable
+net b-step-enable       joint.3.amp-enable-out  =>  stepgen.3.enable
 
 #*******************
 #  AXIS C
@@ -120,7 +120,7 @@ net c-position-feedback stepgen.4.position-fb => joint.4.motor-pos-fb
 net c-step              stepgen.4.step  =>  armcncio.step.4.step-pin
 net c-step-direction    stepgen.4.dir   =>  armcncio.step.4.step-direction-pin
 net c-position-command  joint.4.motor-pos-cmd   =>  stepgen.4.position-cmd
-net c-step-enable       joint.4.amp-enable-out  =>  stepgen.4.enable => armcncio.step.4.step-enable
+net c-step-enable       joint.4.amp-enable-out  =>  stepgen.4.enable
 
 #*********************
 #   SPINDLE
