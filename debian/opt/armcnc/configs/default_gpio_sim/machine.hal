@@ -53,11 +53,11 @@ setp stepgen.1.dirhold                          50000
 setp stepgen.1.dirsetup                         50000
 setp stepgen.1.maxvel                           [JOINT_1]MAX_VELOCITY
 setp stepgen.1.maxaccel                         [JOINT_1]STEPGEN_MAXACCEL
-net x-position-feedback stepgen.1.position-fb => joint.1.motor-pos-fb
-net x-step              stepgen.1.step  =>  armcncio.step.1.step-pin
-net x-step-direction    stepgen.1.dir   =>  armcncio.step.1.step-direction-pin
-net x-position-command  joint.1.motor-pos-cmd   =>  stepgen.1.position-cmd
-net x-step-enable       joint.1.amp-enable-out  =>  stepgen.1.enable => armcncio.step.1.step-enable
+net y-position-feedback stepgen.1.position-fb => joint.1.motor-pos-fb
+net y-step              stepgen.1.step  =>  armcncio.step.1.step-pin
+net y-step-direction    stepgen.1.dir   =>  armcncio.step.1.step-direction-pin
+net y-position-command  joint.1.motor-pos-cmd   =>  stepgen.1.position-cmd
+net y-step-enable       joint.1.amp-enable-out  =>  stepgen.1.enable => armcncio.step.1.step-enable
 
 #*******************
 #  AXIS Z
@@ -116,11 +116,11 @@ setp stepgen.4.dirhold                          50000
 setp stepgen.4.dirsetup                         50000
 setp stepgen.4.maxvel                           [JOINT_4]MAX_VELOCITY
 setp stepgen.4.maxaccel                         [JOINT_4]STEPGEN_MAXACCEL
-net b-position-feedback stepgen.4.position-fb => joint.4.motor-pos-fb
-net b-step              stepgen.4.step  =>  armcncio.step.4.step-pin
-net b-step-direction    stepgen.4.dir   =>  armcncio.step.4.step-direction-pin
-net b-position-command  joint.4.motor-pos-cmd   =>  stepgen.4.position-cmd
-net b-step-enable       joint.4.amp-enable-out  =>  stepgen.4.enable => armcncio.step.4.step-enable
+net c-position-feedback stepgen.4.position-fb => joint.4.motor-pos-fb
+net c-step              stepgen.4.step  =>  armcncio.step.4.step-pin
+net c-step-direction    stepgen.4.dir   =>  armcncio.step.4.step-direction-pin
+net c-position-command  joint.4.motor-pos-cmd   =>  stepgen.4.position-cmd
+net c-step-enable       joint.4.amp-enable-out  =>  stepgen.4.enable => armcncio.step.4.step-enable
 
 #*********************
 #   SPINDLE
