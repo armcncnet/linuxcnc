@@ -9,12 +9,10 @@ package LaunchPackage
 
 import (
 	"armcnc/framework/config"
-	"armcnc/framework/utils"
 	"armcnc/framework/utils/file"
 	"os"
 	"os/exec"
 	"path/filepath"
-	"time"
 )
 
 type Launch struct {
@@ -51,13 +49,13 @@ func (launch *Launch) OnStart() {
 		cmd.Output()
 		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
 		cmd.Output()
-		go func() {
-			for !Utils.IsGraphicalTargetActive() {
-				time.Sleep(1 * time.Second)
-			}
-			cmd = exec.Command("systemctl", "start", "armcnc_chromium.service")
-			cmd.Output()
-		}()
+		//go func() {
+		//	for !Utils.IsGraphicalTargetActive() {
+		//		time.Sleep(1 * time.Second)
+		//	}
+		//	cmd = exec.Command("systemctl", "start", "armcnc_chromium.service")
+		//	cmd.Output()
+		//}()
 	}
 }
 
