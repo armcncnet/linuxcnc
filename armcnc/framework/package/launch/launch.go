@@ -49,7 +49,6 @@ func (launch *Launch) OnStart() {
 		launch.OnRemoveTmp()
 		cmd := exec.Command("systemctl", "start", "armcnc_linuxcnc.service")
 		cmd.Output()
-		time.Sleep(2 * time.Second)
 		cmd = exec.Command("systemctl", "start", "armcnc_launch.service")
 		cmd.Output()
 		go func() {
@@ -66,7 +65,6 @@ func (launch *Launch) OnRestart() {
 	launch.OnRemoveTmp()
 	cmd := exec.Command("systemctl", "restart", "armcnc_linuxcnc.service")
 	cmd.Output()
-	time.Sleep(2 * time.Second)
 	cmd = exec.Command("systemctl", "restart", "armcnc_launch.service")
 	cmd.Output()
 }
@@ -74,10 +72,8 @@ func (launch *Launch) OnRestart() {
 func (launch *Launch) OnStop() {
 	cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
 	cmd.Output()
-	time.Sleep(1 * time.Second)
 	cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 	cmd.Output()
-	time.Sleep(1 * time.Second)
 	cmd = exec.Command("systemctl", "stop", "armcnc_chromium.service")
 	cmd.Output()
 }
