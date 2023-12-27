@@ -54,7 +54,7 @@ func (launch *Launch) OnStart() {
 		cmd.Output()
 		go func() {
 			for !Utils.IsGraphicalTargetActive() {
-				time.Sleep(1 * time.Second) // 每秒检查一次状态
+				time.Sleep(1 * time.Second)
 			}
 			cmd = exec.Command("systemctl", "start", "armcnc_chromium.service")
 			cmd.Output()
