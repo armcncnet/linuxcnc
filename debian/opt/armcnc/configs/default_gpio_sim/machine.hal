@@ -137,7 +137,7 @@ setp armcncio.pwm.5.spindle-forward-pin-not 1
 setp armcncio.pwm.5.spindle-reverse-pin     24
 setp armcncio.pwm.5.spindle-reverse-pin-not 1
 net spindle-rpm     spindle.0.speed-out armcncio.pwm.5.duty-cycle-command
-net spindle-enable  spindle.0.on        armcncio.pwm.5.spindle-enable
+net spindle-enable  spindle.0.on        armcncio.pwm.5.enable
 
 #*********************
 #   E-STOP
