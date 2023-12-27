@@ -16,7 +16,8 @@ addf motion-command-handler     servo-thread
 addf motion-controller          servo-thread
 addf stepgen.update-freq        servo-thread
 addf armcncio.write             servo-thread
-addf armcncio.motion            servo-thread
+addf armcncio.step-write        servo-thread
+addf armcncio.spindle-write     servo-thread
 
 #*******************
 #  AXIS X
