@@ -74,8 +74,10 @@ func (launch *Launch) OnRestart() {
 func (launch *Launch) OnStop() {
 	cmd := exec.Command("systemctl", "stop", "armcnc_launch.service")
 	cmd.Output()
+	time.Sleep(1 * time.Second)
 	cmd = exec.Command("systemctl", "stop", "armcnc_linuxcnc.service")
 	cmd.Output()
+	time.Sleep(1 * time.Second)
 	cmd = exec.Command("systemctl", "stop", "armcnc_chromium.service")
 	cmd.Output()
 }
