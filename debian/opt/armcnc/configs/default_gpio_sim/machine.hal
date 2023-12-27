@@ -9,15 +9,15 @@ addf debounce.1 base-thread
 setp debounce.0.delay 100
 setp debounce.1.delay 60
 
-addf armcncio.read              servo-thread
+addf armcncio.read              base-thread
 addf stepgen.make-pulses        base-thread
 addf stepgen.capture-position   servo-thread
 addf motion-command-handler     servo-thread
 addf motion-controller          servo-thread
 addf stepgen.update-freq        servo-thread
 addf armcncio.write             servo-thread
-addf armcncio.pwm-read          servo-thread
-addf armcncio.pwm-write         servo-thread
+addf armcncio.pwm-read          base-thread
+addf armcncio.pwm-write         base-thread
 
 #*******************
 #  AXIS X
