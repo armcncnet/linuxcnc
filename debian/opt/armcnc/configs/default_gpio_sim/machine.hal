@@ -10,29 +10,28 @@ setp debounce.0.delay 100
 setp debounce.1.delay 60
 
 addf armcncio.read              servo-thread
+addf armcncio.pwm-read          base-thread
 addf stepgen.make-pulses        base-thread
 addf stepgen.capture-position   servo-thread
 addf motion-command-handler     servo-thread
 addf motion-controller          servo-thread
 addf stepgen.update-freq        servo-thread
 addf armcncio.write             servo-thread
-addf armcncio.pwm-read          servo-thread
-addf armcncio.pwm-write         servo-thread
+addf armcncio.pwm-write         base-thread
 
 #*******************
 #  AXIS X
 #*******************
 
-setp armcncio.pwm.0.step-port                  13
-setp armcncio.pwm.0.step-pin-not               0
-setp armcncio.pwm.0.step-direction-port        27
-setp armcncio.pwm.0.step-direction-pin-not     0
+setp armcncio.pwm.0.step-port                   13
+setp armcncio.pwm.0.step-pin-not                0
+setp armcncio.pwm.0.step-direction-port         27
+setp armcncio.pwm.0.step-direction-pin-not      0
 setp stepgen.0.position-scale                   [JOINT_0]SCALE
 setp stepgen.0.steplen                          1
 setp stepgen.0.stepspace                        0
 setp stepgen.0.dirhold                          50000
 setp stepgen.0.dirsetup                         50000
-setp stepgen.0.maxvel                           [JOINT_0]MAX_VELOCITY
 setp stepgen.0.maxaccel                         [JOINT_0]STEPGEN_MAXACCEL
 net x-position-feedback stepgen.0.position-fb => joint.0.motor-pos-fb
 net x-step              stepgen.0.step  =>  armcncio.pwm.0.step-pin
@@ -44,16 +43,15 @@ net x-step-enable       joint.0.amp-enable-out  =>  stepgen.0.enable => armcncio
 #  AXIS Y
 #*******************
 
-setp armcncio.pwm.1.step-port                  12
-setp armcncio.pwm.1.step-pin-not               0
-setp armcncio.pwm.1.step-direction-port        4
-setp armcncio.pwm.1.step-direction-pin-not     0
+setp armcncio.pwm.1.step-port                   12
+setp armcncio.pwm.1.step-pin-not                0
+setp armcncio.pwm.1.step-direction-port         4
+setp armcncio.pwm.1.step-direction-pin-not      0
 setp stepgen.1.position-scale                   [JOINT_1]SCALE
 setp stepgen.1.steplen                          1
 setp stepgen.1.stepspace                        0
 setp stepgen.1.dirhold                          50000
 setp stepgen.1.dirsetup                         50000
-setp stepgen.1.maxvel                           [JOINT_1]MAX_VELOCITY
 setp stepgen.1.maxaccel                         [JOINT_1]STEPGEN_MAXACCEL
 net y-position-feedback stepgen.1.position-fb => joint.1.motor-pos-fb
 net y-step              stepgen.1.step  =>  armcncio.pwm.1.step-pin
@@ -65,16 +63,15 @@ net y-step-enable       joint.1.amp-enable-out  =>  stepgen.1.enable => armcncio
 #  AXIS Z
 #*******************
 
-setp armcncio.pwm.2.step-port                  22
-setp armcncio.pwm.2.step-pin-not               0
-setp armcncio.pwm.2.step-direction-port        10
-setp armcncio.pwm.2.step-direction-pin-not     0
+setp armcncio.pwm.2.step-port                   22
+setp armcncio.pwm.2.step-pin-not                0
+setp armcncio.pwm.2.step-direction-port         10
+setp armcncio.pwm.2.step-direction-pin-not      0
 setp stepgen.2.position-scale                   [JOINT_2]SCALE
 setp stepgen.2.steplen                          1
 setp stepgen.2.stepspace                        0
 setp stepgen.2.dirhold                          50000
 setp stepgen.2.dirsetup                         50000
-setp stepgen.2.maxvel                           [JOINT_2]MAX_VELOCITY
 setp stepgen.2.maxaccel                         [JOINT_2]STEPGEN_MAXACCEL
 net z-position-feedback stepgen.2.position-fb => joint.2.motor-pos-fb
 net z-step              stepgen.2.step  =>  armcncio.pwm.2.step-pin
@@ -86,16 +83,15 @@ net z-step-enable       joint.2.amp-enable-out  =>  stepgen.2.enable => armcncio
 #  AXIS B
 #*******************
 
-setp armcncio.pwm.3.step-port                  5
-setp armcncio.pwm.3.step-pin-not               0
-setp armcncio.pwm.3.step-direction-port        6
-setp armcncio.pwm.3.step-direction-pin-not     0
+setp armcncio.pwm.3.step-port                   5
+setp armcncio.pwm.3.step-pin-not                0
+setp armcncio.pwm.3.step-direction-port         6
+setp armcncio.pwm.3.step-direction-pin-not      0
 setp stepgen.3.position-scale                   [JOINT_3]SCALE
 setp stepgen.3.steplen                          1
 setp stepgen.3.stepspace                        0
 setp stepgen.3.dirhold                          50000
 setp stepgen.3.dirsetup                         50000
-setp stepgen.3.maxvel                           [JOINT_3]MAX_VELOCITY
 setp stepgen.3.maxaccel                         [JOINT_3]STEPGEN_MAXACCEL
 net b-position-feedback stepgen.3.position-fb => joint.3.motor-pos-fb
 net b-step              stepgen.3.step  =>  armcncio.pwm.3.step-pin
@@ -107,16 +103,15 @@ net b-step-enable       joint.3.amp-enable-out  =>  stepgen.3.enable => armcncio
 #  AXIS C
 #*******************
 
-setp armcncio.pwm.4.step-port                  9
-setp armcncio.pwm.4.step-pin-not               0
-setp armcncio.pwm.4.step-direction-port        11
-setp armcncio.pwm.4.step-direction-pin-not     0
+setp armcncio.pwm.4.step-port                   9
+setp armcncio.pwm.4.step-pin-not                0
+setp armcncio.pwm.4.step-direction-port         11
+setp armcncio.pwm.4.step-direction-pin-not      0
 setp stepgen.4.position-scale                   [JOINT_4]SCALE
 setp stepgen.4.steplen                          1
 setp stepgen.4.stepspace                        0
 setp stepgen.4.dirhold                          50000
 setp stepgen.4.dirsetup                         50000
-setp stepgen.4.maxvel                           [JOINT_4]MAX_VELOCITY
 setp stepgen.4.maxaccel                         [JOINT_4]STEPGEN_MAXACCEL
 net c-position-feedback stepgen.4.position-fb => joint.4.motor-pos-fb
 net c-step              stepgen.4.step  =>  armcncio.pwm.4.step-pin
