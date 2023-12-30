@@ -71,7 +71,7 @@ EOF
 
     sudo cp -aRf /etc/skel/. /root/
 
-    wired_card=$(nmcli device status | grep 'ethernet' | awk '{print $1}')
+    wired_card=$(nmcli device status | grep 'ethernet' | awk '{print $1}' | head -n 1)
 
     if [ ! -f "/etc/set_mac_address.sh" ]; then
         sudo touch /etc/network/mac_address
